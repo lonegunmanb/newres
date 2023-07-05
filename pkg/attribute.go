@@ -12,7 +12,8 @@ type attribute struct {
 }
 
 func (a *attribute) skipAttribute() bool {
-	if a.name == "id" {
+	_, isResourceBlockAttribute := a.parent.(*resourceBlock)
+	if a.name == "id" && isResourceBlockAttribute {
 		return true
 	}
 	if a.computedOnly() {

@@ -56,6 +56,16 @@ func TestGenerateResource_NestedObjectAsAttribute(t *testing.T) {
 	assert.Contains(t, sut.Block.NestedBlocks["target_disk_encryption"].Block.NestedBlocks, "disk_encryption_key")
 }
 
+func TestGenerateResource_IdAttributeInsideNestedBlockAttributeShouldNotBeSkipped(t *testing.T) {
+	resource := azurermschema.Resources["azurerm_storage_table"]
+	nb := resource.Block.NestedBlocks["acl"]
+	res, err := newResourceBlock("azurerm_storage_table", resource)
+	require.NoError(t, err)
+	n := newNestedBlock(res, "acl", nb)
+	assert.Equal(t, 1, len(n.attrs))
+	assert.Equal(t, "id", n.attrs[0].name)
+}
+
 func TestGenerateVariableTypeForWholeResource(t *testing.T) {
 	// we're using v2 resource since it's stable now and won't be changed
 	schema := azurermschema_v2.Resources["azurerm_site_recovery_replicated_vm"]
