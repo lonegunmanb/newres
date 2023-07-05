@@ -113,7 +113,7 @@ func (n *nestedBlock) generateDynamicBlock(iterator string) string {
 		obj = iterator
 	}
 	hcl.WriteString(fmt.Sprintf("dynamic \"%s\" {\n", n.name))
-	if n.maxItems() == 1 {
+	if n.maxItems() == 1 || n.NestingMode() == tfjson.SchemaNestingModeSingle {
 		hcl.WriteString(fmt.Sprintf("  for_each = %s == null ? [] : [%s]\n", obj, obj))
 	} else if n.SchemaBlockType.NestingMode == tfjson.SchemaNestingModeMap {
 		hcl.WriteString(fmt.Sprintf("  for_each = %s == null ? {} : %s\n", obj, obj))

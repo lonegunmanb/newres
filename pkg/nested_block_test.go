@@ -296,3 +296,9 @@ func TestGenerateVariableType_RequiredObject(t *testing.T) {
 	actual := strings.Replace(generateVariableType(resourceBlock, true), " ", "", -1)
 	assert.Contains(t, actual, "default_node_pool=object({")
 }
+
+func TestGenerateDynamicBlockForAzurermTimeouts(t *testing.T) {
+	code, err := GenerateResource("azurerm_storage_table", MultipleVariables)
+	require.NoError(t, err)
+	assert.Contains(t, code, "for_each = var.storage_table_timeouts == null ? [] : [var.storage_table_timeouts]")
+}
