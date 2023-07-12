@@ -1,4 +1,4 @@
-module github.com/lonegunmanb/terraform-azurerm-resource-template/v3
+module github.com/lonegunmanb/newres/v3
 
 go 1.20
 

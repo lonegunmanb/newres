@@ -2,13 +2,13 @@ package pkg
 
 import (
 	"fmt"
-	"github.com/hashicorp/hcl/v2/hclsyntax"
-	"github.com/hashicorp/terraform-config-inspect/tfconfig"
 	"strings"
 	"testing"
 
 	"github.com/hashicorp/hcl/v2"
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/hashicorp/hcl/v2/hclwrite"
+	"github.com/hashicorp/terraform-config-inspect/tfconfig"
 	azurermschema "github.com/lonegunmanb/terraform-azurerm-schema/v3/generated"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

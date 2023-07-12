@@ -1,14 +1,14 @@
 package pkg
 
 import (
-	"github.com/hashicorp/hcl/v2"
-	"github.com/hashicorp/hcl/v2/hclsyntax"
-	"github.com/hashicorp/terraform-config-inspect/tfconfig"
-	"github.com/lonegunmanb/azure-verified-module-fix/pkg"
 	"strings"
 	"testing"
 
+	"github.com/hashicorp/hcl/v2"
+	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/hashicorp/hcl/v2/hclwrite"
+	"github.com/hashicorp/terraform-config-inspect/tfconfig"
+	"github.com/lonegunmanb/azure-verified-module-fix/pkg"
 	awsschema "github.com/lonegunmanb/terraform-aws-schema/v5/generated"
 	azurermschema "github.com/lonegunmanb/terraform-azurerm-schema/v3/generated"
 	"github.com/stretchr/testify/assert"

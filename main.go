@@ -9,7 +9,7 @@ import (
 
 	"github.com/hashicorp/hcl/v2/hclwrite"
 	autofix "github.com/lonegunmanb/azure-verified-module-fix/pkg"
-	"github.com/lonegunmanb/terraform-azurerm-resource-template/v3/pkg"
+	"github.com/lonegunmanb/newres/v3/pkg"
 )
 
 func main() {

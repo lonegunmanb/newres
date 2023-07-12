@@ -1,12 +1,12 @@
 package pkg
 
 import (
-	_ "embed"
 	"fmt"
-	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	"os"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 var aksMarkdown string
@@ -164,7 +164,7 @@ func TestDocumentParse_Timeouts(t *testing.T) {
 	}
 	for i := 0; i < len(cases); i++ {
 		c := cases[i]
-		t.Run(fmt.Sprintf("%s", c.resourceType), func(t *testing.T) {
+		t.Run(c.resourceType, func(t *testing.T) {
 			d := newDocument(c.resourceType)
 			d.getContent = doc(c.document)
 			args, err := d.parseDocument()

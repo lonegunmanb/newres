@@ -2,12 +2,13 @@ package pkg
 
 import (
 	"fmt"
-	"github.com/ahmetb/go-linq/v3"
-	tfjson "github.com/hashicorp/terraform-json"
-	"github.com/zclconf/go-cty/cty"
 	"io"
 	"net/http"
 	"strings"
+
+	"github.com/ahmetb/go-linq/v3"
+	tfjson "github.com/hashicorp/terraform-json"
+	"github.com/zclconf/go-cty/cty"
 )
 
 func resourceTypeValid(resourceType string) bool {

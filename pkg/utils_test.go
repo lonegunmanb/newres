@@ -1,10 +1,11 @@
 package pkg
 
 import (
-	azurermschema "github.com/lonegunmanb/terraform-azurerm-schema/v3/generated"
-	"github.com/stretchr/testify/assert"
 	"strings"
 	"testing"
+
+	azurermschema "github.com/lonegunmanb/terraform-azurerm-schema/v3/generated"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestGenerateVariableType_ObjectTypeInAttributes(t *testing.T) {

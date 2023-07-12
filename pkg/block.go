@@ -2,10 +2,11 @@ package pkg
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/ahmetb/go-linq/v3"
 	"github.com/hashicorp/hcl/v2/hclwrite"
 	tfjson "github.com/hashicorp/terraform-json"
-	"strings"
 )
 
 type block interface {

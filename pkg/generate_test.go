@@ -28,14 +28,14 @@ func TestGenerateResource_SimpleUniVarResource(t *testing.T) {
 	assert.Contains(t, mod.Variables, "resource_group")
 	resourceAddress := fmt.Sprintf("%s.this", resourceType)
 	assert.Contains(t, mod.ManagedResources, resourceAddress)
-	for name, _ := range schema.Block.Attributes {
+	for name := range schema.Block.Attributes {
 		if name == "id" {
 			continue
 		}
 		assert.Contains(t, generated, fmt.Sprintf("- `%s` -", name))
 		assert.Contains(t, generated, fmt.Sprintf("%s = var.resource_group.%s", name, name))
 	}
-	for name, _ := range schema.Block.NestedBlocks {
+	for name := range schema.Block.NestedBlocks {
 		assert.Contains(t, generated, fmt.Sprintf("`%s` block supports the following:", name))
 		assert.Contains(t, generated, fmt.Sprintf(`dynamic "%s" {`, name))
 	}

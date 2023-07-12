@@ -1,0 +1,46 @@
+name: build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+jobs:
+  test:
+    name: Build and Test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    permissions:
+      # required for all workflows
+      security-events: write
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.19
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2.20.3
+      with:
+        languages: go
+    - name: Run build
+      run: go build github.com/lonegunmanb/newres/v3
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2.20.3
+    - name: Run tests
+      run: go test -v github.com/lonegunmanb/newres/v3/pkg
+    - name: golangci-lint
+      uses: golangci/golangci-lint-action@v3.6.0
+      with:
+        version:
+          v1.53
+    - name: Run Gosec Security Scanner
+      uses: securego/gosec@master
+      if: runner.os == 'Linux'
