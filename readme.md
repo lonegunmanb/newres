@@ -1,5 +1,7 @@
 # `newres` - Terraform Resource Generation Tool
 
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/lonegunmanb/newres/build.yml)
+
 `newres` is a command-line tool that generates Terraform configuration files for a specified resource type. It automates the process of creating variables.tf and main.tf files, making it easier to get started with Terraform and reducing the time spent on manual configuration.
 
 ## Features
