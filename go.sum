@@ -17,8 +17,8 @@ github.com/hashicorp/hcl/v2 v2.17.0 h1:z1XvSUyXd1HP10U4lrLg5e0JMVz6CPaJvAgxM0KNZ
 github.com/hashicorp/hcl/v2 v2.17.0/go.mod h1:gJyW2PTShkJqQBKpAmPO3yxMxIuoXkOF2TpqXzrQyx4=
 github.com/hashicorp/terraform-config-inspect v0.0.0-20230614215431-f32df32a01cd h1:1uPcotqoL4TjcGKlgIe7OFSRplf7BMVtUjekwmCrvuM=
 github.com/hashicorp/terraform-config-inspect v0.0.0-20230614215431-f32df32a01cd/go.mod h1:l8HcFPm9cQh6Q0KSWoYPiePqMvRFenybP1CH2MjKdlg=
-github.com/hashicorp/terraform-json v0.17.0 h1:EiA1Wp07nknYQAiv+jIt4dX4Cq5crgP+TsTE45MjMmM=
-github.com/hashicorp/terraform-json v0.17.0/go.mod h1:Huy6zt6euxaY9knPAFKjUITn8QxUFIe9VuSzb4zn/0o=
+github.com/hashicorp/terraform-json v0.17.1 h1:eMfvh/uWggKmY7Pmb3T85u86E2EQg6EQHgyRwf3RkyA=
+github.com/hashicorp/terraform-json v0.17.1/go.mod h1:Huy6zt6euxaY9knPAFKjUITn8QxUFIe9VuSzb4zn/0o=
 github.com/kr/pretty v0.1.0 h1:L/CwN0zerZDmRFUapSPitk6f+Q3+0za1rQkzVuMiMFI=
 github.com/kr/text v0.1.0 h1:45sCR5RtlFHMR4UwH9sdQ5TC8v0qDQCHnXt+kaKSTVE=
 github.com/kylelemons/godebug v1.1.0 h1:RPNrshWIDI6G2gRW9EHilWtl7Z6Sb1BR0xunSBf0SNc=
@@ -30,8 +30,8 @@ github.com/lonegunmanb/terraform-aws-schema/v3 v3.76.1 h1:11gsHdCkFAeTDcCJY36EdP
 github.com/lonegunmanb/terraform-aws-schema/v3 v3.76.1/go.mod h1:CI7i3qyLoD/XlIew5Yv+zRpFFdetEBhpIXWJXatgtYQ=
 github.com/lonegunmanb/terraform-aws-schema/v4 v4.67.0 h1:ssy4uMEFjijkxORGG+SyU3njk2LMYs6RO0i+53T4rnM=
 github.com/lonegunmanb/terraform-aws-schema/v4 v4.67.0/go.mod h1:QXLvpWSz5rNGenKQtdHpOlOh7cAet2BOgBXMjqoGYy4=
-github.com/lonegunmanb/terraform-aws-schema/v5 v5.4.0 h1:CeS5IRZLikFkRAifJhvGo2IOj2skX1oGS8gZp3C5CJA=
-github.com/lonegunmanb/terraform-aws-schema/v5 v5.4.0/go.mod h1:3kQLtpDlrWv/8WegezzKWXOnHO38TGnhU6qWNb+rpwg=
+github.com/lonegunmanb/terraform-aws-schema/v5 v5.7.0 h1:9oNtnbVDLxrBHfFCSqz/QEtWvlFhDBHgUm8flI5cr08=
+github.com/lonegunmanb/terraform-aws-schema/v5 v5.7.0/go.mod h1:+tRca0h+V2HzyXCy3MqFHrRzYd7GZPeJNXhj2pQsYVA=
 github.com/lonegunmanb/terraform-azapi-schema v1.6.0 h1:WdF32iKY8KXHDNpbbx0/1UnWv3kwZ273ERi4A+q9Nx0=
 github.com/lonegunmanb/terraform-azapi-schema v1.6.0/go.mod h1:Avski+EREH5zk7Dl2QEXiAhwp7sxOoFKbE+A46Z2fzQ=
 github.com/lonegunmanb/terraform-azuread-schema/v2 v2.39.0 h1:VVUrYsvdhETqjofjf2pm/oS3VWJF5DoebO6scTeI5QQ=

@@ -6,12 +6,12 @@ require (
 	github.com/ahmetb/go-linq/v3 v3.2.0
 	github.com/hashicorp/hcl/v2 v2.17.0
 	github.com/hashicorp/terraform-config-inspect v0.0.0-20230614215431-f32df32a01cd
-	github.com/hashicorp/terraform-json v0.17.0
+	github.com/hashicorp/terraform-json v0.17.1
 	github.com/lonegunmanb/azure-verified-module-fix v0.0.0-20230606023648-25b1bdf8a879
 	github.com/lonegunmanb/terraform-aws-schema/v2 v2.70.4
 	github.com/lonegunmanb/terraform-aws-schema/v3 v3.76.1
 	github.com/lonegunmanb/terraform-aws-schema/v4 v4.67.0
-	github.com/lonegunmanb/terraform-aws-schema/v5 v5.4.0
+	github.com/lonegunmanb/terraform-aws-schema/v5 v5.7.0
 	github.com/lonegunmanb/terraform-azapi-schema v1.6.0
 	github.com/lonegunmanb/terraform-azuread-schema/v2 v2.39.0
 	github.com/lonegunmanb/terraform-azurerm-schema/v2 v2.99.0
