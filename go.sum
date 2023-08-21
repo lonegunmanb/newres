@@ -44,8 +44,8 @@ github.com/lonegunmanb/terraform-google-schema/v2 v2.20.3 h1:2iS6Kb7Fnjt0XnD0BbF
 github.com/lonegunmanb/terraform-google-schema/v2 v2.20.3/go.mod h1:5SOCCxmln16gVopQ1CPRXDq1kHq4oTT4rBRcqk+qmbE=
 github.com/lonegunmanb/terraform-google-schema/v3 v3.90.1 h1:53w7GBFTVQffQWJm7qvLnC/gODTPlikWs3JDJXpQ39c=
 github.com/lonegunmanb/terraform-google-schema/v3 v3.90.1/go.mod h1:ST7y3Sx4mq1RGRCG67KrNDUQ+P2EIyG/rYSM+hC08F4=
-github.com/lonegunmanb/terraform-google-schema/v4 v4.77.0 h1:x9BKT2hgwBV1BNWwvj22gvI1VX/vLtpDPnItkGMpImg=
-github.com/lonegunmanb/terraform-google-schema/v4 v4.77.0/go.mod h1:3A4pBn4jd+I3oO7V3ww3b5RvWVs8JMelkcXK5GXU8Ec=
+github.com/lonegunmanb/terraform-google-schema/v4 v4.78.0 h1:uqHZtSYmdoQQoBhIluZJLnD3gpALQQ3DcdX71oJejkw=
+github.com/lonegunmanb/terraform-google-schema/v4 v4.78.0/go.mod h1:qDyl6UjUn3a3rHATmeMQCR+iYC/hmfVq99QMRgFEkCw=
 github.com/lonegunmanb/terraform-local-schema/v2 v2.4.0 h1:ihO5Axdmn5SpHG6jF8KpVBzjBSzK1feJl+mpkZjSC88=
 github.com/lonegunmanb/terraform-local-schema/v2 v2.4.0/go.mod h1:u0L8ZQExPIbyazM/IVRKy5w5epWK3R01+8e5lzI+jvM=
 github.com/lonegunmanb/terraform-null-schema/v3 v3.2.1 h1:0cgtSJ5fDS75t1O+evxqh/pUU7IJGGRD2j0GNdCesZA=
