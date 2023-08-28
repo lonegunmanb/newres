@@ -26,7 +26,7 @@ require (
 	github.com/lonegunmanb/terraform-time-schema v0.9.1
 	github.com/lonegunmanb/terraform-tls-schema/v4 v4.0.4
 	github.com/stretchr/testify v1.8.4
-	github.com/zclconf/go-cty v1.13.2
+	github.com/zclconf/go-cty v1.13.3
 )
 
 require (
