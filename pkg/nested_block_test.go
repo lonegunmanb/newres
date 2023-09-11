@@ -176,6 +176,12 @@ dynamic "container" {
 		}
 	  }
 	}
+    dynamic "security" {
+      for_each = container.value.security == null ? [] : container.value.security
+      content {
+        privilege_enabled = security.value.privilege_enabled
+      }
+    }
 	dynamic "volume" {
 	  for_each = container.value.volume == null ? [] : container.value.volume
 	  content {
