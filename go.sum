@@ -2,8 +2,6 @@ github.com/agext/levenshtein v1.2.3 h1:YB2fHEn0UJagG8T1rrWknE3ZQzWM06O8AMAatNn7l
 github.com/agext/levenshtein v1.2.3/go.mod h1:JEDfjyjHDjOF/1e4FlBE/PkbqA9OfWu2ki2W0IB5558=
 github.com/ahmetb/go-linq/v3 v3.2.0 h1:BEuMfp+b59io8g5wYzNoFe9pWPalRklhlhbiU3hYZDE=
 github.com/ahmetb/go-linq/v3 v3.2.0/go.mod h1:haQ3JfOeWK8HpVxMtHHEMPVgBKiYyQ+f1/kLZh/cj9U=
-github.com/apparentlymart/go-textseg/v13 v13.0.0 h1:Y+KvPE1NYz0xl601PVImeQfFyEy6iT90AvPUL1NNfNw=
-github.com/apparentlymart/go-textseg/v13 v13.0.0/go.mod h1:ZK2fH7c4NqDTLtiYLvIkEghdlcqw7yxLeM89kiTRPUo=
 github.com/apparentlymart/go-textseg/v15 v15.0.0 h1:uYvfpb3DyLSCGWnctWKGj857c6ew1u1fNQOlOtuGxQY=
 github.com/apparentlymart/go-textseg/v15 v15.0.0/go.mod h1:K8XmNZdhEBkdlyDdvbmmsvpAG721bKi0joRfFdHIWJ4=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
@@ -15,8 +13,8 @@ github.com/hashicorp/go-version v1.6.0 h1:feTTfFNnjP967rlCxM/I9g701jU+RN74YKx2mO
 github.com/hashicorp/go-version v1.6.0/go.mod h1:fltr4n8CU8Ke44wwGCBoEymUuxUHl09ZGVZPK5anwXA=
 github.com/hashicorp/hcl v0.0.0-20170504190234-a4b07c25de5f h1:UdxlrJz4JOnY8W+DbLISwf2B8WXEolNRA8BGCwI9jws=
 github.com/hashicorp/hcl v0.0.0-20170504190234-a4b07c25de5f/go.mod h1:oZtUIOe8dh44I2q6ScRibXws4Ajl+d+nod3AaR9vL5w=
-github.com/hashicorp/hcl/v2 v2.17.0 h1:z1XvSUyXd1HP10U4lrLg5e0JMVz6CPaJvAgxM0KNZVY=
-github.com/hashicorp/hcl/v2 v2.17.0/go.mod h1:gJyW2PTShkJqQBKpAmPO3yxMxIuoXkOF2TpqXzrQyx4=
+github.com/hashicorp/hcl/v2 v2.18.0 h1:wYnG7Lt31t2zYkcquwgKo6MWXzRUDIeIVU5naZwHLl8=
+github.com/hashicorp/hcl/v2 v2.18.0/go.mod h1:ThLC89FV4p9MPW804KVbe/cEXoQ8NZEh+JtMeeGErHE=
 github.com/hashicorp/terraform-config-inspect v0.0.0-20230614215431-f32df32a01cd h1:1uPcotqoL4TjcGKlgIe7OFSRplf7BMVtUjekwmCrvuM=
 github.com/hashicorp/terraform-config-inspect v0.0.0-20230614215431-f32df32a01cd/go.mod h1:l8HcFPm9cQh6Q0KSWoYPiePqMvRFenybP1CH2MjKdlg=
 github.com/hashicorp/terraform-json v0.17.1 h1:eMfvh/uWggKmY7Pmb3T85u86E2EQg6EQHgyRwf3RkyA=
@@ -32,8 +30,8 @@ github.com/lonegunmanb/terraform-aws-schema/v3 v3.76.1 h1:11gsHdCkFAeTDcCJY36EdP
 github.com/lonegunmanb/terraform-aws-schema/v3 v3.76.1/go.mod h1:CI7i3qyLoD/XlIew5Yv+zRpFFdetEBhpIXWJXatgtYQ=
 github.com/lonegunmanb/terraform-aws-schema/v4 v4.67.0 h1:ssy4uMEFjijkxORGG+SyU3njk2LMYs6RO0i+53T4rnM=
 github.com/lonegunmanb/terraform-aws-schema/v4 v4.67.0/go.mod h1:QXLvpWSz5rNGenKQtdHpOlOh7cAet2BOgBXMjqoGYy4=
-github.com/lonegunmanb/terraform-aws-schema/v5 v5.15.0 h1:24O0t0z+7dgtAJd/PnZbMWXGFqb+jsFZzFtF95osZ6E=
-github.com/lonegunmanb/terraform-aws-schema/v5 v5.15.0/go.mod h1:aMpmkBda0aCKUiEEMJPzDhmxF5Gy2iqF16lacZ0cTDk=
+github.com/lonegunmanb/terraform-aws-schema/v5 v5.16.1 h1:pUIPybSiTjMaZFJvbOfCyfZ1DpLwH0B7XE6iYOmDqEk=
+github.com/lonegunmanb/terraform-aws-schema/v5 v5.16.1/go.mod h1:aMpmkBda0aCKUiEEMJPzDhmxF5Gy2iqF16lacZ0cTDk=
 github.com/lonegunmanb/terraform-azapi-schema v1.9.0 h1:A8OwqYUTkYEhQU9ajivtc9Fgu/hVnW6SOUvqY6shVVQ=
 github.com/lonegunmanb/terraform-azapi-schema v1.9.0/go.mod h1:Z75jFT9Gz4fi5hSQJYak2/eFQTDPUS57twSrnBWBw1Y=
 github.com/lonegunmanb/terraform-azuread-schema/v2 v2.41.0 h1:KJYI8ndL0eeKS0KLB37vk5Ptp3Z3D/xM9C6Yp4JjftM=
@@ -46,8 +44,8 @@ github.com/lonegunmanb/terraform-google-schema/v2 v2.20.3 h1:2iS6Kb7Fnjt0XnD0BbF
 github.com/lonegunmanb/terraform-google-schema/v2 v2.20.3/go.mod h1:5SOCCxmln16gVopQ1CPRXDq1kHq4oTT4rBRcqk+qmbE=
 github.com/lonegunmanb/terraform-google-schema/v3 v3.90.1 h1:53w7GBFTVQffQWJm7qvLnC/gODTPlikWs3JDJXpQ39c=
 github.com/lonegunmanb/terraform-google-schema/v3 v3.90.1/go.mod h1:ST7y3Sx4mq1RGRCG67KrNDUQ+P2EIyG/rYSM+hC08F4=
-github.com/lonegunmanb/terraform-google-schema/v4 v4.80.0 h1:2sfsd9Ah3UpP1qsgVr+wBlfZ58M/1BQdzSUHnNPWKpA=
-github.com/lonegunmanb/terraform-google-schema/v4 v4.80.0/go.mod h1:qDyl6UjUn3a3rHATmeMQCR+iYC/hmfVq99QMRgFEkCw=
+github.com/lonegunmanb/terraform-google-schema/v4 v4.81.0 h1:5yshoMq+MXeczB2imFmp69QJgeX7ls2dEiES9tm2wF0=
+github.com/lonegunmanb/terraform-google-schema/v4 v4.81.0/go.mod h1:qDyl6UjUn3a3rHATmeMQCR+iYC/hmfVq99QMRgFEkCw=
 github.com/lonegunmanb/terraform-local-schema/v2 v2.4.0 h1:ihO5Axdmn5SpHG6jF8KpVBzjBSzK1feJl+mpkZjSC88=
 github.com/lonegunmanb/terraform-local-schema/v2 v2.4.0/go.mod h1:u0L8ZQExPIbyazM/IVRKy5w5epWK3R01+8e5lzI+jvM=
 github.com/lonegunmanb/terraform-null-schema/v3 v3.2.1 h1:0cgtSJ5fDS75t1O+evxqh/pUU7IJGGRD2j0GNdCesZA=
