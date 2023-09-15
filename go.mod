@@ -18,7 +18,7 @@ require (
 	github.com/lonegunmanb/terraform-azurerm-schema/v3 v3.72.0
 	github.com/lonegunmanb/terraform-google-schema/v2 v2.20.3
 	github.com/lonegunmanb/terraform-google-schema/v3 v3.90.1
-	github.com/lonegunmanb/terraform-google-schema/v4 v4.80.0
+	github.com/lonegunmanb/terraform-google-schema/v4 v4.81.0
 	github.com/lonegunmanb/terraform-local-schema/v2 v2.4.0
 	github.com/lonegunmanb/terraform-null-schema/v3 v3.2.1
 	github.com/lonegunmanb/terraform-random-schema/v3 v3.5.1
