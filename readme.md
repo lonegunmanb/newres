@@ -17,7 +17,7 @@ Supports two different generation modes: `UniVariable` and `MultipleVariables`:
 To use `newres`, you'll need to have Go installed and build the tool using the provided source code:
 
 ```shell
-go install github.com/lonegunmanb/newres/v3
+go install github.com/lonegunmanb/newres/v3@latest
 ```
 
 Once you've built the tool, you can use it with the following command:
