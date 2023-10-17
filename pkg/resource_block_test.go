@@ -66,6 +66,15 @@ func TestGenerateVariableType_ComplexObject(t *testing.T) {
   max_replicas = optional(number)
   min_replicas = optional(number)
   revision_suffix = optional(string)
+  azure_queue_scale_rule=optional(list(object({
+    name=string
+    queue_length=number
+    queue_name=string
+    authentication=list(object({
+      secret_name=string
+      trigger_parameter=string
+    }))
+  })))
   container = list(object({
     args = optional(list(string))
     command = optional(list(string))
@@ -124,6 +133,31 @@ func TestGenerateVariableType_ComplexObject(t *testing.T) {
 	  path = string
 	})))
   }))
+  custom_scale_rule=optional(list(object({
+  custom_rule_type=string
+  metadata=map(string)
+  name=string
+  authentication=optional(list(object({
+    secret_name=string
+    trigger_parameter=string
+  })))
+  })))
+    http_scale_rule=optional(list(object({
+      concurrent_requests=string
+      name=string
+      authentication=optional(list(object({
+      secret_name=string
+      trigger_parameter=optional(string)
+    })))
+  })))
+    tcp_scale_rule=optional(list(object({
+      concurrent_requests=string
+      name=string
+      authentication=optional(list(object({
+      secret_name=string
+      trigger_parameter=optional(string)
+    })))
+  })))
   volume = optional(list(object({
 	name = string
 	storage_name = optional(string)
