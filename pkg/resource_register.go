@@ -2,6 +2,7 @@ package pkg
 
 import (
 	tfjson "github.com/hashicorp/terraform-json"
+	alicloud "github.com/lonegunmanb/terraform-alicloud-schema/generated"
 	aws_v2 "github.com/lonegunmanb/terraform-aws-schema/v2/generated"
 	aws_v3 "github.com/lonegunmanb/terraform-aws-schema/v3/generated"
 	aws_v4 "github.com/lonegunmanb/terraform-aws-schema/v4/generated"
@@ -25,6 +26,7 @@ var resourceSchemas = make(map[string]*tfjson.Schema, 0)
 
 func init() {
 	resources := []map[string]*tfjson.Schema{
+		alicloud.Resources,
 		azure_v2.Resources,
 		azure_v3.Resources,
 		azuread.Resources,
