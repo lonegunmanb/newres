@@ -10,10 +10,11 @@ require (
 	github.com/hashicorp/terraform-config-inspect v0.0.0-20230614215431-f32df32a01cd
 	github.com/hashicorp/terraform-json v0.17.1
 	github.com/lonegunmanb/azure-verified-module-fix v0.0.0-20231031050011-03271b487c96
+	github.com/lonegunmanb/terraform-alicloud-schema v1.211.2
 	github.com/lonegunmanb/terraform-aws-schema/v2 v2.70.4
 	github.com/lonegunmanb/terraform-aws-schema/v3 v3.76.1
 	github.com/lonegunmanb/terraform-aws-schema/v4 v4.67.0
-	github.com/lonegunmanb/terraform-aws-schema/v5 v5.23.1
+	github.com/lonegunmanb/terraform-aws-schema/v5 v5.24.0
 	github.com/lonegunmanb/terraform-azapi-schema v1.9.0
 	github.com/lonegunmanb/terraform-azuread-schema/v2 v2.45.0
 	github.com/lonegunmanb/terraform-azurerm-schema/v2 v2.99.0
@@ -38,7 +39,6 @@ require (
 	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/hashicorp/go-version v1.6.0 // indirect
 	github.com/hashicorp/hcl v0.0.0-20170504190234-a4b07c25de5f // indirect
-	github.com/lonegunmanb/terraform-alicloud-schema v1.211.2 // indirect
 	github.com/lonegunmanb/terraform-modtm-schema v0.1.8 // indirect
 	github.com/mitchellh/go-wordwrap v1.0.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
