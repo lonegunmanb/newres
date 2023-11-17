@@ -18,7 +18,7 @@ require (
 	github.com/lonegunmanb/terraform-azapi-schema v1.9.0
 	github.com/lonegunmanb/terraform-azuread-schema/v2 v2.45.0
 	github.com/lonegunmanb/terraform-azurerm-schema/v2 v2.99.0
-	github.com/lonegunmanb/terraform-azurerm-schema/v3 v3.79.0
+	github.com/lonegunmanb/terraform-azurerm-schema/v3 v3.80.0
 	github.com/lonegunmanb/terraform-google-schema/v2 v2.20.3
 	github.com/lonegunmanb/terraform-google-schema/v3 v3.90.1
 	github.com/lonegunmanb/terraform-google-schema/v4 v4.84.0
