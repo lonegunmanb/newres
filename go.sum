@@ -44,8 +44,8 @@ github.com/lonegunmanb/terraform-azuread-schema/v2 v2.45.0 h1:aSN3xpj1pOO0P12xRs
 github.com/lonegunmanb/terraform-azuread-schema/v2 v2.45.0/go.mod h1:aqlKnZLHcrns6uC4MpCfJ8oDHHTJJy+nTKZ0qgxlDCM=
 github.com/lonegunmanb/terraform-azurerm-schema/v2 v2.99.0 h1:G5IJgiWe6npIViTDeyE3tSGWHWYvdrCjO0VADm172bQ=
 github.com/lonegunmanb/terraform-azurerm-schema/v2 v2.99.0/go.mod h1:k9mRJlwqithRQfRMzWfsLuWknIAx4sUAuQeW0kRId88=
-github.com/lonegunmanb/terraform-azurerm-schema/v3 v3.80.0 h1:usO3YFKmjvApGCPXmob6xfntYvfKkhJYAV2kTpKBtoc=
-github.com/lonegunmanb/terraform-azurerm-schema/v3 v3.80.0/go.mod h1:XrYn3UKiduOuozyewM8DcBkNpmelzmTk0VE+NUVUgOI=
+github.com/lonegunmanb/terraform-azurerm-schema/v3 v3.81.0 h1:EI5ou0HJHEvCqu2eCVMIv+SKD7OGwjHKb4opU7KOoNc=
+github.com/lonegunmanb/terraform-azurerm-schema/v3 v3.81.0/go.mod h1:XrYn3UKiduOuozyewM8DcBkNpmelzmTk0VE+NUVUgOI=
 github.com/lonegunmanb/terraform-google-schema/v2 v2.20.3 h1:2iS6Kb7Fnjt0XnD0BbFD/LxHt1WO3tXI6PFVclmHVLg=
 github.com/lonegunmanb/terraform-google-schema/v2 v2.20.3/go.mod h1:5SOCCxmln16gVopQ1CPRXDq1kHq4oTT4rBRcqk+qmbE=
 github.com/lonegunmanb/terraform-google-schema/v3 v3.90.1 h1:53w7GBFTVQffQWJm7qvLnC/gODTPlikWs3JDJXpQ39c=
