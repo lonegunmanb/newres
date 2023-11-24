@@ -123,10 +123,18 @@ Even `var.kubernetes_cluster_default_node_pool` is a required object, that's bec
 # Supported Providers and Documentation Limitations
 
 `newres` currently supports variable block description generation for the following providers:
+* Alicloud (`alicloud`)
 * AWS (`aws`)
+* AzAPI (`azapi`)
 * Azure Resource Manager (`azurerm`)
 * Azure Active Directory (`azuread`)
 * Google Cloud Platform (`google`)
+* Local (`local`)
+* Null (`null`)
+* Random (`random`)
+* Template (`template`)
+* Time (`time`)
+* Tls (`tls`)
 
 Please note that there is no unified and strict rule for provider documentation. As a result, `newres` may not always parse the documentation correctly for all providers and resources. This tool is designed to help automate the generation of Terraform configuration files, but it is still essential to review the generated files for accuracy.
 
