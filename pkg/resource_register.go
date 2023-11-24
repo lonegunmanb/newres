@@ -14,6 +14,8 @@ import (
 	google_v2 "github.com/lonegunmanb/terraform-google-schema/v2/generated"
 	google_v3 "github.com/lonegunmanb/terraform-google-schema/v3/generated"
 	google_v4 "github.com/lonegunmanb/terraform-google-schema/v4/generated"
+	helm_v2 "github.com/lonegunmanb/terraform-helm-schema/v2/generated"
+	kubernetes_v2 "github.com/lonegunmanb/terraform-kubernetes-schema/v2/generated"
 	local "github.com/lonegunmanb/terraform-local-schema/v2/generated"
 	null "github.com/lonegunmanb/terraform-null-schema/v3/generated"
 	random "github.com/lonegunmanb/terraform-random-schema/v3/generated"
@@ -38,6 +40,8 @@ func init() {
 		google_v2.Resources,
 		google_v3.Resources,
 		google_v4.Resources,
+		helm_v2.Resources,
+		kubernetes_v2.Resources,
 		local.Resources,
 		null.Resources,
 		random.Resources,
