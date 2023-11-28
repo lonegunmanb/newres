@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/hashicorp/hcl/v2/hclwrite"
 	"github.com/hashicorp/terraform-config-inspect/tfconfig"
-	"github.com/lonegunmanb/azure-verified-module-fix/pkg"
+	avmfix "github.com/lonegunmanb/avmfix/pkg"
 	awsschema "github.com/lonegunmanb/terraform-aws-schema/v5/generated"
 	azurermschema "github.com/lonegunmanb/terraform-azurerm-schema/v3/generated"
 	"github.com/stretchr/testify/assert"
@@ -203,16 +203,16 @@ func TestGenerateVariableBlock_RootArgumentDescription(t *testing.T) {
 	assert.Equal(t, desc, mod.Variables["kubernetes_cluster_name"].Description)
 }
 
-func variableBlockToHclCode(b *pkg.VariableBlock) string {
+func variableBlockToHclCode(b *avmfix.VariableBlock) string {
 	f := hclwrite.NewFile()
 	f.Body().AppendBlock(b.Block.WriteBlock)
 	return string(f.Bytes())
 }
 
-func toVariableBlock(variableCode string) *pkg.VariableBlock {
-	f, _ := pkg.ParseConfig([]byte(variableCode), "")
+func toVariableBlock(variableCode string) *avmfix.VariableBlock {
+	f, _ := avmfix.ParseConfig([]byte(variableCode), "")
 	b := f.GetBlock(0)
-	variableBlock := pkg.BuildVariableBlock(f.File, pkg.NewHclBlock(b.Block, b.WriteBlock))
+	variableBlock := avmfix.BuildVariableBlock(f.File, avmfix.NewHclBlock(b.Block, b.WriteBlock))
 	variableBlock.AutoFix()
 	return variableBlock
 }

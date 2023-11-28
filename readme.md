@@ -128,6 +128,7 @@ Even `var.kubernetes_cluster_default_node_pool` is a required object, that's bec
 * AzAPI (`azapi`)
 * Azure Resource Manager (`azurerm`)
 * Azure Active Directory (`azuread`)
+* Bytebase (`bytebase`)
 * Google Cloud Platform (`google`)
 * Helm (`helm`)
 * Kubernetes (`kubernetes`)

@@ -11,6 +11,7 @@ import (
 	azuread "github.com/lonegunmanb/terraform-azuread-schema/v2/generated"
 	azure_v2 "github.com/lonegunmanb/terraform-azurerm-schema/v2/generated"
 	azure_v3 "github.com/lonegunmanb/terraform-azurerm-schema/v3/generated"
+	bytebase "github.com/lonegunmanb/terraform-bytebase-schema/generated"
 	google_v2 "github.com/lonegunmanb/terraform-google-schema/v2/generated"
 	google_v3 "github.com/lonegunmanb/terraform-google-schema/v3/generated"
 	google_v4 "github.com/lonegunmanb/terraform-google-schema/v4/generated"
@@ -37,6 +38,7 @@ func init() {
 		aws_v3.Resources,
 		aws_v4.Resources,
 		aws_v5.Resources,
+		bytebase.Resources,
 		google_v2.Resources,
 		google_v3.Resources,
 		google_v4.Resources,
