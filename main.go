@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 
 	"github.com/hashicorp/hcl/v2/hclwrite"
-	autofix "github.com/lonegunmanb/azure-verified-module-fix/pkg"
+	autofix "github.com/lonegunmanb/avmfix/pkg"
 	"github.com/lonegunmanb/newres/v3/pkg"
 )
 
