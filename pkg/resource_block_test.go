@@ -63,107 +63,124 @@ func TestGenerateVariableType_ComplexObject(t *testing.T) {
 	require.NoError(t, err)
 	actual := strings.Replace(generateVariableType(newNestedBlock(r, "template", input), true), " ", "", -1)
 	expected := strings.Replace(strings.Replace(`object({
-  max_replicas = optional(number)
-  min_replicas = optional(number)
-  revision_suffix = optional(string)
-  azure_queue_scale_rule=optional(list(object({
-    name=string
-    queue_length=number
-    queue_name=string
-    authentication=list(object({
-      secret_name=string
-      trigger_parameter=string
+    max_replicas           = optional(number)
+    min_replicas           = optional(number)
+    revision_suffix        = optional(string)
+    azure_queue_scale_rule = optional(list(object({
+      name           = string
+      queue_length   = number
+      queue_name     = string
+      authentication = list(object({
+        secret_name       = string
+        trigger_parameter = string
+      }))
+    })))
+    container = list(object({
+      args    = optional(list(string))
+      command = optional(list(string))
+      cpu     = number
+      image   = string
+      memory  = string
+      name    = string
+      env     = optional(list(object({
+        name        = string
+        secret_name = optional(string)
+        value       = optional(string)
+      })))
+      liveness_probe = optional(list(object({
+        failure_count_threshold = optional(number)
+        host                    = optional(string)
+        initial_delay           = optional(number)
+        interval_seconds        = optional(number)
+        path                    = optional(string)
+        port                    = number
+        timeout                 = optional(number)
+        transport = string
+        header    = optional(list(object({
+          name  = string
+          value = string
+        })))
+      })))
+      readiness_probe = optional(list(object({
+        failure_count_threshold = optional(number)
+        host                    = optional(string)
+        interval_seconds        = optional(number)
+        path                    = optional(string)
+        port                    = number
+        success_count_threshold = optional(number)
+        timeout                 = optional(number)
+        transport               = string
+        header                  = optional(list(object({
+          name  = string
+          value = string
+        })))
+      })))
+      startup_probe = optional(list(object({
+        failure_count_threshold = optional(number)
+        host                    = optional(string)
+        interval_seconds        = optional(number)
+        path                    = optional(string)
+        port                    = number
+        timeout                 = optional(number)
+        transport               = string
+        header                  = optional(list(object({
+          name  = string
+          value = string
+        })))
+      })))
+      volume_mounts = optional(list(object({
+        name = string
+        path = string
+      })))
     }))
-  })))
-  container = list(object({
-    args = optional(list(string))
-    command = optional(list(string))
-    cpu = number
-    image = string
-    memory = string
-    name = string
-    env = optional(list(object({
-      name = string
-      secret_name = optional(string)
-      value = optional(string)
+    custom_scale_rule = optional(list(object({
+      custom_rule_type = string
+      metadata         = map(string)
+      name             = string
+      authentication   = optional(list(object({
+        secret_name       = string
+        trigger_parameter = string
+      })))
     })))
-    liveness_probe = optional(list(object({
-	  failure_count_threshold = optional(number)
-	  host = optional(string)
-	  initial_delay = optional(number)
-      interval_seconds = optional(number)
-	  path = optional(string)
- 	  port = number
-	  timeout = optional(number)
-	  transport = string
-      header = optional(list(object({
-		name = string
-		value = string
-	  })))
+    http_scale_rule = optional(list(object({
+      concurrent_requests = string
+      name                = string
+      authentication      = optional(list(object({
+        secret_name       = string
+        trigger_parameter = optional(string)
+      })))
     })))
-    readiness_probe = optional(list(object({
-	  failure_count_threshold = optional(number)
-	  host = optional(string)
-	  interval_seconds = optional(number)
-	  path = optional(string)
-	  port = number
-	  success_count_threshold = optional(number)
-	  timeout = optional(number)
-	  transport = string
-	  header = optional(list(object({
-		name = string
-		value = string
-	  })))
-	})))
-	startup_probe = optional(list(object({
-	  failure_count_threshold = optional(number)
-	  host = optional(string)
-	  interval_seconds = optional(number)
-	  path = optional(string)
-	  port = number
-	  timeout = optional(number)
-	  transport = string
-	  header = optional(list(object({
-		name = string
-		value = string
-	  })))
-	})))
-	volume_mounts = optional(list(object({
-	  name = string
-	  path = string
-	})))
-  }))
-  custom_scale_rule=optional(list(object({
-  custom_rule_type=string
-  metadata=map(string)
-  name=string
-  authentication=optional(list(object({
-    secret_name=string
-    trigger_parameter=string
-  })))
-  })))
-    http_scale_rule=optional(list(object({
-      concurrent_requests=string
-      name=string
-      authentication=optional(list(object({
-      secret_name=string
-      trigger_parameter=optional(string)
+    init_container = optional(list(object({
+      args    = optional(list(string))
+      command = optional(list(string))
+      cpu     = optional(number)
+      image   = string
+      memory  = optional(string)
+      name    = string
+      env     = optional(list(object({
+        name        = string
+        secret_name = optional(string)
+        value       = optional(string)
+      })))
+      volume_mounts = optional(list(object({
+        name = string
+        path = string
+      })))
     })))
-  })))
-    tcp_scale_rule=optional(list(object({
-      concurrent_requests=string
-      name=string
-      authentication=optional(list(object({
-      secret_name=string
-      trigger_parameter=optional(string)
+    tcp_scale_rule = optional(list(object({
+      concurrent_requests = string
+      name                = string
+      authentication      = optional(list(object({
+        secret_name       = string
+        trigger_parameter = optional(string)
+      })))
     })))
-  })))
-  volume = optional(list(object({
-	name = string
-	storage_name = optional(string)
-	storage_type = optional(string)
-  })))
-})`, " ", "", -1), "	", "", -1)
+    volume = optional(list(object({
+      name         = string
+      storage_name = optional(string)
+      storage_type = optional(string)
+    })))
+  })`, " ", "", -1), "	", "", -1)
 	assert.Equal(t, expected, actual)
 }
 
