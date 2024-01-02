@@ -7,7 +7,6 @@ import (
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclwrite"
 	tfjson "github.com/hashicorp/terraform-json"
-	"github.com/zclconf/go-cty/cty"
 )
 
 var _ block = &nestedBlock{}
@@ -127,28 +126,6 @@ func (n *nestedBlock) generateDynamicBlock(iterator string) string {
 	hcl.WriteString("  }\n")
 	hcl.WriteString("}\n")
 	return hcl.String()
-}
-
-func appendVariableBlock(b block, variableName string, document map[string]argumentDescription) error {
-	variableType := generateVariableType(b, true)
-	variableType = fmt.Sprintf("type = %s", variableType)
-	cfg, diag := hclwrite.ParseConfig([]byte(variableType), "", hcl.InitialPos)
-	if diag.HasErrors() {
-		return fmt.Errorf("incorrect parsed variable type for %s: %s, %s", b.address(), variableType, diag.Error())
-	}
-	vb := b.appendNewBlock("variable", []string{variableName})
-
-	vb.Body().AppendUnstructuredTokens(cfg.BuildTokens(hclwrite.Tokens{}))
-	vb.Body().AppendNewline()
-
-	if b.minItems() == 0 {
-		vb.Body().SetAttributeValue("default", cty.NullVal(cty.String))
-	} else {
-		vb.Body().SetAttributeValue("nullable", cty.False)
-	}
-
-	vb.Body().SetAttributeRaw("description", blockDescriptionTokens(b, document))
-	return nil
 }
 
 func (n *nestedBlock) generateHCLAttributes(iterator string) string {

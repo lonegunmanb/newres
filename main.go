@@ -17,10 +17,11 @@ func main() {
 	dir := flag.String("dir", "", "Directory path to store generated files (required)")
 	univar := flag.Bool("u", false, "Generate mode: UniVariable if set, MultipleVariables if not set")
 	resourceType := flag.String("r", "", "Resource type to generate configuration for (required)")
-	flag.StringVar(resourceType, "resource_type", "", "")
+	delimiter := flag.String("delimiter", "EOT", "Heredoc delimiter (optional)")
+	flag.StringVar(resourceType, "resource-type", "", "")
 	flag.Usage = func() {
-		_, _ = fmt.Fprintln(os.Stderr, "Usage: generate_resource -dir [DIRECTORY] [-u] [-r RESOURCE_TYPE]")
-		_, _ = fmt.Fprintln(os.Stderr, "       generate_resource -dir [DIRECTORY] [--resource_type RESOURCE_TYPE]")
+		_, _ = fmt.Fprintln(os.Stderr, "Usage: newres -dir [DIRECTORY] [-u] [-r RESOURCE_TYPE] [-delimiter DELIMITER]")
+		_, _ = fmt.Fprintln(os.Stderr, "       newres -dir [DIRECTORY] [-u] [--resource-type RESOURCE_TYPE] [-delimiter DELIMITER]")
 		flag.PrintDefaults()
 	}
 	flag.Parse()
@@ -38,8 +39,16 @@ func main() {
 		generateMode = pkg.MultipleVariables
 	}
 
+	if delimiter == nil {
+		empty := ""
+		delimiter = &empty
+	}
+
 	// Call GenerateResource function
-	generatedCode, err := pkg.GenerateResource(*resourceType, generateMode)
+	generatedCode, err := pkg.GenerateResource(*resourceType, pkg.Config{
+		Delimiter: *delimiter,
+		Mode:      generateMode,
+	})
 	if err != nil {
 		fmt.Printf("Error generating resource: %s\n", err)
 		os.Exit(1)

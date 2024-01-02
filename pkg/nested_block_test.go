@@ -17,7 +17,7 @@ import (
 func TestGenerateNestedBlock_SimpleObject(t *testing.T) {
 	resourceSchema := azurermschema.Resources["azurerm_kubernetes_cluster"]
 	identity := resourceSchema.Block.NestedBlocks["identity"]
-	r, err := newResourceBlock("azurerm_shared_image", resourceSchema)
+	r, err := newResourceBlock("azurerm_shared_image", resourceSchema, Config{})
 	require.NoError(t, err)
 	sut := newNestedBlock(r, "identity", identity)
 	actual := sut.generateHCL("var.kubernetes_cluster")
@@ -41,7 +41,7 @@ func TestGenerateNestedBlock_SimpleList(t *testing.T) {
 		Block.NestedBlocks["template"].
 		Block.NestedBlocks["container"].
 		Block.NestedBlocks["env"]
-	r, err := newResourceBlock("azurerm_container_app", schema)
+	r, err := newResourceBlock("azurerm_container_app", schema, Config{})
 	require.NoError(t, err)
 	sut := newNestedBlock(r, "env", env)
 	actual := sut.generateHCL("container.value")
@@ -65,7 +65,7 @@ func TestGenerateNestedBlock_ListOfObject(t *testing.T) {
 	container := schema.
 		Block.NestedBlocks["template"].
 		Block.NestedBlocks["container"]
-	r, err := newResourceBlock("azurerm_container_app", schema)
+	r, err := newResourceBlock("azurerm_container_app", schema, Config{})
 	require.NoError(t, err)
 	sut := newNestedBlock(r, "container", container)
 	actual := sut.generateHCL("template.value")
@@ -76,7 +76,7 @@ func TestGenerateNestedBlock_SimpleSet(t *testing.T) {
 	schema := azurermschema.Resources["azurerm_container_app"]
 	secret := schema.
 		Block.NestedBlocks["secret"]
-	r, err := newResourceBlock("azurerm_container_app", schema)
+	r, err := newResourceBlock("azurerm_container_app", schema, Config{})
 	require.NoError(t, err)
 	sut := newNestedBlock(r, "secret", secret)
 	actual := sut.generateHCL("var.container_app")
@@ -98,7 +98,7 @@ func TestGenerateNestedBlock_ContainerGroupContainer(t *testing.T) {
 	schema := azurermschema.Resources["azurerm_container_group"]
 	container := schema.
 		Block.NestedBlocks["container"]
-	r, err := newResourceBlock("azurerm_container_group", schema)
+	r, err := newResourceBlock("azurerm_container_group", schema, Config{})
 	require.NoError(t, err)
 	sut := newNestedBlock(r, "container", container)
 	actual := sut.generateHCL("var.container_group")
@@ -214,7 +214,7 @@ dynamic "container" {
 func TestGenerateNestedBlock_RequiredObject(t *testing.T) {
 	res := azurermschema.Resources["azurerm_shared_image"]
 	identifier := res.Block.NestedBlocks["identifier"]
-	r, err := newResourceBlock("azurerm_shared_image", res)
+	r, err := newResourceBlock("azurerm_shared_image", res, Config{})
 	require.NoError(t, err)
 	sut := newNestedBlock(r, "identifier", identifier)
 	actual := sut.generateHCL("var.shared_image_identifier")
@@ -243,7 +243,7 @@ func formatHcl(code string, t *testing.T) string {
 
 func TestGenerateVariableBlock_NestedBlockDescription(t *testing.T) {
 	resourceType := "azurerm_kubernetes_cluster"
-	r, _ := newResourceBlock(resourceType, resourceSchemas[resourceType])
+	r, _ := newResourceBlock(resourceType, resourceSchemas[resourceType], Config{})
 	desc := "(Required) The subnet name for the virtual nodes to run."
 	generated, err := r.generateResource(map[string]argumentDescription{
 		"aci_connector_linux.subnet_name": {
@@ -266,7 +266,7 @@ func TestGenerateVariableBlock_NestedBlockDescription(t *testing.T) {
 
 func TestGenerateVariableType_SimpleObject(t *testing.T) {
 	aksSchema := azurermschema.Resources["azurerm_kubernetes_cluster"]
-	r, err := newResourceBlock("azurerm_kubernetes_cluster", aksSchema)
+	r, err := newResourceBlock("azurerm_kubernetes_cluster", aksSchema, Config{})
 	cases := []struct {
 		nestedBlockName string
 		expected        string
@@ -298,13 +298,15 @@ func TestGenerateVariableType_SimpleObject(t *testing.T) {
 
 func TestGenerateVariableType_RequiredObject(t *testing.T) {
 	input := azurermschema.Resources["azurerm_kubernetes_cluster"]
-	resourceBlock, _ := newResourceBlock("azurerm_kubernetes_cluster", input)
+	resourceBlock, _ := newResourceBlock("azurerm_kubernetes_cluster", input, Config{})
 	actual := strings.Replace(generateVariableType(resourceBlock, true), " ", "", -1)
 	assert.Contains(t, actual, "default_node_pool=object({")
 }
 
 func TestGenerateDynamicBlockForAzurermTimeouts(t *testing.T) {
-	code, err := GenerateResource("azurerm_storage_table", MultipleVariables)
+	code, err := GenerateResource("azurerm_storage_table", Config{
+		Mode: MultipleVariables,
+	})
 	require.NoError(t, err)
 	assert.Contains(t, code, "for_each = var.storage_table_timeouts == null ? [] : [var.storage_table_timeouts]")
 }

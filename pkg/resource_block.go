@@ -2,6 +2,7 @@ package pkg
 
 import (
 	"fmt"
+	"github.com/hashicorp/hcl/v2"
 	"strings"
 
 	"github.com/hashicorp/hcl/v2/hclsyntax"
@@ -24,6 +25,7 @@ type resourceBlock struct {
 	attrs             []*attribute
 	nbs               []*nestedBlock
 	writeBlock        *hclwrite.Block
+	cfg               Config
 }
 
 func (r *resourceBlock) schemaBlock() *tfjson.SchemaBlock {
@@ -38,7 +40,7 @@ func (r *resourceBlock) appendNewBlock(typeName string, labels []string) *hclwri
 	return r.f.Body().AppendNewBlock(typeName, labels)
 }
 
-func newResourceBlock(name string, schema *tfjson.Schema) (*resourceBlock, error) {
+func newResourceBlock(name string, schema *tfjson.Schema, cfg Config) (*resourceBlock, error) {
 	resourceTypeSegments := strings.Split(name, "_")
 	if len(resourceTypeSegments) < 1 {
 		return nil, fmt.Errorf("incorrect resource type: %s", name)
@@ -51,6 +53,7 @@ func newResourceBlock(name string, schema *tfjson.Schema) (*resourceBlock, error
 		vendor:            vendor,
 		nameWithoutVendor: nameWithoutVendor,
 		f:                 hclwrite.NewFile(),
+		cfg:               cfg,
 	}
 	r.init()
 	return r, nil
@@ -144,7 +147,7 @@ func (r *resourceBlock) generateResource(document map[string]argumentDescription
 		if !generateVariableBlock {
 			continue
 		}
-		err = appendVariableBlock(nb, fmt.Sprintf("%s_%s", r.nameWithoutVendor, nb.name), document)
+		err = r.appendVariableBlock(nb, fmt.Sprintf("%s_%s", r.nameWithoutVendor, nb.name), document)
 		if err != nil {
 			return "", err
 		}
@@ -183,14 +186,14 @@ func uniVarNestedBlockIterator(r *resourceBlock, name string) string {
 	return fmt.Sprintf("var.%s.%s", r.nameWithoutVendor, name)
 }
 
-func blockDescriptionTokens(b block, documents map[string]argumentDescription) hclwrite.Tokens {
+func (r *resourceBlock) blockDescriptionTokens(b block, documents map[string]argumentDescription) hclwrite.Tokens {
 	descriptionTokens := generateVariableDescription(b, documents)
 
 	return newTokens().
-		oHeredoc("<<-EOT").
+		oHeredoc(fmt.Sprintf("<<-%s", r.cfg.GetDelimiter())).
 		newLine().
 		rawTokens(descriptionTokens).
-		cHeredoc("EOT").
+		cHeredoc(r.cfg.GetDelimiter()).
 		newLine().Tokens
 }
 
@@ -219,7 +222,7 @@ func (r *resourceBlock) setAttributeRaw(name string, tokens hclwrite.Tokens) {
 }
 
 func (r *resourceBlock) generateUniVarResource(document map[string]argumentDescription) (string, error) {
-	err := appendVariableBlock(r, r.nameWithoutVendor, document)
+	err := r.appendVariableBlock(r, r.nameWithoutVendor, document)
 	if err != nil {
 		return "", err
 	}
@@ -228,4 +231,26 @@ func (r *resourceBlock) generateUniVarResource(document map[string]argumentDescr
 
 func (r *resourceBlock) generateMultiVarsResource(document map[string]argumentDescription) (string, error) {
 	return r.generateResource(document, true, multiVarsAttributeExpr, multiVarsNestedBlockIterator)
+}
+
+func (r *resourceBlock) appendVariableBlock(b block, variableName string, document map[string]argumentDescription) error {
+	variableType := generateVariableType(b, true)
+	variableType = fmt.Sprintf("type = %s", variableType)
+	cfg, diag := hclwrite.ParseConfig([]byte(variableType), "", hcl.InitialPos)
+	if diag.HasErrors() {
+		return fmt.Errorf("incorrect parsed variable type for %s: %s, %s", b.address(), variableType, diag.Error())
+	}
+	vb := b.appendNewBlock("variable", []string{variableName})
+
+	vb.Body().AppendUnstructuredTokens(cfg.BuildTokens(hclwrite.Tokens{}))
+	vb.Body().AppendNewline()
+
+	if b.minItems() == 0 {
+		vb.Body().SetAttributeValue("default", cty.NullVal(cty.String))
+	} else {
+		vb.Body().SetAttributeValue("nullable", cty.False)
+	}
+
+	vb.Body().SetAttributeRaw("description", r.blockDescriptionTokens(b, document))
+	return nil
 }
