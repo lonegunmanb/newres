@@ -16,7 +16,9 @@ import (
 func TestGenerateResource_SimpleUniVarResource(t *testing.T) {
 	resourceType := "azurerm_resource_group"
 	schema := azurermschema.Resources[resourceType]
-	generated, err := GenerateResource(resourceType, UniVariable)
+	generated, err := GenerateResource(resourceType, Config{
+		Mode: UniVariable,
+	})
 	require.NoError(t, err)
 	config, diag := hclsyntax.ParseConfig([]byte(generated), "", hcl.InitialPos)
 	require.False(t, diag.HasErrors())
@@ -42,7 +44,9 @@ func TestGenerateResource_SimpleUniVarResource(t *testing.T) {
 }
 
 func TestGenerateResource_ObjectInAttributeShouldGenerateNestedBlock(t *testing.T) {
-	code, err := GenerateResource("azurerm_container_group", MultipleVariables)
+	code, err := GenerateResource("azurerm_container_group", Config{
+		Mode: MultipleVariables,
+	})
 	require.NoError(t, err)
 	assert.Contains(t, code, `dynamic "exposed_port" {`)
 }
@@ -59,7 +63,7 @@ func TestGenerateResource_NestedObjectAsAttribute(t *testing.T) {
 func TestGenerateResource_IdAttributeInsideNestedBlockAttributeShouldNotBeSkipped(t *testing.T) {
 	resource := azurermschema.Resources["azurerm_storage_table"]
 	nb := resource.Block.NestedBlocks["acl"]
-	res, err := newResourceBlock("azurerm_storage_table", resource)
+	res, err := newResourceBlock("azurerm_storage_table", resource, Config{})
 	require.NoError(t, err)
 	n := newNestedBlock(res, "acl", nb)
 	assert.Equal(t, 1, len(n.attrs))
@@ -69,7 +73,7 @@ func TestGenerateResource_IdAttributeInsideNestedBlockAttributeShouldNotBeSkippe
 func TestGenerateVariableTypeForWholeResource(t *testing.T) {
 	// we're using v2 resource since it's stable now and won't be changed
 	schema := azurermschema_v2.Resources["azurerm_site_recovery_replicated_vm"]
-	r, err := newResourceBlock("azurerm_site_recovery_replicated_vm", schema)
+	r, err := newResourceBlock("azurerm_site_recovery_replicated_vm", schema, Config{})
 	require.NoError(t, err)
 	variableType := generateVariableType(r, true)
 	//`managed_disk` and `network_interface` are `SchemaConfigModeAttr` so schema info was lost, we cannot know whether their attributes are optional or not. https://github.com/hashicorp/terraform-provider-azurerm/blob/v2.99.0/internal/services/recoveryservices/site_recovery_replicated_vm_resource.go#L118-L120
@@ -128,7 +132,9 @@ func TestGenerateResource_SkippedAttributeShouldNotAppearInVariableDescription(t
 		c := cases[i]
 		t.Run(fmt.Sprintf("%s.%s", c.resourceType, c.caseName), func(t *testing.T) {
 			resourceType := c.resourceType
-			generated, err := GenerateResource(resourceType, UniVariable)
+			generated, err := GenerateResource(resourceType, Config{
+				Mode: UniVariable,
+			})
 			require.NoError(t, err)
 			assert.NotContains(t, generated, fmt.Sprintf("- `%s` -", c.caseName))
 		})

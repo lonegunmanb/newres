@@ -26,7 +26,7 @@ variable "resource_group_name" {
 	s := azurermschema.Resources["azurerm_resource_group"]
 	name := s.Block.Attributes["name"]
 	dummyDefaultValues := map[string]argumentDescription{}
-	r, err := newResourceBlock("azurerm_resource_group", s)
+	r, err := newResourceBlock("azurerm_resource_group", s, Config{})
 	require.NoError(t, err)
 	block := r.schemaAttributeToHCLBlock("name", name, dummyDefaultValues)
 	assert.NoError(t, err)
@@ -47,7 +47,7 @@ variable "vpc_cidr_block" {
 	s := awsschema.Resources["aws_vpc"]
 	name := s.Block.Attributes["cidr_block"]
 	dummyDefaultValues := map[string]argumentDescription{}
-	r, err := newResourceBlock("aws_vpc", s)
+	r, err := newResourceBlock("aws_vpc", s, Config{})
 	block := r.schemaAttributeToHCLBlock("cidr_block", name, dummyDefaultValues)
 	assert.NoError(t, err)
 	actualBlock := toVariableBlock(string(block.BuildTokens(hclwrite.Tokens{}).Bytes()))
@@ -59,7 +59,7 @@ variable "vpc_cidr_block" {
 func TestGenerateVariableType_ComplexObject(t *testing.T) {
 	containerAppSchema := azurermschema.Resources["azurerm_container_app"]
 	input := containerAppSchema.Block.NestedBlocks["template"]
-	r, err := newResourceBlock("azurerm_container_app", containerAppSchema)
+	r, err := newResourceBlock("azurerm_container_app", containerAppSchema, Config{})
 	require.NoError(t, err)
 	actual := strings.Replace(generateVariableType(newNestedBlock(r, "template", input), true), " ", "", -1)
 	expected := strings.Replace(strings.Replace(`object({
@@ -189,7 +189,7 @@ func TestGenerateVariableType_ListOfSimpleObject(t *testing.T) {
 	input := containerAppSchema.Block.NestedBlocks["template"].
 		Block.NestedBlocks["container"].
 		Block.NestedBlocks["env"]
-	r, err := newResourceBlock("azurerm_container_app", containerAppSchema)
+	r, err := newResourceBlock("azurerm_container_app", containerAppSchema, Config{})
 	require.NoError(t, err)
 	actual := strings.Replace(generateVariableType(newNestedBlock(r, "template", input), true), " ", "", -1)
 	expected := strings.Replace(strings.Replace(`list(object({
@@ -202,7 +202,7 @@ func TestGenerateVariableType_ListOfSimpleObject(t *testing.T) {
 
 func TestGenerateVariableBlock_RootArgumentDescription(t *testing.T) {
 	resourceType := "azurerm_kubernetes_cluster"
-	r, _ := newResourceBlock(resourceType, resourceSchemas[resourceType])
+	r, _ := newResourceBlock(resourceType, resourceSchemas[resourceType], Config{})
 	desc := "(Required) The name of the Managed Kubernetes Cluster to create. Changing this forces a new resource to be created."
 	generated, err := r.generateResource(map[string]argumentDescription{
 		"name": {
@@ -218,6 +218,23 @@ func TestGenerateVariableBlock_RootArgumentDescription(t *testing.T) {
 	diag = tfconfig.LoadModuleFromFile(config, mod)
 	require.False(t, diag.HasErrors())
 	assert.Equal(t, desc, mod.Variables["kubernetes_cluster_name"].Description)
+}
+
+func TestGenerateVariableBlock_CustomizedHeredocDelimiter(t *testing.T) {
+	resourceType := "azurerm_kubernetes_cluster"
+	r, _ := newResourceBlock(resourceType, resourceSchemas[resourceType], Config{
+		Delimiter: "DOCUMENT",
+	})
+	desc := "(Required) The name of the Managed Kubernetes Cluster to create. Changing this forces a new resource to be created."
+	generated, err := r.generateUniVarResource(map[string]argumentDescription{
+		"name": {
+			name:         "name",
+			desc:         desc,
+			defaultValue: nil,
+		},
+	})
+	require.NoError(t, err)
+	assert.Contains(t, generated, "description = <<-DOCUMENT")
 }
 
 func variableBlockToHclCode(b *avmfix.VariableBlock) string {

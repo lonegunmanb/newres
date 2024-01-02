@@ -4,19 +4,12 @@ import (
 	"fmt"
 )
 
-type GenerateMode string
-
-const (
-	UniVariable       = "UniVariable"
-	MultipleVariables = "MultipleVariables"
-)
-
-func GenerateResource(resourceType string, mode GenerateMode) (string, error) {
+func GenerateResource(resourceType string, cfg Config) (string, error) {
 	schema, ok := resourceSchemas[resourceType]
 	if !ok {
 		return "", fmt.Errorf("unsupported type %s", resourceType)
 	}
-	r, err := newResourceBlock(resourceType, schema)
+	r, err := newResourceBlock(resourceType, schema, cfg)
 	if err != nil {
 		return "", fmt.Errorf("error on parse resource type name %s: %s", resourceType, err.Error())
 	}
@@ -24,7 +17,7 @@ func GenerateResource(resourceType string, mode GenerateMode) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("error on load and parse document: %s", err.Error())
 	}
-	if mode == UniVariable {
+	if cfg.GetMode() == UniVariable {
 		return r.generateUniVarResource(document)
 	}
 	return r.generateMultiVarsResource(document)
