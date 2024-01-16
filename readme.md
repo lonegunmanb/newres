@@ -125,6 +125,7 @@ Even `var.kubernetes_cluster_default_node_pool` is a required object, that's bec
 `newres` currently supports variable block description generation for the following providers:
 * Alicloud (`alicloud`)
 * AWS (`aws`)
+* AWS Cloud Control API (`awscc`)
 * AzAPI (`azapi`)
 * Azure Resource Manager (`azurerm`)
 * Azure Active Directory (`azuread`)

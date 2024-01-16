@@ -7,6 +7,7 @@ import (
 	aws_v3 "github.com/lonegunmanb/terraform-aws-schema/v3/generated"
 	aws_v4 "github.com/lonegunmanb/terraform-aws-schema/v4/generated"
 	aws_v5 "github.com/lonegunmanb/terraform-aws-schema/v5/generated"
+	awscc "github.com/lonegunmanb/terraform-awscc-schema/generated"
 	azapi "github.com/lonegunmanb/terraform-azapi-schema/generated"
 	azuread "github.com/lonegunmanb/terraform-azuread-schema/v2/generated"
 	azure_v2 "github.com/lonegunmanb/terraform-azurerm-schema/v2/generated"
@@ -34,6 +35,7 @@ func init() {
 		azure_v3.Resources,
 		azuread.Resources,
 		azapi.Resources,
+		awscc.Resources,
 		aws_v2.Resources,
 		aws_v3.Resources,
 		aws_v4.Resources,
