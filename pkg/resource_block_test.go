@@ -237,6 +237,18 @@ func TestGenerateVariableBlock_CustomizedHeredocDelimiter(t *testing.T) {
 	assert.Contains(t, generated, "description = <<-DOCUMENT")
 }
 
+func TestGenerateResourceBlock_ComputedOnlyAttributeShouldNotInGeneratedResourceBlock(t *testing.T) {
+	resourceType := "azurerm_web_app_hybrid_connection"
+	r, _ := newResourceBlock(resourceType, resourceSchemas[resourceType], Config{
+		Delimiter: "DOCUMENT",
+	})
+	for _, a := range r.attrs {
+		if a.name == "namespace_name" {
+			t.Fatal("computed only attribute should be excluded.")
+		}
+	}
+}
+
 func variableBlockToHclCode(b *avmfix.VariableBlock) string {
 	f := hclwrite.NewFile()
 	f.Body().AppendBlock(b.Block.WriteBlock)
