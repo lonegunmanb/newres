@@ -242,11 +242,43 @@ func TestGenerateResourceBlock_ComputedOnlyAttributeShouldNotInGeneratedResource
 	r, _ := newResourceBlock(resourceType, resourceSchemas[resourceType], Config{
 		Delimiter: "DOCUMENT",
 	})
-	for _, a := range r.attrs {
-		if a.name == "namespace_name" {
-			t.Fatal("computed only attribute should be excluded.")
-		}
+	cases := []struct {
+		attributeName string
+		want          bool
+	}{
+		{
+			attributeName: "namespace_name",
+			want:          false,
+		},
+		{
+			// Required
+			attributeName: "port",
+			want:          true,
+		},
+		{
+			// Optional
+			attributeName: "send_key_name",
+			want:          true,
+		},
 	}
+	for i := 0; i < len(cases); i++ {
+		c := cases[i]
+		t.Run(c.attributeName, func(t *testing.T) {
+			for _, a := range r.attrs {
+				if a.name == c.attributeName {
+					if c.want {
+						return
+					} else {
+						t.Fatal("computed only attribute should be excluded.")
+					}
+				}
+			}
+			if c.want {
+				t.Fatal("no computed only attribute should not be excluded.")
+			}
+		})
+	}
+
 }
 
 func variableBlockToHclCode(b *avmfix.VariableBlock) string {
