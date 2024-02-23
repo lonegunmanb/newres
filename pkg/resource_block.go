@@ -42,9 +42,6 @@ func (r *resourceBlock) appendNewBlock(typeName string, labels []string) *hclwri
 
 func newResourceBlock(name string, schema *tfjson.Schema, cfg Config) (*resourceBlock, error) {
 	resourceTypeSegments := strings.Split(name, "_")
-	if len(resourceTypeSegments) < 1 {
-		return nil, fmt.Errorf("incorrect resource type: %s", name)
-	}
 	vendor := resourceTypeSegments[0]
 	nameWithoutVendor := strings.TrimPrefix(name, fmt.Sprintf("%s_", vendor))
 	r := &resourceBlock{
@@ -61,7 +58,6 @@ func newResourceBlock(name string, schema *tfjson.Schema, cfg Config) (*resource
 
 func (r *resourceBlock) init() {
 	r.attrs, r.nbs = normalizeBlockContents(r)
-	r.f = hclwrite.NewFile()
 	r.writeBlock = hclwrite.NewBlock("resource", []string{r.name, "this"})
 }
 

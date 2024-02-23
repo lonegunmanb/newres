@@ -36,7 +36,7 @@ variable "resource_group_name" {
 	assert.Equal(t, expectedString, actualString)
 }
 
-func TestGenerateVariableBlock_AwsRootRequiredArgument(t *testing.T) {
+func TestGenerateVariableBlock_AwsRootOptionalArgument(t *testing.T) {
 	expected := `
 variable "vpc_cidr_block" {
   type        = string
@@ -54,6 +54,46 @@ variable "vpc_cidr_block" {
 	expectedString := variableBlockToHclCode(expectedBlock)
 	actualString := variableBlockToHclCode(actualBlock)
 	assert.Equal(t, expectedString, actualString)
+}
+
+func TestGenerateVariableBlockForRequiredNestedBlockShouldDeclareNullableAsFalse(t *testing.T) {
+	code, err := GenerateResource("azurerm_kubernetes_cluster", Config{})
+	require.NoError(t, err)
+	config, diag := hclsyntax.ParseConfig([]byte(code), "main.tf", hcl.InitialPos)
+	require.False(t, diag.HasErrors())
+	for _, b := range config.Body.(*hclsyntax.Body).Blocks {
+		if b.Type != "variable" {
+			continue
+		}
+		if b.Labels[0] != "kubernetes_cluster_default_node_pool" {
+			continue
+		}
+		nullable, diag := b.Body.Attributes["nullable"].Expr.Value(&hcl.EvalContext{})
+		require.False(t, diag.HasErrors())
+		assert.True(t, nullable.False())
+		return
+	}
+	t.Fatal("expected variable not found")
+}
+
+func TestGenerateVariableBlockForOptionalNestedBlockShouldDeclareDefaultToNull(t *testing.T) {
+	code, err := GenerateResource("azurerm_kubernetes_cluster", Config{})
+	require.NoError(t, err)
+	config, diag := hclsyntax.ParseConfig([]byte(code), "main.tf", hcl.InitialPos)
+	require.False(t, diag.HasErrors())
+	for _, b := range config.Body.(*hclsyntax.Body).Blocks {
+		if b.Type != "variable" {
+			continue
+		}
+		if b.Labels[0] != "kubernetes_cluster_aci_connector_linux" {
+			continue
+		}
+		defaultAttr, diag := b.Body.Attributes["default"].Expr.Value(&hcl.EvalContext{})
+		require.False(t, diag.HasErrors())
+		assert.True(t, defaultAttr.IsNull())
+		return
+	}
+	t.Fatal("expected variable not found")
 }
 
 func TestGenerateVariableType_ComplexObject(t *testing.T) {

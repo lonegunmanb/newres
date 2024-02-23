@@ -13,6 +13,12 @@ import (
 	"testing"
 )
 
+func TestGenerateResourceBlock_InvalidResourcTypeShouldReturnError(t *testing.T) {
+	_, err := GenerateResource("invalidType", Config{})
+	require.NotNil(t, err)
+	assert.Contains(t, err.Error(), "unsupported type")
+}
+
 func TestGenerateResource_SimpleUniVarResource(t *testing.T) {
 	resourceType := "azurerm_resource_group"
 	schema := azurermschema.Resources[resourceType]
