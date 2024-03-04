@@ -6,7 +6,7 @@ toolchain go1.21.3
 
 require (
 	github.com/ahmetb/go-linq/v3 v3.2.0
-	github.com/hashicorp/hcl/v2 v2.19.1
+	github.com/hashicorp/hcl/v2 v2.20.0
 	github.com/hashicorp/terraform-config-inspect v0.0.0-20230614215431-f32df32a01cd
 	github.com/hashicorp/terraform-json v0.21.0
 	github.com/lonegunmanb/avmfix v0.0.0-20240222132608-340448395211
@@ -46,6 +46,9 @@ require (
 	github.com/lonegunmanb/terraform-modtm-schema v0.2.0 // indirect
 	github.com/mitchellh/go-wordwrap v1.0.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
+	golang.org/x/mod v0.15.0 // indirect
+	golang.org/x/sys v0.17.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
+	golang.org/x/tools v0.13.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
