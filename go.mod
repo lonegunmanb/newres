@@ -17,7 +17,7 @@ require (
 	github.com/lonegunmanb/terraform-aws-schema/v5 v5.44.0
 	github.com/lonegunmanb/terraform-awscc-schema v0.73.0
 	github.com/lonegunmanb/terraform-azapi-schema v1.12.1
-	github.com/lonegunmanb/terraform-azuread-schema/v2 v2.47.0
+	github.com/lonegunmanb/terraform-azuread-schema/v2 v2.48.0
 	github.com/lonegunmanb/terraform-azurerm-schema/v2 v2.99.0
 	github.com/lonegunmanb/terraform-azurerm-schema/v3 v3.97.1
 	github.com/lonegunmanb/terraform-bytebase-schema v0.0.9
