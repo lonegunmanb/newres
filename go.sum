@@ -40,8 +40,8 @@ github.com/lonegunmanb/terraform-azuread-schema/v2 v2.48.0 h1:2rXQKqANHzVYj6fTiy
 github.com/lonegunmanb/terraform-azuread-schema/v2 v2.48.0/go.mod h1:yB5J2rHKHHkyeF3f9iVc29ichSbFRLtkqhuwGhz/uoU=
 github.com/lonegunmanb/terraform-azurerm-schema/v2 v2.99.0 h1:G5IJgiWe6npIViTDeyE3tSGWHWYvdrCjO0VADm172bQ=
 github.com/lonegunmanb/terraform-azurerm-schema/v2 v2.99.0/go.mod h1:k9mRJlwqithRQfRMzWfsLuWknIAx4sUAuQeW0kRId88=
-github.com/lonegunmanb/terraform-azurerm-schema/v3 v3.97.1 h1:0+VzEbbFc9A9aAhGgVsNp4PDSYL9HUvLemyus/QnsJ4=
-github.com/lonegunmanb/terraform-azurerm-schema/v3 v3.97.1/go.mod h1:KPbTqV5tn/NV0QrlON3ll8rVs0s4j+wT35vMK5mzMbo=
+github.com/lonegunmanb/terraform-azurerm-schema/v3 v3.99.0 h1:Tl9plw0fIHtRkF3WduZwH+tzYJWlFq2tO8mryEqPmCs=
+github.com/lonegunmanb/terraform-azurerm-schema/v3 v3.99.0/go.mod h1:rHt0ZljoAE24XoInFRZXeCeu4EMuYTaRNfW4HgMKbzk=
 github.com/lonegunmanb/terraform-bytebase-schema v0.0.9 h1:VnwghcbQLnherQCRHnlaqS+UhBDirGkFDZ5lv1coqjQ=
 github.com/lonegunmanb/terraform-bytebase-schema v0.0.9/go.mod h1:QGwRX3GwqSDyd5r+2Q2qXtLLKzcGlAN7Y8eDdAcg4Lc=
 github.com/lonegunmanb/terraform-google-schema/v2 v2.20.3 h1:2iS6Kb7Fnjt0XnD0BbFD/LxHt1WO3tXI6PFVclmHVLg=
@@ -78,8 +78,8 @@ github.com/zclconf/go-cty v1.14.4 h1:uXXczd9QDGsgu0i/QFR/hzI5NYCHLf6NQw/atrbnhq8
 github.com/zclconf/go-cty v1.14.4/go.mod h1:VvMs5i0vgZdhYawQNq5kePSpLAoz8u1xvZgrPIxfnZE=
 github.com/zclconf/go-cty-debug v0.0.0-20191215020915-b22d67c1ba0b h1:FosyBZYxY34Wul7O/MSKey3txpPYyCqVO5ZyceuQJEI=
 github.com/zclconf/go-cty-debug v0.0.0-20191215020915-b22d67c1ba0b/go.mod h1:ZRKQfBXbGkpdV6QMzT3rU1kSTAnfu1dO8dPKjYprgj8=
-golang.org/x/mod v0.16.0 h1:QX4fJ0Rr5cPQCF7O9lh9Se4pmwfwskqZfq5moyldzic=
-golang.org/x/mod v0.16.0/go.mod h1:hTbmBsO62+eylJbnUtE2MGJUyE7QWk4xUqPFrRgJ+7c=
+golang.org/x/mod v0.17.0 h1:zY54UmvipHiNd+pm+m0x9KhZ9hl1/7QNMyxXbc6ICqA=
+golang.org/x/mod v0.17.0/go.mod h1:hTbmBsO62+eylJbnUtE2MGJUyE7QWk4xUqPFrRgJ+7c=
 golang.org/x/sync v0.3.0 h1:ftCYgMx6zT/asHUrPw8BLLscYtGznsLAnjq5RH9P66E=
 golang.org/x/sync v0.3.0/go.mod h1:FU7BRWz2tNW+3quACPkgCx/L+uEAv1htQ0V83Z9Rj+Y=
 golang.org/x/sys v0.18.0 h1:DBdB3niSjOA/O0blCZBqDefyWNYveAYMNF1Wum0DYQ4=
