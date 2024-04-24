@@ -84,6 +84,8 @@ func TestGenerateNestedBlock_SimpleSet(t *testing.T) {
 dynamic "secret" {
   for_each = var.container_app.secret == null ? [] : var.container_app.secret
   content {
+    identity            = secret.value.identity
+    key_vault_secret_id = secret.value.key_vault_secret_id
     name = secret.value.name
 	value = secret.value.value
   }
