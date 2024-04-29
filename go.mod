@@ -14,7 +14,7 @@ require (
 	github.com/lonegunmanb/terraform-aws-schema/v2 v2.70.4
 	github.com/lonegunmanb/terraform-aws-schema/v3 v3.76.1
 	github.com/lonegunmanb/terraform-aws-schema/v4 v4.67.0
-	github.com/lonegunmanb/terraform-aws-schema/v5 v5.46.0
+	github.com/lonegunmanb/terraform-aws-schema/v5 v5.47.0
 	github.com/lonegunmanb/terraform-awscc-schema v0.74.0
 	github.com/lonegunmanb/terraform-azapi-schema v1.12.1
 	github.com/lonegunmanb/terraform-azuread-schema/v2 v2.48.0
@@ -24,6 +24,7 @@ require (
 	github.com/lonegunmanb/terraform-google-schema/v2 v2.20.3
 	github.com/lonegunmanb/terraform-google-schema/v3 v3.90.1
 	github.com/lonegunmanb/terraform-google-schema/v4 v4.84.0
+	github.com/lonegunmanb/terraform-google-schema/v5 v5.26.0
 	github.com/lonegunmanb/terraform-helm-schema/v2 v2.13.1
 	github.com/lonegunmanb/terraform-kubernetes-schema/v2 v2.29.0
 	github.com/lonegunmanb/terraform-local-schema/v2 v2.5.1
@@ -43,7 +44,6 @@ require (
 	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/hashicorp/go-version v1.6.0 // indirect
 	github.com/hashicorp/hcl v0.0.0-20170504190234-a4b07c25de5f // indirect
-	github.com/lonegunmanb/terraform-google-schema/v5 v5.26.0 // indirect
 	github.com/lonegunmanb/terraform-modtm-schema v0.2.0 // indirect
 	github.com/mitchellh/go-wordwrap v1.0.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
