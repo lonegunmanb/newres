@@ -10,7 +10,7 @@ require (
 	github.com/hashicorp/terraform-config-inspect v0.0.0-20230614215431-f32df32a01cd
 	github.com/hashicorp/terraform-json v0.22.1
 	github.com/lonegunmanb/avmfix v0.0.0-20240222132608-340448395211
-	github.com/lonegunmanb/terraform-alicloud-schema v1.223.2
+	github.com/lonegunmanb/terraform-alicloud-schema v1.224.0
 	github.com/lonegunmanb/terraform-aws-schema/v2 v2.70.4
 	github.com/lonegunmanb/terraform-aws-schema/v3 v3.76.1
 	github.com/lonegunmanb/terraform-aws-schema/v4 v4.67.0
@@ -42,7 +42,7 @@ require (
 	github.com/apparentlymart/go-textseg/v15 v15.0.0 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/google/go-cmp v0.6.0 // indirect
-	github.com/hashicorp/go-version v1.6.0 // indirect
+	github.com/hashicorp/go-version v1.7.0 // indirect
 	github.com/hashicorp/hcl v0.0.0-20170504190234-a4b07c25de5f // indirect
 	github.com/lonegunmanb/terraform-modtm-schema v0.2.0 // indirect
 	github.com/mitchellh/go-wordwrap v1.0.1 // indirect
