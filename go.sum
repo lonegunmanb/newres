@@ -52,8 +52,8 @@ github.com/lonegunmanb/terraform-google-schema/v4 v4.84.0 h1:aP8Exm16FOegCpQq2fX
 github.com/lonegunmanb/terraform-google-schema/v4 v4.84.0/go.mod h1:r2vxkTZVBIyIGLByQh6Jdz2rzf2FrCtf6vS4GsFILAM=
 github.com/lonegunmanb/terraform-google-schema/v5 v5.42.0 h1:Qt5d8H/CvkjcFHPM7o+2aJBiy5UkGBY0vNXRTcgQ6a8=
 github.com/lonegunmanb/terraform-google-schema/v5 v5.42.0/go.mod h1:sNOmiDUQ7Vs9wPkypVtplvf7huAZhg8kIBqDpOHsnMk=
-github.com/lonegunmanb/terraform-helm-schema/v2 v2.14.0 h1:RP2lkGkUTBtLFD02l6tKjH1Ho/xnpGJo8qrbZ0RnNJ8=
-github.com/lonegunmanb/terraform-helm-schema/v2 v2.14.0/go.mod h1:bJv8yKnfdGj5wVqQ3q/rHgU9wU5ADLg/nL93i/LDCQw=
+github.com/lonegunmanb/terraform-helm-schema/v2 v2.15.0 h1:ySmpFowYFCShmOkKoVC/VYEKv6ymBl7sYNATmBMJs4c=
+github.com/lonegunmanb/terraform-helm-schema/v2 v2.15.0/go.mod h1:6/YyKpzHZkHgFyOKeYP8OiQN+eNh1Ah2xirilOcWXY8=
 github.com/lonegunmanb/terraform-kubernetes-schema/v2 v2.31.0 h1:DKZzCq4+AxdjkRK8X0yhmjdJSK71+wXcJnhKwNcpcVk=
 github.com/lonegunmanb/terraform-kubernetes-schema/v2 v2.31.0/go.mod h1:4wJOVE1PoQruqpTrp06e/mHuqAq4XnXW42dPuVA3vHY=
 github.com/lonegunmanb/terraform-local-schema/v2 v2.5.1 h1:E2pqIk6nX12SJityaelNt2lE1mtKdcU6PrtfuYaELD8=
