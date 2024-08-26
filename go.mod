@@ -25,7 +25,7 @@ require (
 	github.com/lonegunmanb/terraform-google-schema/v3 v3.90.1
 	github.com/lonegunmanb/terraform-google-schema/v4 v4.84.0
 	github.com/lonegunmanb/terraform-google-schema/v5 v5.42.0
-	github.com/lonegunmanb/terraform-helm-schema/v2 v2.14.0
+	github.com/lonegunmanb/terraform-helm-schema/v2 v2.15.0
 	github.com/lonegunmanb/terraform-kubernetes-schema/v2 v2.31.0
 	github.com/lonegunmanb/terraform-local-schema/v2 v2.5.1
 	github.com/lonegunmanb/terraform-null-schema/v3 v3.2.2
