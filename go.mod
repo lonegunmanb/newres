@@ -6,10 +6,10 @@ toolchain go1.21.3
 
 require (
 	github.com/ahmetb/go-linq/v3 v3.2.0
-	github.com/hashicorp/hcl/v2 v2.21.0
+	github.com/hashicorp/hcl/v2 v2.22.0
 	github.com/hashicorp/terraform-config-inspect v0.0.0-20230614215431-f32df32a01cd
 	github.com/hashicorp/terraform-json v0.22.1
-	github.com/lonegunmanb/avmfix v0.0.0-20240611053723-2ced409d783e
+	github.com/lonegunmanb/avmfix v0.0.0-20240903025710-cb99e4846c83
 	github.com/lonegunmanb/terraform-alicloud-schema v1.229.1
 	github.com/lonegunmanb/terraform-aws-schema/v2 v2.70.4
 	github.com/lonegunmanb/terraform-aws-schema/v3 v3.76.1
@@ -44,7 +44,7 @@ require (
 	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/hashicorp/go-version v1.7.0 // indirect
 	github.com/hashicorp/hcl v0.0.0-20170504190234-a4b07c25de5f // indirect
-	github.com/lonegunmanb/terraform-modtm-schema v0.2.0 // indirect
+	github.com/lonegunmanb/terraform-modtm-schema v0.3.2 // indirect
 	github.com/mitchellh/go-wordwrap v1.0.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	golang.org/x/mod v0.20.0 // indirect
