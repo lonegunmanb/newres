@@ -1,8 +1,7 @@
 module github.com/lonegunmanb/newres/v3
 
 go 1.21.2
-
-toolchain go1.21.3
+toolchain go1.22.5
 
 require (
 	github.com/ahmetb/go-linq/v3 v3.2.0
@@ -14,7 +13,7 @@ require (
 	github.com/lonegunmanb/terraform-aws-schema/v2 v2.70.4
 	github.com/lonegunmanb/terraform-aws-schema/v3 v3.76.1
 	github.com/lonegunmanb/terraform-aws-schema/v4 v4.67.0
-	github.com/lonegunmanb/terraform-aws-schema/v5 v5.68.0
+	github.com/lonegunmanb/terraform-aws-schema/v5 v5.69.0
 	github.com/lonegunmanb/terraform-awscc-schema v1.15.0
 	github.com/lonegunmanb/terraform-azapi-schema v1.15.0
 	github.com/lonegunmanb/terraform-azuread-schema/v2 v2.53.1
@@ -47,7 +46,7 @@ require (
 	github.com/lonegunmanb/terraform-modtm-schema v0.3.2 // indirect
 	github.com/mitchellh/go-wordwrap v1.0.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
-	golang.org/x/mod v0.20.0 // indirect
+	golang.org/x/mod v0.21.0 // indirect
 	golang.org/x/sys v0.20.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	golang.org/x/tools v0.13.0 // indirect
