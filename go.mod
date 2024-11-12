@@ -1,14 +1,15 @@
 module github.com/lonegunmanb/newres/v3
 
-go 1.21.2
-toolchain go1.22.5
+go 1.23.0
+
+toolchain go1.23.3
 
 require (
 	github.com/ahmetb/go-linq/v3 v3.2.0
 	github.com/hashicorp/hcl/v2 v2.22.0
 	github.com/hashicorp/terraform-config-inspect v0.0.0-20230614215431-f32df32a01cd
 	github.com/hashicorp/terraform-json v0.23.0
-	github.com/lonegunmanb/avmfix v0.0.0-20240903025710-cb99e4846c83
+	github.com/lonegunmanb/avmfix v0.0.0-20241112024937-586398c1520d
 	github.com/lonegunmanb/terraform-alicloud-schema v1.233.0
 	github.com/lonegunmanb/terraform-aws-schema/v2 v2.70.4
 	github.com/lonegunmanb/terraform-aws-schema/v3 v3.76.1
@@ -17,13 +18,15 @@ require (
 	github.com/lonegunmanb/terraform-awscc-schema v1.20.0
 	github.com/lonegunmanb/terraform-azapi-schema v1.15.0
 	github.com/lonegunmanb/terraform-azuread-schema/v2 v2.53.1
+	github.com/lonegunmanb/terraform-azuread-schema/v3 v3.0.2
 	github.com/lonegunmanb/terraform-azurerm-schema/v2 v2.99.0
 	github.com/lonegunmanb/terraform-azurerm-schema/v3 v3.116.0
 	github.com/lonegunmanb/terraform-bytebase-schema v0.0.9
 	github.com/lonegunmanb/terraform-google-schema/v2 v2.20.3
 	github.com/lonegunmanb/terraform-google-schema/v3 v3.90.1
 	github.com/lonegunmanb/terraform-google-schema/v4 v4.84.0
-	github.com/lonegunmanb/terraform-google-schema/v5 v5.44.2
+	github.com/lonegunmanb/terraform-google-schema/v5 v5.45.0
+	github.com/lonegunmanb/terraform-google-schema/v6 v6.11.0
 	github.com/lonegunmanb/terraform-helm-schema/v2 v2.16.1
 	github.com/lonegunmanb/terraform-kubernetes-schema/v2 v2.33.0
 	github.com/lonegunmanb/terraform-local-schema/v2 v2.5.2

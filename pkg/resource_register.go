@@ -9,7 +9,8 @@ import (
 	aws_v5 "github.com/lonegunmanb/terraform-aws-schema/v5/generated"
 	awscc "github.com/lonegunmanb/terraform-awscc-schema/generated"
 	azapi "github.com/lonegunmanb/terraform-azapi-schema/generated"
-	azuread "github.com/lonegunmanb/terraform-azuread-schema/v2/generated"
+	azuread_v2 "github.com/lonegunmanb/terraform-azuread-schema/v2/generated"
+	azuread_v3 "github.com/lonegunmanb/terraform-azuread-schema/v3/generated"
 	azure_v2 "github.com/lonegunmanb/terraform-azurerm-schema/v2/generated"
 	azure_v3 "github.com/lonegunmanb/terraform-azurerm-schema/v3/generated"
 	bytebase "github.com/lonegunmanb/terraform-bytebase-schema/generated"
@@ -17,6 +18,7 @@ import (
 	google_v3 "github.com/lonegunmanb/terraform-google-schema/v3/generated"
 	google_v4 "github.com/lonegunmanb/terraform-google-schema/v4/generated"
 	google_v5 "github.com/lonegunmanb/terraform-google-schema/v5/generated"
+	google_v6 "github.com/lonegunmanb/terraform-google-schema/v6/generated"
 	helm_v2 "github.com/lonegunmanb/terraform-helm-schema/v2/generated"
 	kubernetes_v2 "github.com/lonegunmanb/terraform-kubernetes-schema/v2/generated"
 	local "github.com/lonegunmanb/terraform-local-schema/v2/generated"
@@ -34,7 +36,8 @@ func init() {
 		alicloud.Resources,
 		azure_v2.Resources,
 		azure_v3.Resources,
-		azuread.Resources,
+		azuread_v2.Resources,
+		azuread_v3.Resources,
 		azapi.Resources,
 		awscc.Resources,
 		aws_v2.Resources,
@@ -46,6 +49,7 @@ func init() {
 		google_v3.Resources,
 		google_v4.Resources,
 		google_v5.Resources,
+		google_v6.Resources,
 		helm_v2.Resources,
 		kubernetes_v2.Resources,
 		local.Resources,
