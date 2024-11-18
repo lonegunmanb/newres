@@ -30,8 +30,8 @@ github.com/lonegunmanb/terraform-aws-schema/v3 v3.76.1 h1:11gsHdCkFAeTDcCJY36EdP
 github.com/lonegunmanb/terraform-aws-schema/v3 v3.76.1/go.mod h1:CI7i3qyLoD/XlIew5Yv+zRpFFdetEBhpIXWJXatgtYQ=
 github.com/lonegunmanb/terraform-aws-schema/v4 v4.67.0 h1:ssy4uMEFjijkxORGG+SyU3njk2LMYs6RO0i+53T4rnM=
 github.com/lonegunmanb/terraform-aws-schema/v4 v4.67.0/go.mod h1:QXLvpWSz5rNGenKQtdHpOlOh7cAet2BOgBXMjqoGYy4=
-github.com/lonegunmanb/terraform-aws-schema/v5 v5.75.1 h1:e8b1qvkRZsGb3RO5E+rcw+lNxRO/ZcxPZTEJBJ9ZF3Y=
-github.com/lonegunmanb/terraform-aws-schema/v5 v5.75.1/go.mod h1:KJAYkOmA24No8XCS0MkU6JpZQA6MrDkaS3q7AydS2tQ=
+github.com/lonegunmanb/terraform-aws-schema/v5 v5.76.0 h1:aunDGWrVppF42L0LlHTHi+OtbEqUAhbwB7Vd9jg1Nkc=
+github.com/lonegunmanb/terraform-aws-schema/v5 v5.76.0/go.mod h1:OSWZ0y0rc0srDOxHfyOtORjEFjvTWJbO4RtnhZ8e+oM=
 github.com/lonegunmanb/terraform-awscc-schema v1.20.0 h1:rWEnmBl0dBGmeqhjw3qJV7+Plh560/bu7yq7Ig/q9YY=
 github.com/lonegunmanb/terraform-awscc-schema v1.20.0/go.mod h1:yABztZ6+cueftqiKH5kz3J9tTjZR/K8n7WROHBgGb0o=
 github.com/lonegunmanb/terraform-azapi-schema v1.15.0 h1:n5oGrSU1NerlGH/3bVNHdNl24fNfV3N3JtK2QEhxpIE=
@@ -52,8 +52,6 @@ github.com/lonegunmanb/terraform-google-schema/v3 v3.90.1 h1:53w7GBFTVQffQWJm7qv
 github.com/lonegunmanb/terraform-google-schema/v3 v3.90.1/go.mod h1:ST7y3Sx4mq1RGRCG67KrNDUQ+P2EIyG/rYSM+hC08F4=
 github.com/lonegunmanb/terraform-google-schema/v4 v4.84.0 h1:aP8Exm16FOegCpQq2fXdJS8GUlsIqxZ0GCrdB27O/J4=
 github.com/lonegunmanb/terraform-google-schema/v4 v4.84.0/go.mod h1:r2vxkTZVBIyIGLByQh6Jdz2rzf2FrCtf6vS4GsFILAM=
-github.com/lonegunmanb/terraform-google-schema/v5 v5.44.2 h1:GO3YQSc84Nf3fCzBrKCTnALnz9pf+lt0SZ1gdVCV8qo=
-github.com/lonegunmanb/terraform-google-schema/v5 v5.44.2/go.mod h1:k0YHg2FNaAmUiV8NogS9Wu9ctNv3p6FdLLWckFbhNho=
 github.com/lonegunmanb/terraform-google-schema/v5 v5.45.0 h1:7ZpLnfPv/lAu2v8n0cw3jFJO3ti9HhC8CJ6rQ0+S5rA=
 github.com/lonegunmanb/terraform-google-schema/v5 v5.45.0/go.mod h1:k0YHg2FNaAmUiV8NogS9Wu9ctNv3p6FdLLWckFbhNho=
 github.com/lonegunmanb/terraform-google-schema/v6 v6.11.0 h1:x203ITggqOJgpRwjfnFt74/eDvkKvf9kOxjVThKK5jg=
