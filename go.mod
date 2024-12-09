@@ -48,6 +48,7 @@ require (
 	github.com/hashicorp/hcl v0.0.0-20170504190234-a4b07c25de5f // indirect
 	github.com/lonegunmanb/terraform-modtm-schema v0.3.2 // indirect
 	github.com/mitchellh/go-wordwrap v1.0.1 // indirect
+	github.com/ms-henglu/go-azure-types v0.0.0-20241209024855-7c19a326abcc // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	golang.org/x/mod v0.21.0 // indirect
 	golang.org/x/sys v0.20.0 // indirect
