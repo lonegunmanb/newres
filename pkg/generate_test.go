@@ -14,7 +14,7 @@ import (
 )
 
 func TestGenerateResourceBlock_InvalidResourcTypeShouldReturnError(t *testing.T) {
-	_, err := GenerateResource("invalidType", Config{})
+	_, err := GenerateResource(NewResourceGenerateCommand("invalidType", Config{}, nil))
 	require.NotNil(t, err)
 	assert.Contains(t, err.Error(), "unsupported type")
 }
@@ -22,9 +22,9 @@ func TestGenerateResourceBlock_InvalidResourcTypeShouldReturnError(t *testing.T)
 func TestGenerateResource_SimpleUniVarResource(t *testing.T) {
 	resourceType := "azurerm_resource_group"
 	schema := azurermschema.Resources[resourceType]
-	generated, err := GenerateResource(resourceType, Config{
+	generated, err := GenerateResource(NewResourceGenerateCommand(resourceType, Config{
 		Mode: UniVariable,
-	})
+	}, nil))
 	require.NoError(t, err)
 	config, diag := hclsyntax.ParseConfig([]byte(generated), "", hcl.InitialPos)
 	require.False(t, diag.HasErrors())
@@ -50,9 +50,9 @@ func TestGenerateResource_SimpleUniVarResource(t *testing.T) {
 }
 
 func TestGenerateResource_ObjectInAttributeShouldGenerateNestedBlock(t *testing.T) {
-	code, err := GenerateResource("azurerm_container_group", Config{
+	code, err := GenerateResource(NewResourceGenerateCommand("azurerm_container_group", Config{
 		Mode: MultipleVariables,
-	})
+	}, nil))
 	require.NoError(t, err)
 	assert.Contains(t, code, `dynamic "exposed_port" {`)
 }
@@ -138,9 +138,9 @@ func TestGenerateResource_SkippedAttributeShouldNotAppearInVariableDescription(t
 		c := cases[i]
 		t.Run(fmt.Sprintf("%s.%s", c.resourceType, c.caseName), func(t *testing.T) {
 			resourceType := c.resourceType
-			generated, err := GenerateResource(resourceType, Config{
+			generated, err := GenerateResource(NewResourceGenerateCommand(resourceType, Config{
 				Mode: UniVariable,
-			})
+			}, nil))
 			require.NoError(t, err)
 			assert.NotContains(t, generated, fmt.Sprintf("- `%s` -", c.caseName))
 		})

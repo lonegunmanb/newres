@@ -1,12 +1,34 @@
 package azapi
 
 import (
+	"fmt"
 	"log"
 
 	tfjson "github.com/hashicorp/terraform-json"
 	"github.com/ms-henglu/go-azure-types/types"
 	"github.com/zclconf/go-cty/cty"
 )
+
+func GetAzApiType(resourceType, apiVersion string) (*types.ResourceType, error) {
+	loader := types.DefaultAzureSchemaLoader()
+	resourceDef, err := loader.GetResourceDefinition(resourceType, apiVersion)
+	if err != nil {
+		return nil, err
+	}
+	if resourceDef == nil || resourceDef.Body == nil {
+		return nil, fmt.Errorf("resource %s not found", resourceType)
+	}
+	objectType, ok := resourceDef.Body.Type.(*types.ObjectType)
+	if !ok {
+		return nil, fmt.Errorf("resource %s body is not object", resourceType)
+	}
+	removeGeneralFields(objectType.Properties)
+	return resourceDef, nil
+}
+
+func removeGeneralFields(properties map[string]types.ObjectProperty) {
+	delete(properties, "managedBy")
+}
 
 func ConvertAzApiTypeToTerraformJsonSchemaAttribute(property types.ObjectProperty) *tfjson.SchemaAttribute {
 	var schema *tfjson.SchemaAttribute

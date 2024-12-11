@@ -18,6 +18,7 @@ func main() {
 	univar := flag.Bool("u", false, "Generate mode: UniVariable if set, MultipleVariables if not set")
 	resourceType := flag.String("r", "", "Resource type to generate configuration for (required)")
 	delimiter := flag.String("delimiter", "EOT", "Heredoc delimiter (optional)")
+	azapiResourceType := flag.String("azapi-resource-type", "", "AZAPI resource type (optional)")
 	flag.StringVar(resourceType, "resource-type", "", "")
 	flag.Usage = func() {
 		_, _ = fmt.Fprintln(os.Stderr, "Usage: newres -dir [DIRECTORY] [-u] [-r RESOURCE_TYPE] [-delimiter DELIMITER]")
@@ -28,6 +29,12 @@ func main() {
 
 	if *dir == "" || *resourceType == "" {
 		flag.Usage()
+		os.Exit(1)
+	}
+
+	// Check if resourceType is azapi and azapiResourceType is provided
+	if *resourceType != "azapi" && *azapiResourceType != "" {
+		fmt.Println("Error: --azapi-resource-type must be provided when --resource-type is azapi")
 		os.Exit(1)
 	}
 
@@ -45,10 +52,10 @@ func main() {
 	}
 
 	// Call GenerateResource function
-	generatedCode, err := pkg.GenerateResource(*resourceType, pkg.Config{
+	generatedCode, err := pkg.GenerateResource(pkg.NewResourceGenerateCommand(*resourceType, pkg.Config{
 		Delimiter: *delimiter,
 		Mode:      generateMode,
-	})
+	}, map[string]string{}))
 	if err != nil {
 		fmt.Printf("Error generating resource: %s\n", err)
 		os.Exit(1)
