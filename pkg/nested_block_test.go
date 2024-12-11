@@ -306,9 +306,9 @@ func TestGenerateVariableType_RequiredObject(t *testing.T) {
 }
 
 func TestGenerateDynamicBlockForAzurermTimeouts(t *testing.T) {
-	code, err := GenerateResource("azurerm_storage_table", Config{
+	code, err := GenerateResource(NewResourceGenerateCommand("azurerm_storage_table", Config{
 		Mode: MultipleVariables,
-	})
+	}, nil))
 	require.NoError(t, err)
 	assert.Contains(t, code, "for_each = var.storage_table_timeouts == null ? [] : [var.storage_table_timeouts]")
 }

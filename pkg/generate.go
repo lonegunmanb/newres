@@ -4,10 +4,12 @@ import (
 	"fmt"
 )
 
-func GenerateResource(resourceType string, cfg Config) (string, error) {
-	schema, ok := resourceSchemas[resourceType]
-	if !ok {
-		return "", fmt.Errorf("unsupported type %s", resourceType)
+func GenerateResource(generateCmd ResourceGenerateCommand) (string, error) {
+	resourceType := generateCmd.Type()
+	cfg := generateCmd.Config()
+	schema, err := generateCmd.Schema()
+	if err != nil {
+		return "", err
 	}
 	r, err := newResourceBlock(resourceType, schema, cfg)
 	if err != nil {

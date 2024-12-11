@@ -57,7 +57,7 @@ variable "vpc_cidr_block" {
 }
 
 func TestGenerateVariableBlockForRequiredNestedBlockShouldDeclareNullableAsFalse(t *testing.T) {
-	code, err := GenerateResource("azurerm_kubernetes_cluster", Config{})
+	code, err := GenerateResource(NewResourceGenerateCommand("azurerm_kubernetes_cluster", Config{}, nil))
 	require.NoError(t, err)
 	config, diag := hclsyntax.ParseConfig([]byte(code), "main.tf", hcl.InitialPos)
 	require.False(t, diag.HasErrors())
@@ -77,7 +77,7 @@ func TestGenerateVariableBlockForRequiredNestedBlockShouldDeclareNullableAsFalse
 }
 
 func TestGenerateVariableBlockForOptionalNestedBlockShouldDeclareDefaultToNull(t *testing.T) {
-	code, err := GenerateResource("azurerm_kubernetes_cluster", Config{})
+	code, err := GenerateResource(NewResourceGenerateCommand("azurerm_kubernetes_cluster", Config{}, nil))
 	require.NoError(t, err)
 	config, diag := hclsyntax.ParseConfig([]byte(code), "main.tf", hcl.InitialPos)
 	require.False(t, diag.HasErrors())

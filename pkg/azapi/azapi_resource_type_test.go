@@ -12,8 +12,7 @@ import (
 )
 
 func TestGetAzApiResourceTypeDefinition(t *testing.T) {
-	loader := types.DefaultAzureSchemaLoader()
-	resourceDef, err := loader.GetResourceDefinition("Microsoft.Resources/resourcegroups", "2024-07-01")
+	resourceDef, err := azapi.GetAzApiType("Microsoft.Resources/resourcegroups", "2024-07-01")
 	require.NoError(t, err)
 	assert.NotNil(t, resourceDef)
 }
