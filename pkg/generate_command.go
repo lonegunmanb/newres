@@ -1,16 +1,34 @@
 package pkg
 
-import tfjson "github.com/hashicorp/terraform-json"
+import (
+	"strings"
+
+	tfjson "github.com/hashicorp/terraform-json"
+)
+
+const AzApiResourceType = "azapi-resource-type"
 
 type ResourceGenerateCommand interface {
-	Type() string
+	ResourceBlockType() string
+	ResourceType() string
 	Config() Config
 	Schema() (*tfjson.Schema, error)
 }
 
 func NewResourceGenerateCommand(resourceType string, cfg Config, parameters map[string]string) ResourceGenerateCommand {
-	return generalResource{
-		ResourceType: resourceType,
-		Cfg:          cfg,
+	var g ResourceGenerateCommand = generalResource{
+		resourceType: resourceType,
+		cfg:          cfg,
 	}
+	if resourceType == "azapi_resource" {
+		if azapiType, ok := parameters[AzApiResourceType]; ok {
+			typeString := strings.Split(azapiType, "@")
+			g = azApiResourceGenerateCommand{
+				resourceType: typeString[0],
+				apiVersion:   typeString[1],
+				cfg:          cfg,
+			}
+		}
+	}
+	return g
 }

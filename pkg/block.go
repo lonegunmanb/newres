@@ -60,7 +60,7 @@ func normalizeBlockContents(b block) ([]*attribute, []*nestedBlock) {
 func generateVariableType(b block, rootType bool) string {
 	var sb strings.Builder
 	nb, isNestedBlock := b.(*nestedBlock)
-
+	closeToken := "})"
 	if b.maxItems() == 1 || isNestedBlock && nb.NestingMode() == tfjson.SchemaNestingModeSingle {
 		sb.WriteString("object({\n")
 	} else {
@@ -68,6 +68,7 @@ func generateVariableType(b block, rootType bool) string {
 		if isNestedBlock && nb.NestingMode() == tfjson.SchemaNestingModeList {
 			collection = "list(object({\n"
 		}
+		closeToken = "}))"
 		sb.WriteString(collection)
 	}
 
@@ -92,12 +93,7 @@ func generateVariableType(b block, rootType bool) string {
 		}
 	}
 
-	sb.WriteString("})")
-
-	nb, isNestedBlock = b.(*nestedBlock)
-	if isNestedBlock && b.maxItems() != 1 && (nb.NestingMode() == tfjson.SchemaNestingModeList || nb.NestingMode() == tfjson.SchemaNestingModeSet) {
-		sb.WriteString(")")
-	}
+	sb.WriteString(closeToken)
 
 	t := sb.String()
 	if !rootType && b.minItems() < 1 {

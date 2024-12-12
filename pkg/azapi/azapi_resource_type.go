@@ -27,34 +27,46 @@ func GetAzApiType(resourceType, apiVersion string) (*types.ResourceType, error) 
 }
 
 func removeGeneralFields(properties map[string]types.ObjectProperty) {
-	delete(properties, "managedBy")
 }
 
-func ConvertAzApiTypeToTerraformJsonSchemaAttribute(property types.ObjectProperty) *tfjson.SchemaAttribute {
-	var schema *tfjson.SchemaAttribute
-	ctyType := convertAzApiTypeToCtyType(property.Type.Type)
-	if ctyType != nil {
+func ConvertAzApiObjectTypeToTerraformJsonSchemaAttribute(property types.ObjectProperty) (*tfjson.SchemaBlock, error) {
+	objType, ok := property.Type.Type.(*types.ObjectType)
+	if !ok {
+		log.Panicf("expect object type but got %v", property.Type.Type)
+	}
+	attributes := make(map[string]*tfjson.SchemaAttribute)
+	for n, p := range objType.Properties {
+		if shouldFilterOut(p) {
+			continue
+		}
+		var schema *tfjson.SchemaAttribute
+		ctyType := convertAzApiTypeToCtyType(p.Type.Type)
+		if ctyType == nil {
+			return nil, fmt.Errorf("unknown type %v", p.Type.Type)
+		}
 		schema = &tfjson.SchemaAttribute{
 			AttributeType: *ctyType,
 		}
-		if stringType, ok := property.Type.Type.(*types.StringType); ok {
+		if stringType, ok := p.Type.Type.(*types.StringType); ok {
 			schema.Sensitive = stringType.Sensitive
 		}
+		schema.Required = isRequired(p)
+
+		if p.Description != nil {
+			schema.Description = *p.Description
+			schema.DescriptionKind = tfjson.SchemaDescriptionKindPlain
+		}
+		attributes[n] = schema
 	}
 
-	if schema == nil {
-		return nil
-	}
-	for _, flag := range property.Flags {
-		if flag == types.Required {
-			schema.Required = true
-		}
+	block := &tfjson.SchemaBlock{
+		Attributes: attributes,
 	}
 	if property.Description != nil {
-		schema.Description = *property.Description
-		schema.DescriptionKind = tfjson.SchemaDescriptionKindPlain
+		block.Description = *property.Description
+		block.DescriptionKind = tfjson.SchemaDescriptionKindPlain
 	}
-	return schema
+	return block, nil
 }
 
 func convertAzApiTypeToCtyType(azApiType types.TypeBase) *cty.Type {
@@ -81,6 +93,15 @@ func convertAzApiTypeToCtyType(azApiType types.TypeBase) *cty.Type {
 				return toMapType(t)
 			}
 			return toObjectType(t)
+		}
+	case *types.UnionType:
+		{
+			if len(t.Elements) == 0 {
+				log.Panicf("empty union type: %v", t)
+			}
+			if _, ok := t.Elements[0].Type.(*types.StringLiteralType); ok {
+				return &cty.String
+			}
 		}
 	}
 	return nil
