@@ -15,7 +15,15 @@ func GenerateResource(generateCmd ResourceGenerateCommand) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("error on parse resource type name %s: %s", resourceType, err.Error())
 	}
-	document, err := newDocument(r.name).parseDocument()
+	post, ok := generateCmd.(postProcessor)
+	if ok {
+		post.action(r)
+	}
+	document := make(map[string]argumentDescription)
+	docGenerate, ok := generateCmd.(withDocument)
+	if ok {
+		document, err = docGenerate.Doc()
+	}
 	if err != nil {
 		return "", fmt.Errorf("error on load and parse document: %s", err.Error())
 	}
