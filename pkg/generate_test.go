@@ -2,6 +2,9 @@ package pkg
 
 import (
 	"fmt"
+	"strings"
+	"testing"
+
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/hashicorp/terraform-config-inspect/tfconfig"
@@ -9,8 +12,6 @@ import (
 	azurermschema "github.com/lonegunmanb/terraform-azurerm-schema/v3/generated"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"strings"
-	"testing"
 )
 
 func TestGenerateResourceBlock_InvalidResourcTypeShouldReturnError(t *testing.T) {

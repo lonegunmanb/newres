@@ -6,10 +6,15 @@ import (
 )
 
 var _ ResourceGenerateCommand = generalResource{}
+var _ withDocument = generalResource{}
 
 type generalResource struct {
 	ResourceType string
 	Cfg          Config
+}
+
+func (g generalResource) Doc() (map[string]argumentDescription, error) {
+	return newDocument(g.ResourceType).parseDocument()
 }
 
 func (g generalResource) Type() string {
