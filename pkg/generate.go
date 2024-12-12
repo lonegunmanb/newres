@@ -5,15 +5,15 @@ import (
 )
 
 func GenerateResource(generateCmd ResourceGenerateCommand) (string, error) {
-	resourceType := generateCmd.Type()
+	blockType := generateCmd.ResourceBlockType()
 	cfg := generateCmd.Config()
 	schema, err := generateCmd.Schema()
 	if err != nil {
 		return "", err
 	}
-	r, err := newResourceBlock(resourceType, schema, cfg)
+	r, err := newResourceBlock(blockType, schema, cfg)
 	if err != nil {
-		return "", fmt.Errorf("error on parse resource type name %s: %s", resourceType, err.Error())
+		return "", fmt.Errorf("error on parse resource type name %s: %s", generateCmd.ResourceType(), err.Error())
 	}
 	post, ok := generateCmd.(postProcessor)
 	if ok {

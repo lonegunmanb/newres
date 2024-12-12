@@ -8,7 +8,7 @@ import (
 
 func TestDoc(t *testing.T) {
 	sut := generalResource{
-		ResourceType: "azurerm_resource_group",
+		resourceType: "azurerm_resource_group",
 	}
 	docs, err := sut.Doc()
 	require.NoError(t, err)

@@ -2,6 +2,7 @@ package pkg
 
 import (
 	"fmt"
+	tfjson "github.com/hashicorp/terraform-json"
 	"strings"
 	"testing"
 
@@ -146,4 +147,31 @@ func TestGenerateResource_SkippedAttributeShouldNotAppearInVariableDescription(t
 			assert.NotContains(t, generated, fmt.Sprintf("- `%s` -", c.caseName))
 		})
 	}
+}
+
+func TestGenerateVariableTypeForSetOfObject(t *testing.T) {
+	variableType := generateVariableType(&nestedBlock{
+		SchemaBlockType: &tfjson.SchemaBlockType{
+			Block:    nil,
+			MinItems: 0,
+			MaxItems: 2,
+		},
+	}, true)
+	expected := `set(object({
+}))`
+	assert.Equal(t, strings.ReplaceAll(expected, " ", ""), strings.ReplaceAll(variableType, " ", ""))
+}
+
+func TestGenerateVariableTypeForListOfObject(t *testing.T) {
+	variableType := generateVariableType(&nestedBlock{
+		SchemaBlockType: &tfjson.SchemaBlockType{
+			NestingMode: tfjson.SchemaNestingModeList,
+			Block:       nil,
+			MinItems:    0,
+			MaxItems:    2,
+		},
+	}, true)
+	expected := `list(object({
+}))`
+	assert.Equal(t, strings.ReplaceAll(expected, " ", ""), strings.ReplaceAll(variableType, " ", ""))
 }

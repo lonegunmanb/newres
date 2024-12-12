@@ -3,14 +3,17 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/hashicorp/hcl/v2"
 	"os"
 	"path/filepath"
+	"regexp"
 
+	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclwrite"
 	autofix "github.com/lonegunmanb/avmfix/pkg"
 	"github.com/lonegunmanb/newres/v3/pkg"
 )
+
+var azapiVersionRegex = regexp.MustCompile(`^[a-zA-Z0-9.-]+(/[a-zA-Z0-9.-]+)+@[0-9]{4}-[0-9]{2}-[0-9]{2}(-preview)?$`)
 
 func main() {
 	// Parse command line flags
@@ -18,7 +21,7 @@ func main() {
 	univar := flag.Bool("u", false, "Generate mode: UniVariable if set, MultipleVariables if not set")
 	resourceType := flag.String("r", "", "Resource type to generate configuration for (required)")
 	delimiter := flag.String("delimiter", "EOT", "Heredoc delimiter (optional)")
-	azapiResourceType := flag.String("azapi-resource-type", "", "AZAPI resource type (optional)")
+	azapiResourceType := flag.String(pkg.AzApiResourceType, "", "AZAPI resource type (optional)")
 	flag.StringVar(resourceType, "resource-type", "", "")
 	flag.Usage = func() {
 		_, _ = fmt.Fprintln(os.Stderr, "Usage: newres -dir [DIRECTORY] [-u] [-r RESOURCE_TYPE] [-delimiter DELIMITER]")
@@ -31,11 +34,19 @@ func main() {
 		flag.Usage()
 		os.Exit(1)
 	}
+	parameters := map[string]string{}
 
 	// Check if resourceType is azapi and azapiResourceType is provided
-	if *resourceType != "azapi" && *azapiResourceType != "" {
-		fmt.Println("Error: --azapi-resource-type must be provided when --resource-type is azapi")
-		os.Exit(1)
+	if *azapiResourceType != "" {
+		if *resourceType != "azapi_resource" {
+			fmt.Println("Error: --azapi-resource-type must be provided when --resource-type is `azapi_resource`")
+			os.Exit(1)
+		}
+		if !azapiVersionRegex.MatchString(*azapiResourceType) {
+			fmt.Println("Error: Invalid azapi-resource-type format")
+			os.Exit(1)
+		}
+		parameters[pkg.AzApiResourceType] = *azapiResourceType
 	}
 
 	// Set generate mode based on the -u flag
@@ -55,7 +66,7 @@ func main() {
 	generatedCode, err := pkg.GenerateResource(pkg.NewResourceGenerateCommand(*resourceType, pkg.Config{
 		Delimiter: *delimiter,
 		Mode:      generateMode,
-	}, map[string]string{}))
+	}, parameters))
 	if err != nil {
 		fmt.Printf("Error generating resource: %s\n", err)
 		os.Exit(1)

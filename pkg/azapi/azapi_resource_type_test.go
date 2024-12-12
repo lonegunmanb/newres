@@ -20,96 +20,166 @@ func TestGetAzApiResourceTypeDefinition(t *testing.T) {
 func TestAzApiTypeToTfSchemaAttribute(t *testing.T) {
 	cases := []struct {
 		azApiProperty types.ObjectProperty
-		expected      *tfjson.SchemaAttribute
+		expected      *tfjson.SchemaBlock
 		description   string
 	}{
 		{
 			azApiProperty: types.ObjectProperty{
 				Type: &types.TypeReference{
-					Type: &types.StringType{
-						Type: "StringType",
+					Type: &types.ObjectType{
+						Type: "ObjectType",
+						Name: "obj",
+						Properties: map[string]types.ObjectProperty{
+							"field1": {
+								Type: &types.TypeReference{
+									Type: &types.StringType{
+										Type: "StringType",
+									},
+								},
+								Flags:       []types.ObjectPropertyFlag{types.Required},
+								Description: p("string field"),
+							},
+						},
 					},
 				},
-				Flags:       []types.ObjectPropertyFlag{types.Required},
-				Description: p("string field"),
 			},
-			expected: &tfjson.SchemaAttribute{
-				AttributeType:   cty.String,
-				Description:     "string field",
-				DescriptionKind: tfjson.SchemaDescriptionKindPlain,
-				Required:        true,
+			expected: &tfjson.SchemaBlock{
+				Attributes: map[string]*tfjson.SchemaAttribute{
+					"field1": {
+						AttributeType:   cty.String,
+						Description:     "string field",
+						DescriptionKind: tfjson.SchemaDescriptionKindPlain,
+						Required:        true,
+					},
+				},
 			},
 			description: "simple string field",
 		},
 		{
 			azApiProperty: types.ObjectProperty{
 				Type: &types.TypeReference{
-					Type: &types.StringType{
-						Type: "StringType",
+					Type: &types.ObjectType{
+						Type: "ObjectType",
+						Name: "obj",
+						Properties: map[string]types.ObjectProperty{
+							"field1": {
+								Type: &types.TypeReference{
+									Type: &types.StringType{
+										Type: "StringType",
+									},
+								},
+								Flags:       []types.ObjectPropertyFlag{types.Required},
+								Description: p("string field"),
+							},
+						},
 					},
 				},
-				Flags:       []types.ObjectPropertyFlag{types.Required},
-				Description: p("string field"),
 			},
-			expected: &tfjson.SchemaAttribute{
-				AttributeType:   cty.String,
-				Description:     "string field",
-				DescriptionKind: tfjson.SchemaDescriptionKindPlain,
-				Required:        true,
+			expected: &tfjson.SchemaBlock{
+				Attributes: map[string]*tfjson.SchemaAttribute{
+					"field1": {
+						AttributeType:   cty.String,
+						Description:     "string field",
+						DescriptionKind: tfjson.SchemaDescriptionKindPlain,
+						Required:        true,
+					},
+				},
 			},
 			description: "optional string field",
 		},
 		{
 			azApiProperty: types.ObjectProperty{
 				Type: &types.TypeReference{
-					Type: &types.BooleanType{
-						Type: "BooleanType",
+					Type: &types.ObjectType{
+						Type: "ObjectType",
+						Name: "obj",
+						Properties: map[string]types.ObjectProperty{
+							"field1": types.ObjectProperty{
+								Type: &types.TypeReference{
+									Type: &types.BooleanType{
+										Type: "BooleanType",
+									},
+								},
+								Flags:       []types.ObjectPropertyFlag{types.Required},
+								Description: p("boolean field"),
+							},
+						},
 					},
 				},
-				Flags:       []types.ObjectPropertyFlag{types.Required},
-				Description: p("boolean field"),
 			},
-			expected: &tfjson.SchemaAttribute{
-				AttributeType:   cty.Bool,
-				Description:     "boolean field",
-				DescriptionKind: tfjson.SchemaDescriptionKindPlain,
-				Required:        true,
+			expected: &tfjson.SchemaBlock{
+				Attributes: map[string]*tfjson.SchemaAttribute{
+					"field1": {
+						AttributeType:   cty.Bool,
+						Description:     "boolean field",
+						DescriptionKind: tfjson.SchemaDescriptionKindPlain,
+						Required:        true,
+					},
+				},
 			},
 			description: "simple boolean field",
 		},
 		{
 			azApiProperty: types.ObjectProperty{
 				Type: &types.TypeReference{
-					Type: &types.IntegerType{
-						Type: "IntegerType",
+					Type: &types.ObjectType{
+						Type: "ObjectType",
+						Name: "obj",
+						Properties: map[string]types.ObjectProperty{
+							"field1": {
+								Type: &types.TypeReference{
+									Type: &types.IntegerType{
+										Type: "IntegerType",
+									},
+								},
+								Flags:       []types.ObjectPropertyFlag{types.Required},
+								Description: p("number field"),
+							},
+						},
 					},
 				},
-				Flags:       []types.ObjectPropertyFlag{types.Required},
-				Description: p("number field"),
 			},
-			expected: &tfjson.SchemaAttribute{
-				AttributeType:   cty.Number,
-				Description:     "number field",
-				DescriptionKind: tfjson.SchemaDescriptionKindPlain,
-				Required:        true,
+			expected: &tfjson.SchemaBlock{
+				Attributes: map[string]*tfjson.SchemaAttribute{
+					"field1": {
+						AttributeType:   cty.Number,
+						Description:     "number field",
+						DescriptionKind: tfjson.SchemaDescriptionKindPlain,
+						Required:        true,
+					},
+				},
 			},
 			description: "simple number field",
 		},
 		{
 			azApiProperty: types.ObjectProperty{
 				Type: &types.TypeReference{
-					Type: &types.IntegerType{
-						Type: "IntegerType",
+					Type: &types.ObjectType{
+						Type: "ObjectType",
+						Name: "obj",
+						Properties: map[string]types.ObjectProperty{
+							"field1": {
+								Type: &types.TypeReference{
+									Type: &types.IntegerType{
+										Type: "IntegerType",
+									},
+								},
+								Flags:       []types.ObjectPropertyFlag{types.Required},
+								Description: p("required field"),
+							},
+						},
 					},
 				},
-				Flags:       []types.ObjectPropertyFlag{types.Required},
-				Description: p("required field"),
 			},
-			expected: &tfjson.SchemaAttribute{
-				AttributeType:   cty.Number,
-				Description:     "required field",
-				DescriptionKind: tfjson.SchemaDescriptionKindPlain,
-				Required:        true,
+			expected: &tfjson.SchemaBlock{
+				Attributes: map[string]*tfjson.SchemaAttribute{
+					"field1": {
+						AttributeType:   cty.Number,
+						Description:     "required field",
+						DescriptionKind: tfjson.SchemaDescriptionKindPlain,
+						Required:        true,
+					},
+				},
 			},
 			description: "required field",
 		},
@@ -140,8 +210,13 @@ func TestAzApiTypeToTfSchemaAttribute(t *testing.T) {
 				},
 				Description: p("object with readonly field"),
 			},
-			expected: &tfjson.SchemaAttribute{
-				AttributeType:   cty.Object(map[string]cty.Type{"field1": cty.String}),
+			expected: &tfjson.SchemaBlock{
+				Attributes: map[string]*tfjson.SchemaAttribute{
+					"field1": {
+						AttributeType: cty.String,
+						Required:      true,
+					},
+				},
 				Description:     "object with readonly field",
 				DescriptionKind: tfjson.SchemaDescriptionKindPlain,
 			},
@@ -174,8 +249,13 @@ func TestAzApiTypeToTfSchemaAttribute(t *testing.T) {
 				},
 				Description: p("object with identifier field"),
 			},
-			expected: &tfjson.SchemaAttribute{
-				AttributeType:   cty.Object(map[string]cty.Type{"field1": cty.String}),
+			expected: &tfjson.SchemaBlock{
+				Attributes: map[string]*tfjson.SchemaAttribute{
+					"field1": {
+						AttributeType: cty.String,
+						Required:      true,
+					},
+				},
 				Description:     "object with identifier field",
 				DescriptionKind: tfjson.SchemaDescriptionKindPlain,
 			},
@@ -207,11 +287,16 @@ func TestAzApiTypeToTfSchemaAttribute(t *testing.T) {
 				},
 				Description: p("object with optional and required field"),
 			},
-			expected: &tfjson.SchemaAttribute{
-				AttributeType: cty.ObjectWithOptionalAttrs(map[string]cty.Type{
-					"field1": cty.String,
-					"field2": cty.String,
-				}, []string{"field2"}),
+			expected: &tfjson.SchemaBlock{
+				Attributes: map[string]*tfjson.SchemaAttribute{
+					"field1": {
+						AttributeType: cty.String,
+						Required:      true,
+					},
+					"field2": {
+						AttributeType: cty.String,
+					},
+				},
 				Description:     "object with optional and required field",
 				DescriptionKind: tfjson.SchemaDescriptionKindPlain,
 			},
@@ -220,60 +305,102 @@ func TestAzApiTypeToTfSchemaAttribute(t *testing.T) {
 		{
 			azApiProperty: types.ObjectProperty{
 				Type: &types.TypeReference{
-					Type: &types.StringType{
-						Type:      "StringType",
-						Sensitive: true,
+					Type: &types.ObjectType{
+						Type: "ObjectType",
+						Name: "obj",
+						Properties: map[string]types.ObjectProperty{
+							"field1": {
+								Type: &types.TypeReference{
+									Type: &types.StringType{
+										Type:      "StringType",
+										Sensitive: true,
+									},
+								},
+								Description: p("sensitive field"),
+							},
+						},
 					},
 				},
-				Description: p("sensitive field"),
 			},
-			expected: &tfjson.SchemaAttribute{
-				AttributeType:   cty.String,
-				Description:     "sensitive field",
-				DescriptionKind: tfjson.SchemaDescriptionKindPlain,
-				Sensitive:       true,
+			expected: &tfjson.SchemaBlock{
+				Attributes: map[string]*tfjson.SchemaAttribute{
+					"field1": {
+						AttributeType:   cty.String,
+						Description:     "sensitive field",
+						DescriptionKind: tfjson.SchemaDescriptionKindPlain,
+						Sensitive:       true,
+					},
+				},
 			},
 			description: "sensitive field",
 		},
 		{
 			azApiProperty: types.ObjectProperty{
 				Type: &types.TypeReference{
-					Type: &types.ArrayType{
-						Type: "ArrayType",
-						ItemType: &types.TypeReference{
-							Type: &types.StringType{
-								Type: "StringType",
+					Type: &types.ObjectType{
+						Type: "ObjectType",
+						Name: "obj",
+						Properties: map[string]types.ObjectProperty{
+							"field1": {
+								Type: &types.TypeReference{
+									Type: &types.ArrayType{
+										Type: "ArrayType",
+										ItemType: &types.TypeReference{
+											Type: &types.StringType{
+												Type: "StringType",
+											},
+										},
+									},
+								},
+								Description: p("array of string"),
 							},
 						},
 					},
 				},
-				Description: p("array of string"),
 			},
-			expected: &tfjson.SchemaAttribute{
-				AttributeType:   cty.List(cty.String),
-				Description:     "array of string",
-				DescriptionKind: tfjson.SchemaDescriptionKindPlain,
+			expected: &tfjson.SchemaBlock{
+				Attributes: map[string]*tfjson.SchemaAttribute{
+					"field1": {
+						AttributeType:   cty.List(cty.String),
+						Description:     "array of string",
+						DescriptionKind: tfjson.SchemaDescriptionKindPlain,
+					},
+				},
 			},
 			description: "array of string",
 		},
 		{
 			azApiProperty: types.ObjectProperty{
 				Type: &types.TypeReference{
-					Type: &types.ArrayType{
-						Type: "ArrayType",
-						ItemType: &types.TypeReference{
-							Type: &types.IntegerType{
-								Type: "IntegerType",
+					Type: &types.ObjectType{
+						Type: "ObjectType",
+						Name: "obj",
+						Properties: map[string]types.ObjectProperty{
+							"field1": {
+								Type: &types.TypeReference{
+									Type: &types.ArrayType{
+										Type: "ArrayType",
+										ItemType: &types.TypeReference{
+											Type: &types.IntegerType{
+												Type: "IntegerType",
+											},
+										},
+									},
+								},
+								Description: p("array of number"),
 							},
 						},
 					},
 				},
-				Description: p("array of number"),
 			},
-			expected: &tfjson.SchemaAttribute{
-				AttributeType:   cty.List(cty.Number),
-				Description:     "array of number",
-				DescriptionKind: tfjson.SchemaDescriptionKindPlain,
+			expected: &tfjson.SchemaBlock{
+				Attributes: map[string]*tfjson.SchemaAttribute{
+					"field1": {
+						AttributeType:   cty.List(cty.Number),
+						Description:     "array of number",
+						DescriptionKind: tfjson.SchemaDescriptionKindPlain,
+					},
+				},
 			},
 			description: "array of number",
 		},
@@ -282,26 +409,82 @@ func TestAzApiTypeToTfSchemaAttribute(t *testing.T) {
 				Type: &types.TypeReference{
 					Type: &types.ObjectType{
 						Type: "ObjectType",
-						AdditionalProperties: &types.TypeReference{
-							Type: &types.StringType{
-								Type: "StringType",
+						Name: "obj",
+						Properties: map[string]types.ObjectProperty{
+							"field1": {
+								Type: &types.TypeReference{
+									Type: &types.ObjectType{
+										Type: "ObjectType",
+										AdditionalProperties: &types.TypeReference{
+											Type: &types.StringType{
+												Type: "StringType",
+											},
+										},
+									},
+								},
+								Description: p("map of string"),
 							},
 						},
 					},
 				},
-				Description: p("map of string"),
 			},
-			expected: &tfjson.SchemaAttribute{
-				AttributeType:   cty.Map(cty.String),
-				Description:     "map of string",
-				DescriptionKind: tfjson.SchemaDescriptionKindPlain,
+			expected: &tfjson.SchemaBlock{
+				Attributes: map[string]*tfjson.SchemaAttribute{
+					"field1": {
+						AttributeType:   cty.Map(cty.String),
+						Description:     "map of string",
+						DescriptionKind: tfjson.SchemaDescriptionKindPlain,
+					},
+				},
 			},
 			description: "map of string",
+		},
+		{
+			description: "union string type",
+			azApiProperty: types.ObjectProperty{
+				Type: &types.TypeReference{
+					Type: &types.ObjectType{
+						Type: "ObjectType",
+						Name: "obj",
+						Properties: map[string]types.ObjectProperty{
+							"field1": {
+								Type: &types.TypeReference{
+									Type: &types.UnionType{
+										Type: "UnionType",
+										Elements: []*types.TypeReference{
+											{
+												Type: &types.StringLiteralType{
+													Type:  "StringLiteralType",
+													Value: "value1",
+												},
+											},
+											{
+												Type: &types.StringLiteralType{
+													Type:  "StringLiteralType",
+													Value: "value2",
+												},
+											},
+										},
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			expected: &tfjson.SchemaBlock{
+				Attributes: map[string]*tfjson.SchemaAttribute{
+					"field1": {
+						AttributeType: cty.String,
+					},
+				},
+			},
 		},
 	}
 	for _, c := range cases {
 		t.Run(c.description, func(t *testing.T) {
-			actual := azapi.ConvertAzApiTypeToTerraformJsonSchemaAttribute(c.azApiProperty)
+			actual, err := azapi.ConvertAzApiObjectTypeToTerraformJsonSchemaAttribute(c.azApiProperty)
+			require.NoError(t, err)
 			require.NotNil(t, actual)
 			assert.Equal(t, *c.expected, *actual)
 		})

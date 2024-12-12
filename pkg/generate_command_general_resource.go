@@ -9,26 +9,30 @@ var _ ResourceGenerateCommand = generalResource{}
 var _ withDocument = generalResource{}
 
 type generalResource struct {
-	ResourceType string
-	Cfg          Config
+	resourceType string
+	cfg          Config
+}
+
+func (g generalResource) ResourceType() string {
+	return g.resourceType
 }
 
 func (g generalResource) Doc() (map[string]argumentDescription, error) {
-	return newDocument(g.ResourceType).parseDocument()
+	return newDocument(g.resourceType).parseDocument()
 }
 
-func (g generalResource) Type() string {
-	return g.ResourceType
+func (g generalResource) ResourceBlockType() string {
+	return g.resourceType
 }
 
 func (g generalResource) Config() Config {
-	return g.Cfg
+	return g.cfg
 }
 
 func (g generalResource) Schema() (*tfjson.Schema, error) {
-	s, ok := resourceSchemas[g.ResourceType]
+	s, ok := resourceSchemas[g.resourceType]
 	if !ok {
-		return nil, fmt.Errorf("unsupported type %s", g.ResourceType)
+		return nil, fmt.Errorf("unsupported type %s", g.resourceType)
 	}
 	return s, nil
 }
