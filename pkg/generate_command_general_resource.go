@@ -2,6 +2,7 @@ package pkg
 
 import (
 	"fmt"
+
 	"github.com/hashicorp/terraform-json"
 )
 

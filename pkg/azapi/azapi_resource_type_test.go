@@ -45,11 +45,9 @@ func TestAzApiTypeToTfSchemaAttribute(t *testing.T) {
 			},
 			expected: &tfjson.SchemaBlock{
 				Attributes: map[string]*tfjson.SchemaAttribute{
-					"field1": {
-						AttributeType:   cty.String,
-						Description:     "string field",
-						DescriptionKind: tfjson.SchemaDescriptionKindPlain,
-						Required:        true,
+					"body": {
+						AttributeType: cty.Object(map[string]cty.Type{"field1": cty.String}),
+						Required:      true,
 					},
 				},
 			},
@@ -77,11 +75,9 @@ func TestAzApiTypeToTfSchemaAttribute(t *testing.T) {
 			},
 			expected: &tfjson.SchemaBlock{
 				Attributes: map[string]*tfjson.SchemaAttribute{
-					"field1": {
-						AttributeType:   cty.String,
-						Description:     "string field",
-						DescriptionKind: tfjson.SchemaDescriptionKindPlain,
-						Required:        true,
+					"body": {
+						AttributeType: cty.Object(map[string]cty.Type{"field1": cty.String}),
+						Required:      true,
 					},
 				},
 			},
@@ -109,11 +105,9 @@ func TestAzApiTypeToTfSchemaAttribute(t *testing.T) {
 			},
 			expected: &tfjson.SchemaBlock{
 				Attributes: map[string]*tfjson.SchemaAttribute{
-					"field1": {
-						AttributeType:   cty.Bool,
-						Description:     "boolean field",
-						DescriptionKind: tfjson.SchemaDescriptionKindPlain,
-						Required:        true,
+					"body": {
+						AttributeType: cty.Object(map[string]cty.Type{"field1": cty.Bool}),
+						Required:      true,
 					},
 				},
 			},
@@ -141,11 +135,9 @@ func TestAzApiTypeToTfSchemaAttribute(t *testing.T) {
 			},
 			expected: &tfjson.SchemaBlock{
 				Attributes: map[string]*tfjson.SchemaAttribute{
-					"field1": {
-						AttributeType:   cty.Number,
-						Description:     "number field",
-						DescriptionKind: tfjson.SchemaDescriptionKindPlain,
-						Required:        true,
+					"body": {
+						Required:      true,
+						AttributeType: cty.Object(map[string]cty.Type{"field1": cty.Number}),
 					},
 				},
 			},
@@ -173,11 +165,9 @@ func TestAzApiTypeToTfSchemaAttribute(t *testing.T) {
 			},
 			expected: &tfjson.SchemaBlock{
 				Attributes: map[string]*tfjson.SchemaAttribute{
-					"field1": {
-						AttributeType:   cty.Number,
-						Description:     "required field",
-						DescriptionKind: tfjson.SchemaDescriptionKindPlain,
-						Required:        true,
+					"body": {
+						AttributeType: cty.Object(map[string]cty.Type{"field1": cty.Number}),
+						Required:      true,
 					},
 				},
 			},
@@ -212,8 +202,8 @@ func TestAzApiTypeToTfSchemaAttribute(t *testing.T) {
 			},
 			expected: &tfjson.SchemaBlock{
 				Attributes: map[string]*tfjson.SchemaAttribute{
-					"field1": {
-						AttributeType: cty.String,
+					"body": {
+						AttributeType: cty.Object(map[string]cty.Type{"field1": cty.String}),
 						Required:      true,
 					},
 				},
@@ -251,9 +241,9 @@ func TestAzApiTypeToTfSchemaAttribute(t *testing.T) {
 			},
 			expected: &tfjson.SchemaBlock{
 				Attributes: map[string]*tfjson.SchemaAttribute{
-					"field1": {
-						AttributeType: cty.String,
+					"body": {
 						Required:      true,
+						AttributeType: cty.Object(map[string]cty.Type{"field1": cty.String}),
 					},
 				},
 				Description:     "object with identifier field",
@@ -289,12 +279,9 @@ func TestAzApiTypeToTfSchemaAttribute(t *testing.T) {
 			},
 			expected: &tfjson.SchemaBlock{
 				Attributes: map[string]*tfjson.SchemaAttribute{
-					"field1": {
-						AttributeType: cty.String,
+					"body": {
 						Required:      true,
-					},
-					"field2": {
-						AttributeType: cty.String,
+						AttributeType: cty.ObjectWithOptionalAttrs(map[string]cty.Type{"field1": cty.String, "field2": cty.String}, []string{"field2"}),
 					},
 				},
 				Description:     "object with optional and required field",
@@ -324,11 +311,9 @@ func TestAzApiTypeToTfSchemaAttribute(t *testing.T) {
 			},
 			expected: &tfjson.SchemaBlock{
 				Attributes: map[string]*tfjson.SchemaAttribute{
-					"field1": {
-						AttributeType:   cty.String,
-						Description:     "sensitive field",
-						DescriptionKind: tfjson.SchemaDescriptionKindPlain,
-						Sensitive:       true,
+					"body": {
+						AttributeType: cty.ObjectWithOptionalAttrs(map[string]cty.Type{"field1": cty.String}, []string{"field1"}),
+						Required:      true,
 					},
 				},
 			},
@@ -352,6 +337,7 @@ func TestAzApiTypeToTfSchemaAttribute(t *testing.T) {
 										},
 									},
 								},
+								Flags:       []types.ObjectPropertyFlag{types.Required},
 								Description: p("array of string"),
 							},
 						},
@@ -360,10 +346,9 @@ func TestAzApiTypeToTfSchemaAttribute(t *testing.T) {
 			},
 			expected: &tfjson.SchemaBlock{
 				Attributes: map[string]*tfjson.SchemaAttribute{
-					"field1": {
-						AttributeType:   cty.List(cty.String),
-						Description:     "array of string",
-						DescriptionKind: tfjson.SchemaDescriptionKindPlain,
+					"body": {
+						Required:      true,
+						AttributeType: cty.Object(map[string]cty.Type{"field1": cty.List(cty.String)}),
 					},
 				},
 			},
@@ -387,6 +372,7 @@ func TestAzApiTypeToTfSchemaAttribute(t *testing.T) {
 										},
 									},
 								},
+								Flags:       []types.ObjectPropertyFlag{types.Required},
 								Description: p("array of number"),
 							},
 						},
@@ -395,10 +381,9 @@ func TestAzApiTypeToTfSchemaAttribute(t *testing.T) {
 			},
 			expected: &tfjson.SchemaBlock{
 				Attributes: map[string]*tfjson.SchemaAttribute{
-					"field1": {
-						AttributeType:   cty.List(cty.Number),
-						Description:     "array of number",
-						DescriptionKind: tfjson.SchemaDescriptionKindPlain,
+					"body": {
+						Required:      true,
+						AttributeType: cty.Object(map[string]cty.Type{"field1": cty.List(cty.Number)}),
 					},
 				},
 			},
@@ -422,6 +407,7 @@ func TestAzApiTypeToTfSchemaAttribute(t *testing.T) {
 										},
 									},
 								},
+								Flags:       []types.ObjectPropertyFlag{types.Required},
 								Description: p("map of string"),
 							},
 						},
@@ -430,10 +416,9 @@ func TestAzApiTypeToTfSchemaAttribute(t *testing.T) {
 			},
 			expected: &tfjson.SchemaBlock{
 				Attributes: map[string]*tfjson.SchemaAttribute{
-					"field1": {
-						AttributeType:   cty.Map(cty.String),
-						Description:     "map of string",
-						DescriptionKind: tfjson.SchemaDescriptionKindPlain,
+					"body": {
+						Required:      true,
+						AttributeType: cty.Object(map[string]cty.Type{"field1": cty.Map(cty.String)}),
 					},
 				},
 			},
@@ -467,6 +452,7 @@ func TestAzApiTypeToTfSchemaAttribute(t *testing.T) {
 										},
 									},
 								},
+								Flags: []types.ObjectPropertyFlag{types.Required},
 							},
 						},
 					},
@@ -474,8 +460,9 @@ func TestAzApiTypeToTfSchemaAttribute(t *testing.T) {
 			},
 			expected: &tfjson.SchemaBlock{
 				Attributes: map[string]*tfjson.SchemaAttribute{
-					"field1": {
-						AttributeType: cty.String,
+					"body": {
+						Required:      true,
+						AttributeType: cty.Object(map[string]cty.Type{"field1": cty.String}),
 					},
 				},
 			},

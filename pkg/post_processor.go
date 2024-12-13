@@ -1,5 +1,5 @@
 package pkg
 
 type postProcessor interface {
-	action(r *resourceBlock)
+	action(terraformConfig string, cfg Config) (string, error)
 }

@@ -94,6 +94,64 @@ After running the command, you should find `variables.tf` and `main.tf` files in
 
 **Note**: You can run the command multiple times with different resource types, and the newly added resource blocks and variable blocks will be appended to the existing `main.tf` and `variables.tf` files, allowing you to easily expand your Terraform configuration without manual editing.
 
+## AzAPI resource generate
+
+`newres` also supports AzAPI resources. To generate configuration files for an AzAPI resource, you can set `-r` to `azapi_resource` and use the `--azapi-resource-type` flag:
+
+```shell
+newres --azapi-resource-type "Microsoft.Resources/resourceGroups@2021-04-01" -r azapi_resource --dir .
+```
+
+The result looks like:
+
+```hcl
+variable "resource_body" {
+  type = object({
+    managedBy = optional(string)
+  })
+  description = <<-EOT
+ - `managedBy` - 
+
+ ---
+ `properties` block supports the following:
+EOT
+  nullable    = false
+}
+
+variable "resource_location" {
+  type        = string
+  description = "The location of the resource group. It cannot be changed after the resource group has been created. It must be one of the supported Azure locations."
+  nullable    = false
+}
+
+variable "resource_name" {
+  type        = string
+  description = "The resource name"
+  nullable    = false
+}
+
+variable "resource_parent_id" {
+  type        = string
+  description = "The ID of the azure resource in which this resource is created."
+  nullable    = false
+}
+
+variable "resource_tags" {
+  type        = map(string)
+  default     = null
+  description = "The tags attached to the resource group."
+}
+
+resource "azapi_resource" "this" {
+  type      = "Microsoft.Resources/resourceGroups@2021-04-01"
+  body      = var.resource_body
+  location  = var.resource_location
+  name      = var.resource_name
+  parent_id = var.resource_parent_id
+  tags      = var.resource_tags
+}
+```
+
 ## Limitations
 
 ### Sometimes optional attributes might be required

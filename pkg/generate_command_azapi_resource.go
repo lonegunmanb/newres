@@ -3,6 +3,8 @@ package pkg
 import (
 	"fmt"
 
+	"github.com/hashicorp/hcl/v2"
+	"github.com/hashicorp/hcl/v2/hclwrite"
 	tfjson "github.com/hashicorp/terraform-json"
 	"github.com/lonegunmanb/newres/v3/pkg/azapi"
 	"github.com/ms-henglu/go-azure-types/types"
@@ -10,6 +12,7 @@ import (
 )
 
 var _ ResourceGenerateCommand = azApiResourceGenerateCommand{}
+var _ postProcessor = azApiResourceGenerateCommand{}
 
 type azApiResourceGenerateCommand struct {
 	resourceType string
@@ -17,8 +20,42 @@ type azApiResourceGenerateCommand struct {
 	cfg          Config
 }
 
+func (a azApiResourceGenerateCommand) action(terraformConfig string, cfg Config) (string, error) {
+	hclCfg, diag := hclwrite.ParseConfig([]byte(terraformConfig), "", hcl.InitialPos)
+	if diag.HasErrors() {
+		return "", diag
+	}
+	newFile := hclwrite.NewEmptyFile()
+	var resBlock *hclwrite.Block
+	for _, b := range hclCfg.Body().Blocks() {
+		if b.Type() == "resource" {
+			resBlock = b
+			continue
+		}
+		newFile.Body().AppendBlock(b)
+	}
+	if resBlock == nil {
+		return "", fmt.Errorf("no resource block found")
+	}
+	resBody := resBlock.Body()
+	resBody.SetAttributeValue("type", cty.StringVal(a.ResourceType()))
+	for _, b := range resBody.Blocks() {
+		if b.Type() == "dynamic" && b.Labels()[0] == "body" {
+			resBody.RemoveBlock(b)
+		}
+	}
+	bodyValue := newTokens().ident("var", 0).dot().ident("resource_body", 0).Tokens
+	if cfg.Mode == UniVariable {
+		bodyValue = newTokens().ident("var", 0).dot().ident("resource", 0).dot().ident("body", 0).Tokens
+	}
+
+	resBody.SetAttributeRaw("body", bodyValue)
+	newFile.Body().AppendBlock(resBlock)
+	return string(newFile.Bytes()), nil
+}
+
 func (a azApiResourceGenerateCommand) ResourceType() string {
-	return fmt.Sprintf("azapi-%s@%s", a.resourceType, a.apiVersion)
+	return fmt.Sprintf("%s@%s", a.resourceType, a.apiVersion)
 }
 
 func (a azApiResourceGenerateCommand) ResourceBlockType() string {
