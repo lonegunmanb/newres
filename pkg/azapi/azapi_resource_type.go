@@ -9,6 +9,13 @@ import (
 	"github.com/zclconf/go-cty/cty"
 )
 
+var rootAttributes = map[string]struct{}{
+	"location": {},
+	"name":     {},
+	"tags":     {},
+	"identity": {},
+}
+
 func GetAzApiType(resourceType, apiVersion string) (*types.ResourceType, error) {
 	loader := types.DefaultAzureSchemaLoader()
 	resourceDef, err := loader.GetResourceDefinition(resourceType, apiVersion)
@@ -34,7 +41,23 @@ func ConvertAzApiObjectTypeToTerraformJsonSchemaAttribute(property types.ObjectP
 	if !ok {
 		log.Panicf("expect object type but got %v", property.Type.Type)
 	}
-	attributes := make(map[string]*tfjson.SchemaAttribute)
+	bodyAttributes, err := convertToAttributes(objType)
+	if err != nil {
+		return nil, err
+	}
+
+	block := &tfjson.SchemaBlock{
+		Attributes: wrapBodySchema(bodyAttributes),
+	}
+	if property.Description != nil {
+		block.Description = *property.Description
+		block.DescriptionKind = tfjson.SchemaDescriptionKindPlain
+	}
+	return block, nil
+}
+
+func convertToAttributes(objType *types.ObjectType) (map[string]*tfjson.SchemaAttribute, error) {
+	bodyAttributes := make(map[string]*tfjson.SchemaAttribute)
 	for n, p := range objType.Properties {
 		if shouldFilterOut(p) {
 			continue
@@ -51,22 +74,43 @@ func ConvertAzApiObjectTypeToTerraformJsonSchemaAttribute(property types.ObjectP
 			schema.Sensitive = stringType.Sensitive
 		}
 		schema.Required = isRequired(p)
+		schema.Optional = !schema.Required
 
 		if p.Description != nil {
 			schema.Description = *p.Description
 			schema.DescriptionKind = tfjson.SchemaDescriptionKindPlain
 		}
-		attributes[n] = schema
+		bodyAttributes[n] = schema
 	}
+	return bodyAttributes, nil
+}
 
-	block := &tfjson.SchemaBlock{
-		Attributes: attributes,
+func wrapBodySchema(bodyAttributes map[string]*tfjson.SchemaAttribute) map[string]*tfjson.SchemaAttribute {
+	attributes := make(map[string]*tfjson.SchemaAttribute)
+
+	for name, _ := range rootAttributes {
+		if attr, ok := bodyAttributes[name]; ok {
+			attributes[name] = attr
+			delete(bodyAttributes, name)
+		}
 	}
-	if property.Description != nil {
-		block.Description = *property.Description
-		block.DescriptionKind = tfjson.SchemaDescriptionKindPlain
+	var optionalList []string
+	var bodyTypes = make(map[string]cty.Type)
+	for name, attr := range bodyAttributes {
+		if attr.Optional || !attr.Required {
+			optionalList = append(optionalList, name)
+		}
+		bodyTypes[name] = attr.AttributeType
 	}
-	return block, nil
+	bodyType := cty.Object(bodyTypes)
+	if len(optionalList) > 0 {
+		bodyType = cty.ObjectWithOptionalAttrs(bodyTypes, optionalList)
+	}
+	attributes["body"] = &tfjson.SchemaAttribute{
+		AttributeType: bodyType,
+		Required:      true,
+	}
+	return attributes
 }
 
 func convertAzApiTypeToCtyType(azApiType types.TypeBase) *cty.Type {

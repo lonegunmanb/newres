@@ -48,15 +48,20 @@ func restoreToNestedBlockSchema(attr *tfjson.SchemaAttribute) *tfjson.SchemaBloc
 	}
 	for s, t := range fields {
 		if t.IsPrimitiveType() || (t.IsCollectionType() && t.ElementType().IsPrimitiveType()) {
-			schemaBlock.Attributes[s] = &tfjson.SchemaAttribute{
+
+			newAttr := &tfjson.SchemaAttribute{
 				AttributeType: t,
-				Required:      true,
+				Optional:      attributeType.IsObjectType() && attributeType.AttributeOptional(s),
 			}
+			newAttr.Required = !newAttr.Optional
+			schemaBlock.Attributes[s] = newAttr
 		} else {
-			schemaBlock.NestedBlocks[s] = restoreToNestedBlockSchema(&tfjson.SchemaAttribute{
+			newNb := restoreToNestedBlockSchema(&tfjson.SchemaAttribute{
 				AttributeType: t,
-				Required:      true,
+				Optional:      attributeType.IsObjectType() && attributeType.AttributeOptional(s),
+				Required:      !attributeType.IsObjectType() || !attributeType.AttributeOptional(s),
 			})
+			schemaBlock.NestedBlocks[s] = newNb
 		}
 	}
 	nb := &tfjson.SchemaBlockType{

@@ -15,10 +15,6 @@ func GenerateResource(generateCmd ResourceGenerateCommand) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("error on parse resource type name %s: %s", generateCmd.ResourceType(), err.Error())
 	}
-	post, ok := generateCmd.(postProcessor)
-	if ok {
-		post.action(r)
-	}
 	document := make(map[string]argumentDescription)
 	docGenerate, ok := generateCmd.(withDocument)
 	if ok {
@@ -27,8 +23,18 @@ func GenerateResource(generateCmd ResourceGenerateCommand) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("error on load and parse document: %s", err.Error())
 	}
+	var generated string
 	if cfg.GetMode() == UniVariable {
-		return r.generateUniVarResource(document)
+		generated, err = r.generateUniVarResource(document)
+	} else {
+		generated, err = r.generateMultiVarsResource(document)
 	}
-	return r.generateMultiVarsResource(document)
+	if err != nil {
+		return "", err
+	}
+	post, ok := generateCmd.(postProcessor)
+	if ok {
+		generated, err = post.action(generated, cfg)
+	}
+	return generated, err
 }

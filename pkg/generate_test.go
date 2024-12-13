@@ -2,13 +2,13 @@ package pkg
 
 import (
 	"fmt"
-	tfjson "github.com/hashicorp/terraform-json"
 	"strings"
 	"testing"
 
 	"github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/hcl/v2/hclsyntax"
 	"github.com/hashicorp/terraform-config-inspect/tfconfig"
+	tfjson "github.com/hashicorp/terraform-json"
 	azurermschema_v2 "github.com/lonegunmanb/terraform-azurerm-schema/v2/generated"
 	azurermschema "github.com/lonegunmanb/terraform-azurerm-schema/v3/generated"
 	"github.com/stretchr/testify/assert"
@@ -174,4 +174,70 @@ func TestGenerateVariableTypeForListOfObject(t *testing.T) {
 	expected := `list(object({
 }))`
 	assert.Equal(t, strings.ReplaceAll(expected, " ", ""), strings.ReplaceAll(variableType, " ", ""))
+}
+
+func TestGenerateAzApiResource_MultipleVars(t *testing.T) {
+	version := "Microsoft.ContainerRegistry/registries@2020-11-01-preview"
+	cfg, err := GenerateResource(NewResourceGenerateCommand("azapi_resource", Config{}, map[string]string{
+		AzApiResourceType: version,
+	}))
+	require.NoError(t, err)
+	syntaxFile, diag := hclsyntax.ParseConfig([]byte(cfg), "", hcl.InitialPos)
+	require.False(t, diag.HasErrors())
+	var rb *hclsyntax.Block
+	for _, b := range syntaxFile.Body.(*hclsyntax.Body).Blocks {
+		if b.Type == "resource" {
+			rb = b
+			break
+		}
+	}
+	require.NotNil(t, rb)
+	typeValue, diag := rb.Body.Attributes["type"].Expr.Value(&hcl.EvalContext{})
+	require.False(t, diag.HasErrors())
+	assert.Equal(t, version, typeValue.AsString())
+	variables := rb.Body.Attributes["body"].Expr.Variables()
+	require.NotNil(t, variables)
+	require.Len(t, variables, 1)
+	require.Len(t, variables[0], 2)
+	assert.Equal(t, "var", variables[0][0].(hcl.TraverseRoot).Name)
+	assert.Equal(t, "resource_body", variables[0][1].(hcl.TraverseAttr).Name)
+}
+
+func TestGenerateAzApiResource_UniVar(t *testing.T) {
+	version := "Microsoft.ContainerRegistry/registries@2020-11-01-preview"
+	cfg, err := GenerateResource(NewResourceGenerateCommand("azapi_resource", Config{
+		Mode: UniVariable,
+	}, map[string]string{
+		AzApiResourceType: version,
+	}))
+	require.NoError(t, err)
+	syntaxFile, diag := hclsyntax.ParseConfig([]byte(cfg), "", hcl.InitialPos)
+	require.False(t, diag.HasErrors())
+	var rb *hclsyntax.Block
+	for _, b := range syntaxFile.Body.(*hclsyntax.Body).Blocks {
+		if b.Type == "resource" {
+			rb = b
+			break
+		}
+	}
+	require.NotNil(t, rb)
+	typeValue, diag := rb.Body.Attributes["type"].Expr.Value(&hcl.EvalContext{})
+	require.False(t, diag.HasErrors())
+	assert.Equal(t, version, typeValue.AsString())
+	variables := rb.Body.Attributes["body"].Expr.Variables()
+	require.NotNil(t, variables)
+	require.Len(t, variables, 1)
+	require.Len(t, variables[0], 3)
+	assert.Equal(t, "var", variables[0][0].(hcl.TraverseRoot).Name)
+	assert.Equal(t, "resource", variables[0][1].(hcl.TraverseAttr).Name)
+	assert.Equal(t, "body", variables[0][2].(hcl.TraverseAttr).Name)
+}
+
+func TestGenerateAzApiResource_OptionalField(t *testing.T) {
+	version := "Microsoft.Resources/resourcegroups@2021-04-01@2024-07-01"
+	cfg, err := GenerateResource(NewResourceGenerateCommand("azapi_resource", Config{}, map[string]string{
+		AzApiResourceType: version,
+	}))
+	require.NoError(t, err)
+	require.NotNil(t, cfg)
 }
