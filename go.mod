@@ -26,7 +26,7 @@ require (
 	github.com/lonegunmanb/terraform-google-schema/v3 v3.90.1
 	github.com/lonegunmanb/terraform-google-schema/v4 v4.84.0
 	github.com/lonegunmanb/terraform-google-schema/v5 v5.45.0
-	github.com/lonegunmanb/terraform-google-schema/v6 v6.12.0
+	github.com/lonegunmanb/terraform-google-schema/v6 v6.13.0
 	github.com/lonegunmanb/terraform-helm-schema/v2 v2.16.1
 	github.com/lonegunmanb/terraform-kubernetes-schema/v2 v2.34.0
 	github.com/lonegunmanb/terraform-local-schema/v2 v2.5.2
@@ -35,6 +35,7 @@ require (
 	github.com/lonegunmanb/terraform-template-schema/v2 v2.2.0
 	github.com/lonegunmanb/terraform-time-schema v0.12.1
 	github.com/lonegunmanb/terraform-tls-schema/v4 v4.0.6
+	github.com/ms-henglu/go-azure-types v0.0.0-20241209024855-7c19a326abcc
 	github.com/stretchr/testify v1.10.0
 	github.com/zclconf/go-cty v1.15.1
 )
@@ -48,7 +49,6 @@ require (
 	github.com/hashicorp/hcl v0.0.0-20170504190234-a4b07c25de5f // indirect
 	github.com/lonegunmanb/terraform-modtm-schema v0.3.2 // indirect
 	github.com/mitchellh/go-wordwrap v1.0.1 // indirect
-	github.com/ms-henglu/go-azure-types v0.0.0-20241209024855-7c19a326abcc // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	golang.org/x/mod v0.21.0 // indirect
 	golang.org/x/sys v0.20.0 // indirect

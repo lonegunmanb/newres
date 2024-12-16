@@ -20,8 +20,6 @@ github.com/hashicorp/terraform-config-inspect v0.0.0-20230614215431-f32df32a01cd
 github.com/hashicorp/terraform-config-inspect v0.0.0-20230614215431-f32df32a01cd/go.mod h1:l8HcFPm9cQh6Q0KSWoYPiePqMvRFenybP1CH2MjKdlg=
 github.com/hashicorp/terraform-json v0.23.0 h1:sniCkExU4iKtTADReHzACkk8fnpQXrdD2xoR+lppBkI=
 github.com/hashicorp/terraform-json v0.23.0/go.mod h1:MHdXbBAbSg0GvzuWazEGKAn/cyNfIB7mN6y7KJN6y2c=
-github.com/lonegunmanb/avmfix v0.0.0-20241112024937-586398c1520d h1:5pWX48KFAKM1ugGKBjP8Xwo4LBrw/1SGIDAydFogTq0=
-github.com/lonegunmanb/avmfix v0.0.0-20241112024937-586398c1520d/go.mod h1:6AFd/w77vgd7kPAdZJLLoJoUIZ0LXDLCL921g1Jxv94=
 github.com/lonegunmanb/avmfix v0.0.0-20241211014503-cc3142bf2546 h1:zgYIhzpBhuMYExQkdsZ7jlB6JXVqZ533OyMhS0vctls=
 github.com/lonegunmanb/avmfix v0.0.0-20241211014503-cc3142bf2546/go.mod h1:LIETKND+WloEojsuzpWCQ8+XrknTkn2YnRxC3dZYZ9o=
 github.com/lonegunmanb/terraform-alicloud-schema v1.237.0 h1:VaEj2xch+yAB7CYxcwMpWgqUcgp08kvkmOF3ba/s4Cg=
@@ -56,8 +54,8 @@ github.com/lonegunmanb/terraform-google-schema/v4 v4.84.0 h1:aP8Exm16FOegCpQq2fX
 github.com/lonegunmanb/terraform-google-schema/v4 v4.84.0/go.mod h1:r2vxkTZVBIyIGLByQh6Jdz2rzf2FrCtf6vS4GsFILAM=
 github.com/lonegunmanb/terraform-google-schema/v5 v5.45.0 h1:7ZpLnfPv/lAu2v8n0cw3jFJO3ti9HhC8CJ6rQ0+S5rA=
 github.com/lonegunmanb/terraform-google-schema/v5 v5.45.0/go.mod h1:k0YHg2FNaAmUiV8NogS9Wu9ctNv3p6FdLLWckFbhNho=
-github.com/lonegunmanb/terraform-google-schema/v6 v6.12.0 h1:Lm2M+U9YmoVhUlQ5hTZm73scpDBlaB8f2R6gfaRtL/U=
-github.com/lonegunmanb/terraform-google-schema/v6 v6.12.0/go.mod h1:COxUnbRJSwhfprTnolx4w2dtHCj77dtcWePTp+EzBLg=
+github.com/lonegunmanb/terraform-google-schema/v6 v6.13.0 h1:mr3bHx8tU7WmAqP0BBC3CNkzCZJXFuTSjtuzkkiQxkI=
+github.com/lonegunmanb/terraform-google-schema/v6 v6.13.0/go.mod h1:Sa16meuEhF9fgQSsMRWAOEnZRieQZ8ggNaBt8ZKoFSQ=
 github.com/lonegunmanb/terraform-helm-schema/v2 v2.16.1 h1:uNcrcQvlSmZZrYZh77jgnHmikaaMDquCmViwEy0Upsc=
 github.com/lonegunmanb/terraform-helm-schema/v2 v2.16.1/go.mod h1:64rNm8NgV/Y4CAz8RGF/bpmB1GhCZAoXstZji0vsE2Q=
 github.com/lonegunmanb/terraform-kubernetes-schema/v2 v2.34.0 h1:mtE3ipva0ZLUwWqkAQAflVoxY5/d0WUMrCbOfIG03OQ=
@@ -78,8 +76,6 @@ github.com/lonegunmanb/terraform-tls-schema/v4 v4.0.6 h1:IGCZw9w+QKGiGs727SFa3Lr
 github.com/lonegunmanb/terraform-tls-schema/v4 v4.0.6/go.mod h1:x7Dbb+lhxw/a3uQj2ZXLu7GsCBIDDpKkq9zyYnbYpec=
 github.com/mitchellh/go-wordwrap v1.0.1 h1:TLuKupo69TCn6TQSyGxwI1EblZZEsQ0vMlAFQflz0v0=
 github.com/mitchellh/go-wordwrap v1.0.1/go.mod h1:R62XHJLzvMFRBbcrT7m7WgmE1eOyTSsCt+hzestvNj0=
-github.com/ms-henglu/go-azure-types v0.0.0-20241206013458-c96276b99534 h1:aiGNqo4v/b2VpHgrIHDUXYfPiC8YOWSdS+2PPXOuRcY=
-github.com/ms-henglu/go-azure-types v0.0.0-20241206013458-c96276b99534/go.mod h1:7auTVHJN5QUX2hAoXlZpJxkrVugkx9bPJzDey4BaAh4=
 github.com/ms-henglu/go-azure-types v0.0.0-20241209024855-7c19a326abcc h1:A1i6JdHoDhFe4DSJurhA6YMltIiZQvzme7RpjsqAUFw=
 github.com/ms-henglu/go-azure-types v0.0.0-20241209024855-7c19a326abcc/go.mod h1:7auTVHJN5QUX2hAoXlZpJxkrVugkx9bPJzDey4BaAh4=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
