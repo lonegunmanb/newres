@@ -8,7 +8,7 @@ require (
 	github.com/ahmetb/go-linq/v3 v3.2.0
 	github.com/hashicorp/hcl/v2 v2.23.0
 	github.com/hashicorp/terraform-config-inspect v0.0.0-20230614215431-f32df32a01cd
-	github.com/hashicorp/terraform-json v0.23.0
+	github.com/hashicorp/terraform-json v0.24.0
 	github.com/lonegunmanb/avmfix v0.0.0-20241211014503-cc3142bf2546
 	github.com/lonegunmanb/terraform-alicloud-schema v1.237.0
 	github.com/lonegunmanb/terraform-aws-schema/v2 v2.70.4
@@ -26,7 +26,7 @@ require (
 	github.com/lonegunmanb/terraform-google-schema/v3 v3.90.1
 	github.com/lonegunmanb/terraform-google-schema/v4 v4.84.0
 	github.com/lonegunmanb/terraform-google-schema/v5 v5.45.0
-	github.com/lonegunmanb/terraform-google-schema/v6 v6.13.0
+	github.com/lonegunmanb/terraform-google-schema/v6 v6.14.1
 	github.com/lonegunmanb/terraform-helm-schema/v2 v2.16.1
 	github.com/lonegunmanb/terraform-kubernetes-schema/v2 v2.35.0
 	github.com/lonegunmanb/terraform-local-schema/v2 v2.5.2
