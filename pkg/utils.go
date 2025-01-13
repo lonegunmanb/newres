@@ -44,6 +44,8 @@ func ctyTypeToVariableTypeString(t cty.Type) string {
 		return "number"
 	case cty.Bool:
 		return "bool"
+	case cty.DynamicPseudoType:
+		return "any"
 	}
 	if t.SetElementType() != nil {
 		return fmt.Sprintf("set(%s)", ctyTypeToVariableTypeString(t.ElementType()))
