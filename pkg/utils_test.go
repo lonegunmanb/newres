@@ -6,6 +6,7 @@ import (
 
 	azurermschema "github.com/lonegunmanb/terraform-azurerm-schema/v3/generated"
 	"github.com/stretchr/testify/assert"
+	"github.com/zclconf/go-cty/cty"
 )
 
 func TestGenerateVariableType_ObjectTypeInAttributes(t *testing.T) {
@@ -17,4 +18,9 @@ func TestGenerateVariableType_ObjectTypeInAttributes(t *testing.T) {
   protocol = string
 }))`, " ", "", -1)
 	assert.Equal(t, expected, actual)
+}
+
+func TestGenerateVariableType_DynamicTypeShouldBeGeneratedAsAny(t *testing.T) {
+	actual := ctyTypeToVariableTypeString(cty.DynamicPseudoType)
+	assert.Equal(t, "any", actual)
 }

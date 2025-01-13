@@ -138,6 +138,10 @@ func convertAzApiTypeToCtyType(azApiType types.TypeBase) *cty.Type {
 			}
 			return toObjectType(t)
 		}
+	case *types.DiscriminatedObjectType:
+		{
+			return toDiscriminatedObjectType(t)
+		}
 	case *types.UnionType:
 		{
 			if len(t.Elements) == 0 {
@@ -173,6 +177,10 @@ func toObjectType(t *types.ObjectType) *cty.Type {
 		ctyType = cty.ObjectWithOptionalAttrs(properties, optionalList)
 	}
 	return &ctyType
+}
+
+func toDiscriminatedObjectType(t *types.DiscriminatedObjectType) *cty.Type {
+	return &cty.DynamicPseudoType
 }
 
 func isRequired(p types.ObjectProperty) bool {
