@@ -37,7 +37,7 @@ require (
 	github.com/lonegunmanb/terraform-tls-schema/v4 v4.0.6
 	github.com/ms-henglu/go-azure-types v0.0.0-20241209024855-7c19a326abcc
 	github.com/stretchr/testify v1.10.0
-	github.com/zclconf/go-cty v1.16.0
+	github.com/zclconf/go-cty v1.16.1
 )
 
 require (
