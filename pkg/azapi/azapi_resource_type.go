@@ -115,6 +115,10 @@ func wrapBodySchema(bodyAttributes map[string]*tfjson.SchemaAttribute) map[strin
 
 func convertAzApiTypeToCtyType(azApiType types.TypeBase) *cty.Type {
 	switch t := azApiType.(type) {
+	case *types.StringLiteralType:
+		{
+			return &cty.String
+		}
 	case *types.StringType:
 		{
 			return &cty.String
@@ -150,6 +154,10 @@ func convertAzApiTypeToCtyType(azApiType types.TypeBase) *cty.Type {
 			if _, ok := t.Elements[0].Type.(*types.StringLiteralType); ok {
 				return &cty.String
 			}
+		}
+	default:
+		{
+			log.Panicf("unknown type %v", azApiType)
 		}
 	}
 	return nil
