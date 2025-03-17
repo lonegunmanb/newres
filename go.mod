@@ -2,7 +2,7 @@ module github.com/lonegunmanb/newres/v3
 
 go 1.23.0
 
-toolchain go1.23.3
+toolchain go1.24.1
 
 require (
 	github.com/ahmetb/go-linq/v3 v3.2.0
@@ -26,7 +26,7 @@ require (
 	github.com/lonegunmanb/terraform-google-schema/v3 v3.90.1
 	github.com/lonegunmanb/terraform-google-schema/v4 v4.84.0
 	github.com/lonegunmanb/terraform-google-schema/v5 v5.45.0
-	github.com/lonegunmanb/terraform-google-schema/v6 v6.24.0
+	github.com/lonegunmanb/terraform-google-schema/v6 v6.25.0
 	github.com/lonegunmanb/terraform-helm-schema/v2 v2.17.0
 	github.com/lonegunmanb/terraform-kubernetes-schema/v2 v2.36.0
 	github.com/lonegunmanb/terraform-local-schema/v2 v2.5.2
