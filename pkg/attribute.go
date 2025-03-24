@@ -47,8 +47,7 @@ func restoreToNestedBlockSchema(attr *tfjson.SchemaAttribute) *tfjson.SchemaBloc
 		fields = attributeType.ElementType().AttributeTypes()
 	}
 	for s, t := range fields {
-		if t.IsPrimitiveType() || t == cty.DynamicPseudoType || (t.IsCollectionType() && t.ElementType().IsPrimitiveType()) {
-
+		if t.IsPrimitiveType() || t == cty.DynamicPseudoType || (t.IsCollectionType() && isSimpleElementType(t)) {
 			newAttr := &tfjson.SchemaAttribute{
 				AttributeType: t,
 				Optional:      attributeType.IsObjectType() && attributeType.AttributeOptional(s),
@@ -71,4 +70,9 @@ func restoreToNestedBlockSchema(attr *tfjson.SchemaAttribute) *tfjson.SchemaBloc
 		MaxItems:    uint64(maxItems),
 	}
 	return nb
+}
+
+func isSimpleElementType(t cty.Type) bool {
+	elementType := t.ElementType()
+	return elementType.IsPrimitiveType() || elementType == cty.DynamicPseudoType
 }

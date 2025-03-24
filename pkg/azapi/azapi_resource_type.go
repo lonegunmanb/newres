@@ -131,6 +131,10 @@ func convertAzApiTypeToCtyType(azApiType types.TypeBase) *cty.Type {
 		{
 			return &cty.Bool
 		}
+	case *types.AnyType:
+		{
+			return &cty.DynamicPseudoType
+		}
 	case *types.ArrayType:
 		{
 			return toArrayType(t)
