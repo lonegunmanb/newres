@@ -467,6 +467,36 @@ func TestAzApiTypeToTfSchemaAttribute(t *testing.T) {
 				},
 			},
 		},
+		{
+			azApiProperty: types.ObjectProperty{
+				Type: &types.TypeReference{
+					Type: &types.ObjectType{
+						Type: "ObjectType",
+						Name: "obj",
+						Properties: map[string]types.ObjectProperty{
+							"field1": {
+								Type: &types.TypeReference{
+									Type: &types.AnyType{
+										Type: "AnyType",
+									},
+								},
+								Flags:       []types.ObjectPropertyFlag{types.Required},
+								Description: p("any type field"),
+							},
+						},
+					},
+				},
+			},
+			expected: &tfjson.SchemaBlock{
+				Attributes: map[string]*tfjson.SchemaAttribute{
+					"body": {
+						Required:      true,
+						AttributeType: cty.Object(map[string]cty.Type{"field1": cty.DynamicPseudoType}),
+					},
+				},
+			},
+			description: "any type field",
+		},
 	}
 	for _, c := range cases {
 		t.Run(c.description, func(t *testing.T) {
