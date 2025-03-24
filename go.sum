@@ -22,8 +22,8 @@ github.com/hashicorp/terraform-json v0.24.0 h1:rUiyF+x1kYawXeRth6fKFm/MdfBS6+lW4
 github.com/hashicorp/terraform-json v0.24.0/go.mod h1:Nfj5ubo9xbu9uiAoZVBsNOjvNKB66Oyrvtit74kC7ow=
 github.com/lonegunmanb/avmfix v0.0.0-20250318023323-7b0ea8d2d71b h1:0lk3R4iMq9PTr/XSQ5LsPHNM1PAfKpHF8w2mP+HjnLo=
 github.com/lonegunmanb/avmfix v0.0.0-20250318023323-7b0ea8d2d71b/go.mod h1:9/2Vak5FW7PC8xgDa7mOuF4t2ZiPI3cgV1X+l16JjxQ=
-github.com/lonegunmanb/terraform-alicloud-schema v1.245.0 h1:t9pkF7rkNuKYW/XEMhnWX+BmLbLxPNqgAynS6eUkBu8=
-github.com/lonegunmanb/terraform-alicloud-schema v1.245.0/go.mod h1:ogaMpFQs4t9/2JiX9fpprI6xrBIbtnp7pUIkFK/CyPQ=
+github.com/lonegunmanb/terraform-alicloud-schema v1.246.0 h1:ey0gxQS5GL9tmWnZUJrfjPbvyBfD2wnZzABwDXrynvQ=
+github.com/lonegunmanb/terraform-alicloud-schema v1.246.0/go.mod h1:ogaMpFQs4t9/2JiX9fpprI6xrBIbtnp7pUIkFK/CyPQ=
 github.com/lonegunmanb/terraform-aws-schema/v2 v2.70.4 h1:8rQuBaw9uotjblsgrJUABSnBPjVetMYm+5SwTt+QI5c=
 github.com/lonegunmanb/terraform-aws-schema/v2 v2.70.4/go.mod h1:4Pq4ZJSPg0mEtSve7+53UJGLqulwtrM6p6gA9a++08Y=
 github.com/lonegunmanb/terraform-aws-schema/v3 v3.76.1 h1:11gsHdCkFAeTDcCJY36EdPiQM6d+Lc0BsghEhW1ILII=
@@ -78,8 +78,6 @@ github.com/lonegunmanb/terraform-tls-schema/v4 v4.0.6 h1:IGCZw9w+QKGiGs727SFa3Lr
 github.com/lonegunmanb/terraform-tls-schema/v4 v4.0.6/go.mod h1:x7Dbb+lhxw/a3uQj2ZXLu7GsCBIDDpKkq9zyYnbYpec=
 github.com/mitchellh/go-wordwrap v1.0.1 h1:TLuKupo69TCn6TQSyGxwI1EblZZEsQ0vMlAFQflz0v0=
 github.com/mitchellh/go-wordwrap v1.0.1/go.mod h1:R62XHJLzvMFRBbcrT7m7WgmE1eOyTSsCt+hzestvNj0=
-github.com/ms-henglu/go-azure-types v0.0.0-20241209024855-7c19a326abcc h1:A1i6JdHoDhFe4DSJurhA6YMltIiZQvzme7RpjsqAUFw=
-github.com/ms-henglu/go-azure-types v0.0.0-20241209024855-7c19a326abcc/go.mod h1:7auTVHJN5QUX2hAoXlZpJxkrVugkx9bPJzDey4BaAh4=
 github.com/ms-henglu/go-azure-types v0.0.0-20250324020351-df91d26b05dc h1:G+sGgQWAj8H0a5hBAtqzHcgBNG+LKkJLpW899b5U8kA=
 github.com/ms-henglu/go-azure-types v0.0.0-20250324020351-df91d26b05dc/go.mod h1:7auTVHJN5QUX2hAoXlZpJxkrVugkx9bPJzDey4BaAh4=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
