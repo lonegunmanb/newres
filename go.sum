@@ -56,8 +56,8 @@ github.com/lonegunmanb/terraform-google-schema/v4 v4.84.0 h1:aP8Exm16FOegCpQq2fX
 github.com/lonegunmanb/terraform-google-schema/v4 v4.84.0/go.mod h1:r2vxkTZVBIyIGLByQh6Jdz2rzf2FrCtf6vS4GsFILAM=
 github.com/lonegunmanb/terraform-google-schema/v5 v5.45.0 h1:7ZpLnfPv/lAu2v8n0cw3jFJO3ti9HhC8CJ6rQ0+S5rA=
 github.com/lonegunmanb/terraform-google-schema/v5 v5.45.0/go.mod h1:k0YHg2FNaAmUiV8NogS9Wu9ctNv3p6FdLLWckFbhNho=
-github.com/lonegunmanb/terraform-google-schema/v6 v6.29.0 h1:fg/mivILgE0efO2+P2jvYRvcFjr0xtxzMd2PQzxJD3E=
-github.com/lonegunmanb/terraform-google-schema/v6 v6.29.0/go.mod h1:h0myS0oSh9wRsU36XWw6kp/jC0UcoYtd52mmQNGG6GY=
+github.com/lonegunmanb/terraform-google-schema/v6 v6.30.0 h1:v9NHRWcW5SVaN//LLO1RMO6a9aZeU0tB6fy9nA+6gHo=
+github.com/lonegunmanb/terraform-google-schema/v6 v6.30.0/go.mod h1:dIk//ty8XH/DYMgJB3AKgawYkjxyqGqHjgonpRDvXCo=
 github.com/lonegunmanb/terraform-helm-schema/v2 v2.17.0 h1:Jrlb7VrXH7y+6lZTtNx3e3KH5fDiC2wHfJsRAR7oR/c=
 github.com/lonegunmanb/terraform-helm-schema/v2 v2.17.0/go.mod h1:980t3S4UuBp9yrgpdA5/kMvniOjNgPvamPivaY1hPto=
 github.com/lonegunmanb/terraform-kubernetes-schema/v2 v2.36.0 h1:rHZ5EYuC9ljvGI1X4g7vXHBLt97F/PfNl+a2+4yrTKA=
@@ -90,10 +90,10 @@ github.com/zclconf/go-cty-debug v0.0.0-20240509010212-0d6042c53940 h1:4r45xpDWB6
 github.com/zclconf/go-cty-debug v0.0.0-20240509010212-0d6042c53940/go.mod h1:CmBdvvj3nqzfzJ6nTCIwDTPZ56aVGvDrmztiO5g3qrM=
 golang.org/x/mod v0.24.0 h1:ZfthKaKaT4NrhGVZHO1/WDTwGES4De8KtWO0SIbNJMU=
 golang.org/x/mod v0.24.0/go.mod h1:IXM97Txy2VM4PJ3gI61r1YEk/gAj6zAHN3AdZt6S9Ww=
-golang.org/x/sync v0.12.0 h1:MHc5BpPuC30uJk597Ri8TV3CNZcTLu6B6z4lJy+g6Jw=
-golang.org/x/sync v0.12.0/go.mod h1:1dzgHSNfp02xaA81J2MS99Qcpr2w7fw1gpm99rleRqA=
-golang.org/x/text v0.23.0 h1:D71I7dUrlY+VX0gQShAThNGHFxZ13dGLBHQLVl1mJlY=
-golang.org/x/text v0.23.0/go.mod h1:/BLNzu4aZCJ1+kcD0DNRotWKage4q2rGVAg4o22unh4=
+golang.org/x/sync v0.13.0 h1:AauUjRAJ9OSnvULf/ARrrVywoJDy0YS2AwQ98I37610=
+golang.org/x/sync v0.13.0/go.mod h1:1dzgHSNfp02xaA81J2MS99Qcpr2w7fw1gpm99rleRqA=
+golang.org/x/text v0.24.0 h1:dd5Bzh4yt5KYA8f9CJHCP4FB4D51c2c6JvN37xJJkJ0=
+golang.org/x/text v0.24.0/go.mod h1:L8rBsPeo2pSS+xqN0d5u2ikmjtmoJbDBT1b7nHvFCdU=
 golang.org/x/tools v0.31.0 h1:0EedkvKDbh+qistFTd0Bcwe/YLh4vHwWEkiI0toFIBU=
 golang.org/x/tools v0.31.0/go.mod h1:naFTU+Cev749tSJRXJlna0T3WxKvb1kWEx15xA4SdmQ=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405 h1:yhCVgyC4o1eVCa2tZl7eS0r+SDo693bJlVdllGtEeKM=
