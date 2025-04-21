@@ -10,7 +10,7 @@ require (
 	github.com/hashicorp/terraform-config-inspect v0.0.0-20250203082807-efaa306e97b4
 	github.com/hashicorp/terraform-json v0.24.0
 	github.com/lonegunmanb/avmfix v0.0.0-20250318023323-7b0ea8d2d71b
-	github.com/lonegunmanb/terraform-alicloud-schema v1.247.0
+	github.com/lonegunmanb/terraform-alicloud-schema v1.248.0
 	github.com/lonegunmanb/terraform-aws-schema/v2 v2.70.4
 	github.com/lonegunmanb/terraform-aws-schema/v3 v3.76.1
 	github.com/lonegunmanb/terraform-aws-schema/v4 v4.67.0
