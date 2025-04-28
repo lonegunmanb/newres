@@ -30,7 +30,7 @@ require (
 	github.com/lonegunmanb/terraform-helm-schema/v2 v2.17.0
 	github.com/lonegunmanb/terraform-kubernetes-schema/v2 v2.36.0
 	github.com/lonegunmanb/terraform-local-schema/v2 v2.5.2
-	github.com/lonegunmanb/terraform-null-schema/v3 v3.2.3
+	github.com/lonegunmanb/terraform-null-schema/v3 v3.2.4
 	github.com/lonegunmanb/terraform-random-schema/v3 v3.7.1
 	github.com/lonegunmanb/terraform-template-schema/v2 v2.2.0
 	github.com/lonegunmanb/terraform-time-schema v0.13.0
