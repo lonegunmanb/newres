@@ -34,7 +34,7 @@ require (
 	github.com/lonegunmanb/terraform-random-schema/v3 v3.7.1
 	github.com/lonegunmanb/terraform-template-schema/v2 v2.2.0
 	github.com/lonegunmanb/terraform-time-schema v0.13.0
-	github.com/lonegunmanb/terraform-tls-schema/v4 v4.0.6
+	github.com/lonegunmanb/terraform-tls-schema/v4 v4.1.0
 	github.com/ms-henglu/go-azure-types v0.0.0-20250324020351-df91d26b05dc
 	github.com/stretchr/testify v1.10.0
 	github.com/zclconf/go-cty v1.16.2
