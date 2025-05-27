@@ -9,10 +9,12 @@ import (
 	aws_v5 "github.com/lonegunmanb/terraform-aws-schema/v5/generated"
 	awscc "github.com/lonegunmanb/terraform-awscc-schema/generated"
 	azapi "github.com/lonegunmanb/terraform-azapi-schema/generated"
+	azapi_v2 "github.com/lonegunmanb/terraform-azapi-schema/v2/generated"
 	azuread_v2 "github.com/lonegunmanb/terraform-azuread-schema/v2/generated"
 	azuread_v3 "github.com/lonegunmanb/terraform-azuread-schema/v3/generated"
 	azure_v2 "github.com/lonegunmanb/terraform-azurerm-schema/v2/generated"
 	azure_v3 "github.com/lonegunmanb/terraform-azurerm-schema/v3/generated"
+	azure_v4 "github.com/lonegunmanb/terraform-azurerm-schema/v4/generated"
 	bytebase "github.com/lonegunmanb/terraform-bytebase-schema/generated"
 	google_v2 "github.com/lonegunmanb/terraform-google-schema/v2/generated"
 	google_v3 "github.com/lonegunmanb/terraform-google-schema/v3/generated"
@@ -22,6 +24,7 @@ import (
 	helm_v2 "github.com/lonegunmanb/terraform-helm-schema/v2/generated"
 	kubernetes_v2 "github.com/lonegunmanb/terraform-kubernetes-schema/v2/generated"
 	local "github.com/lonegunmanb/terraform-local-schema/v2/generated"
+	modtm "github.com/lonegunmanb/terraform-modtm-schema/generated"
 	null "github.com/lonegunmanb/terraform-null-schema/v3/generated"
 	random "github.com/lonegunmanb/terraform-random-schema/v3/generated"
 	template "github.com/lonegunmanb/terraform-template-schema/v2/generated"
@@ -36,9 +39,11 @@ func init() {
 		alicloud.Resources,
 		azure_v2.Resources,
 		azure_v3.Resources,
+		azure_v4.Resources,
 		azuread_v2.Resources,
 		azuread_v3.Resources,
 		azapi.Resources,
+		azapi_v2.Resources,
 		awscc.Resources,
 		aws_v2.Resources,
 		aws_v3.Resources,
@@ -58,6 +63,7 @@ func init() {
 		template.Resources,
 		time.Resources,
 		tls.Resources,
+		modtm.Resources,
 	}
 	for _, schemas := range resources {
 		mergeSchemas(resourceSchemas, schemas)
