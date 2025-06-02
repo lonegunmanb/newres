@@ -22,7 +22,7 @@ require (
 	github.com/lonegunmanb/terraform-azuread-schema/v3 v3.2.0
 	github.com/lonegunmanb/terraform-azurerm-schema/v2 v2.99.0
 	github.com/lonegunmanb/terraform-azurerm-schema/v3 v3.116.0
-	github.com/lonegunmanb/terraform-azurerm-schema/v4 v4.30.0
+	github.com/lonegunmanb/terraform-azurerm-schema/v4 v4.31.0
 	github.com/lonegunmanb/terraform-bytebase-schema v0.0.9
 	github.com/lonegunmanb/terraform-google-schema/v2 v2.20.3
 	github.com/lonegunmanb/terraform-google-schema/v3 v3.90.1
