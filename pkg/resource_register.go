@@ -7,6 +7,7 @@ import (
 	aws_v3 "github.com/lonegunmanb/terraform-aws-schema/v3/generated"
 	aws_v4 "github.com/lonegunmanb/terraform-aws-schema/v4/generated"
 	aws_v5 "github.com/lonegunmanb/terraform-aws-schema/v5/generated"
+	aws_v6 "github.com/lonegunmanb/terraform-aws-schema/v6/generated"
 	awscc "github.com/lonegunmanb/terraform-awscc-schema/generated"
 	azapi "github.com/lonegunmanb/terraform-azapi-schema/generated"
 	azapi_v2 "github.com/lonegunmanb/terraform-azapi-schema/v2/generated"
@@ -49,6 +50,7 @@ func init() {
 		aws_v3.Resources,
 		aws_v4.Resources,
 		aws_v5.Resources,
+		aws_v6.Resources,
 		bytebase.Resources,
 		google_v2.Resources,
 		google_v3.Resources,
