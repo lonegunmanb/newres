@@ -23,6 +23,7 @@ import (
 	google_v5 "github.com/lonegunmanb/terraform-google-schema/v5/generated"
 	google_v6 "github.com/lonegunmanb/terraform-google-schema/v6/generated"
 	helm_v2 "github.com/lonegunmanb/terraform-helm-schema/v2/generated"
+	helm_v3 "github.com/lonegunmanb/terraform-helm-schema/v3/generated"
 	kubernetes_v2 "github.com/lonegunmanb/terraform-kubernetes-schema/v2/generated"
 	local "github.com/lonegunmanb/terraform-local-schema/v2/generated"
 	modtm "github.com/lonegunmanb/terraform-modtm-schema/generated"
@@ -58,6 +59,7 @@ func init() {
 		google_v5.Resources,
 		google_v6.Resources,
 		helm_v2.Resources,
+		helm_v3.Resources,
 		kubernetes_v2.Resources,
 		local.Resources,
 		null.Resources,

@@ -15,7 +15,7 @@ require (
 	github.com/lonegunmanb/terraform-aws-schema/v3 v3.76.1
 	github.com/lonegunmanb/terraform-aws-schema/v4 v4.67.0
 	github.com/lonegunmanb/terraform-aws-schema/v5 v5.100.0
-	github.com/lonegunmanb/terraform-aws-schema/v6 v6.0.0
+	github.com/lonegunmanb/terraform-aws-schema/v6 v6.2.0
 	github.com/lonegunmanb/terraform-awscc-schema v1.48.0
 	github.com/lonegunmanb/terraform-azapi-schema v1.15.0
 	github.com/lonegunmanb/terraform-azapi-schema/v2 v2.5.0
@@ -31,11 +31,12 @@ require (
 	github.com/lonegunmanb/terraform-google-schema/v5 v5.45.0
 	github.com/lonegunmanb/terraform-google-schema/v6 v6.42.0
 	github.com/lonegunmanb/terraform-helm-schema/v2 v2.17.0
+	github.com/lonegunmanb/terraform-helm-schema/v3 v3.0.2
 	github.com/lonegunmanb/terraform-kubernetes-schema/v2 v2.37.0
 	github.com/lonegunmanb/terraform-local-schema/v2 v2.5.3
 	github.com/lonegunmanb/terraform-modtm-schema v0.3.5
 	github.com/lonegunmanb/terraform-null-schema/v3 v3.2.4
-	github.com/lonegunmanb/terraform-random-schema/v3 v3.7.1-ephemeral
+	github.com/lonegunmanb/terraform-random-schema/v3 v3.7.2
 	github.com/lonegunmanb/terraform-template-schema/v2 v2.2.0
 	github.com/lonegunmanb/terraform-time-schema v0.13.0
 	github.com/lonegunmanb/terraform-tls-schema/v4 v4.1.0-ephemeral
