@@ -41,7 +41,7 @@ require (
 	github.com/lonegunmanb/terraform-time-schema v0.13.0
 	github.com/lonegunmanb/terraform-tls-schema/v4 v4.1.0-ephemeral
 	github.com/ms-henglu/go-azure-types v0.0.0-20250710084755-17c1d17a45e4
-	github.com/stretchr/testify v1.10.0
+	github.com/stretchr/testify v1.11.0
 	github.com/zclconf/go-cty v1.16.4
 )
 
