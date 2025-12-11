@@ -23,17 +23,18 @@ go install github.com/lonegunmanb/newres/v3@latest
 Once you've built the tool, you can use it with the following command:
 
 ```shell
-newres -dir [DIRECTORY] [-u] [-r RESOURCE_TYPE]
+newres -dir [DIRECTORY] [-u] [-r RESOURCE_TYPE] [--variable-prefix PREFIX]
 ```
 
 * `-dir [DIRECTORY]`: Required. The directory path where the generated files will be stored.
 * `-r RESOURCE_TYPE`: Required. The resource type to generate configuration for (e.g., `aws_instance`, `azurerm_virtual_machine`, `google_compute_instance`).
 * `-u`: Optional. If set, the tool will generate the resource configuration in UniVariable mode. If not set, MultipleVariables mode will be used by default.
+* `--variable-prefix PREFIX`: Optional. Overrides the default variable name prefix (defaults to the resource type without vendor, e.g. `resource_group` for `azurerm_resource_group`). Set to empty string (`""`) in MultipleVariables mode to generate unprefixed variables (e.g., `name` instead of `resource_group_name`).
 
 For example, to generate configuration files for an Azure resource group in the current working directory, you would run:
 
 ```shell
-newres -dir ./ -r azurerm_resource_group
+newres -dir ./ -r azurerm_resource_group --variable-prefix rg
 ```
 
 The result looks like:

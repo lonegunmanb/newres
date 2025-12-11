@@ -44,9 +44,18 @@ func (a azApiResourceGenerateCommand) action(terraformConfig string, cfg Config)
 			resBody.RemoveBlock(b)
 		}
 	}
-	bodyValue := newTokens().ident("var", 0).dot().ident("resource_body", 0).Tokens
+	variablePrefix := cfg.GetVariablePrefix(resourceTypeWithoutVendor(a.ResourceBlockType()))
+	bodyVarName := "body"
+	if variablePrefix != "" {
+		bodyVarName = fmt.Sprintf("%s_body", variablePrefix)
+	}
+	bodyValue := newTokens().ident("var", 0).dot().ident(bodyVarName, 0).Tokens
 	if cfg.Mode == UniVariable {
-		bodyValue = newTokens().ident("var", 0).dot().ident("resource", 0).dot().ident("body", 0).Tokens
+		uniVarName := variablePrefix
+		if uniVarName == "" {
+			uniVarName = resourceTypeWithoutVendor(a.ResourceBlockType())
+		}
+		bodyValue = newTokens().ident("var", 0).dot().ident(uniVarName, 0).dot().ident("body", 0).Tokens
 	}
 
 	resBody.SetAttributeRaw("body", bodyValue)

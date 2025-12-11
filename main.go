@@ -22,10 +22,11 @@ func main() {
 	resourceType := flag.String("r", "", "Resource type to generate configuration for (required)")
 	delimiter := flag.String("delimiter", "EOT", "Heredoc delimiter (optional)")
 	azapiResourceType := flag.String(pkg.AzApiResourceType, "", "AZAPI resource type (optional)")
+	variablePrefix := flag.String("variable-prefix", "", "Variable name prefix override (optional; empty string means no prefix in MultiVariables mode)")
 	flag.StringVar(resourceType, "resource-type", "", "")
 	flag.Usage = func() {
-		_, _ = fmt.Fprintln(os.Stderr, "Usage: newres -dir [DIRECTORY] [-u] [-r RESOURCE_TYPE] [-delimiter DELIMITER]")
-		_, _ = fmt.Fprintln(os.Stderr, "       newres -dir [DIRECTORY] [-u] [--resource-type RESOURCE_TYPE] [-delimiter DELIMITER]")
+		_, _ = fmt.Fprintln(os.Stderr, "Usage: newres -dir [DIRECTORY] [-u] [-r RESOURCE_TYPE] [-delimiter DELIMITER] [--variable-prefix PREFIX]")
+		_, _ = fmt.Fprintln(os.Stderr, "       newres -dir [DIRECTORY] [-u] [--resource-type RESOURCE_TYPE] [-delimiter DELIMITER] [--variable-prefix PREFIX]")
 		flag.PrintDefaults()
 	}
 	flag.Parse()
@@ -34,6 +35,13 @@ func main() {
 		flag.Usage()
 		os.Exit(1)
 	}
+
+	variablePrefixProvided := false
+	flag.CommandLine.Visit(func(f *flag.Flag) {
+		if f.Name == "variable-prefix" {
+			variablePrefixProvided = true
+		}
+	})
 	parameters := map[string]string{}
 
 	// Check if resourceType is azapi and azapiResourceType is provided
@@ -64,8 +72,10 @@ func main() {
 
 	// Call GenerateResource function
 	generatedCode, err := pkg.GenerateResource(pkg.NewResourceGenerateCommand(*resourceType, pkg.Config{
-		Delimiter: *delimiter,
-		Mode:      generateMode,
+		Delimiter:         *delimiter,
+		Mode:              generateMode,
+		VariablePrefix:    *variablePrefix,
+		VariablePrefixSet: variablePrefixProvided,
 	}, parameters))
 	if err != nil {
 		fmt.Printf("Error generating resource: %s\n", err)

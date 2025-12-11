@@ -21,11 +21,19 @@ type resourceBlock struct {
 	name              string
 	vendor            string
 	nameWithoutVendor string
+	variablePrefix    string
 	f                 *hclwrite.File
 	attrs             []*attribute
 	nbs               []*nestedBlock
 	writeBlock        *hclwrite.Block
 	cfg               Config
+}
+
+func composeName(prefix, name string) string {
+	if prefix == "" {
+		return name
+	}
+	return fmt.Sprintf("%s_%s", prefix, name)
 }
 
 func (r *resourceBlock) schemaBlock() *tfjson.SchemaBlock {
@@ -49,11 +57,21 @@ func newResourceBlock(name string, schema *tfjson.Schema, cfg Config) (*resource
 		name:              name,
 		vendor:            vendor,
 		nameWithoutVendor: nameWithoutVendor,
+		variablePrefix:    cfg.GetVariablePrefix(nameWithoutVendor),
 		f:                 hclwrite.NewFile(),
 		cfg:               cfg,
 	}
 	r.init()
 	return r, nil
+}
+
+// variableName returns the name used for the UniVariable mode variable block.
+// If the configured prefix is empty (explicitly), it falls back to nameWithoutVendor to keep a valid variable name.
+func (r *resourceBlock) variableName() string {
+	if r.variablePrefix == "" {
+		return r.nameWithoutVendor
+	}
+	return r.variablePrefix
 }
 
 func (r *resourceBlock) init() {
@@ -62,7 +80,7 @@ func (r *resourceBlock) init() {
 }
 
 func (r *resourceBlock) schemaAttributeToHCLBlock(attributeName string, attribute *tfjson.SchemaAttribute, descriptions map[string]argumentDescription) *hclwrite.Block {
-	name := fmt.Sprintf("%s_%s", r.nameWithoutVendor, attributeName)
+	name := composeName(r.variablePrefix, attributeName)
 	wb := hclwrite.NewBlock("variable", []string{name})
 
 	typeStr := ctyTypeToVariableTypeString(attribute.AttributeType)
@@ -143,7 +161,7 @@ func (r *resourceBlock) generateResource(document map[string]argumentDescription
 		if !generateVariableBlock {
 			continue
 		}
-		err = r.appendVariableBlock(nb, fmt.Sprintf("%s_%s", r.nameWithoutVendor, nb.name), document)
+		err = r.appendVariableBlock(nb, composeName(r.variablePrefix, nb.name), document)
 		if err != nil {
 			return "", err
 		}
@@ -161,7 +179,7 @@ func multiVarsAttributeExpr(r *resourceBlock, name string) hclwrite.Tokens {
 	return newTokens().
 		ident("var", 0).
 		dot().
-		ident(fmt.Sprintf("%s_%s", r.nameWithoutVendor, name), 0).
+		ident(composeName(r.variablePrefix, name), 0).
 		Tokens
 }
 
@@ -169,17 +187,17 @@ func uniVarAttributeExpr(r *resourceBlock, name string) hclwrite.Tokens {
 	return newTokens().
 		ident("var", 0).
 		dot().
-		ident(r.nameWithoutVendor, 0).
+		ident(r.variableName(), 0).
 		dot().
 		ident(name, 0).Tokens
 }
 
 func multiVarsNestedBlockIterator(r *resourceBlock, name string) string {
-	return fmt.Sprintf("var.%s_%s", r.nameWithoutVendor, name)
+	return fmt.Sprintf("var.%s", composeName(r.variablePrefix, name))
 }
 
 func uniVarNestedBlockIterator(r *resourceBlock, name string) string {
-	return fmt.Sprintf("var.%s.%s", r.nameWithoutVendor, name)
+	return fmt.Sprintf("var.%s.%s", r.variableName(), name)
 }
 
 func (r *resourceBlock) blockDescriptionTokens(b block, documents map[string]argumentDescription) hclwrite.Tokens {
@@ -218,7 +236,7 @@ func (r *resourceBlock) setAttributeRaw(name string, tokens hclwrite.Tokens) {
 }
 
 func (r *resourceBlock) generateUniVarResource(document map[string]argumentDescription) (string, error) {
-	err := r.appendVariableBlock(r, r.nameWithoutVendor, document)
+	err := r.appendVariableBlock(r, r.variableName(), document)
 	if err != nil {
 		return "", err
 	}

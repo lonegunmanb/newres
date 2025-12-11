@@ -51,6 +51,89 @@ func TestGenerateResource_SimpleUniVarResource(t *testing.T) {
 	}
 }
 
+func TestGenerateResource_CustomVariablePrefix_MultipleVariables(t *testing.T) {
+	resourceType := "azurerm_resource_group"
+	schema := azurermschema.Resources[resourceType]
+	generated, err := GenerateResource(NewResourceGenerateCommand(resourceType, Config{
+		Mode:              MultipleVariables,
+		VariablePrefix:    "rg",
+		VariablePrefixSet: true,
+	}, nil))
+	require.NoError(t, err)
+	config, diag := hclsyntax.ParseConfig([]byte(generated), "", hcl.InitialPos)
+	require.False(t, diag.HasErrors())
+	mod := tfconfig.NewModule("")
+	diag = tfconfig.LoadModuleFromFile(config, mod)
+	require.False(t, diag.HasErrors())
+	// ensure variables use custom prefix
+	assert.Contains(t, mod.Variables, "rg_name")
+	assert.Contains(t, mod.Variables, "rg_location")
+	for name := range schema.Block.Attributes {
+		if name == "id" {
+			continue
+		}
+		assert.Contains(t, generated, fmt.Sprintf("%s = var.rg_%s", name, name))
+	}
+}
+
+func TestGenerateResource_CustomVariablePrefix_UniVar(t *testing.T) {
+	resourceType := "azurerm_resource_group"
+	schema := azurermschema.Resources[resourceType]
+	generated, err := GenerateResource(NewResourceGenerateCommand(resourceType, Config{
+		Mode:              UniVariable,
+		VariablePrefix:    "proj",
+		VariablePrefixSet: true,
+	}, nil))
+	require.NoError(t, err)
+	config, diag := hclsyntax.ParseConfig([]byte(generated), "", hcl.InitialPos)
+	require.False(t, diag.HasErrors())
+	mod := tfconfig.NewModule("")
+	diag = tfconfig.LoadModuleFromFile(config, mod)
+	require.False(t, diag.HasErrors())
+	assert.Contains(t, mod.Variables, "proj")
+	for name := range schema.Block.Attributes {
+		if name == "id" {
+			continue
+		}
+		assert.Contains(t, generated, fmt.Sprintf("%s = var.proj.%s", name, name))
+	}
+}
+
+func TestGenerateResource_EmptyVariablePrefix_MultipleVariables(t *testing.T) {
+	resourceType := "azurerm_resource_group"
+	schema := azurermschema.Resources[resourceType]
+	generated, err := GenerateResource(NewResourceGenerateCommand(resourceType, Config{
+		Mode:              MultipleVariables,
+		VariablePrefix:    "",
+		VariablePrefixSet: true,
+	}, nil))
+	require.NoError(t, err)
+	config, diag := hclsyntax.ParseConfig([]byte(generated), "", hcl.InitialPos)
+	require.False(t, diag.HasErrors())
+	mod := tfconfig.NewModule("")
+	diag = tfconfig.LoadModuleFromFile(config, mod)
+	require.False(t, diag.HasErrors())
+	for name := range schema.Block.Attributes {
+		if name == "id" {
+			continue
+		}
+		assert.Contains(t, mod.Variables, name)
+		assert.Contains(t, generated, fmt.Sprintf("%s = var.%s", name, name))
+	}
+}
+
+func TestGenerateResource_EmptyVariablePrefix_UniVarFallsBack(t *testing.T) {
+	resourceType := "azurerm_resource_group"
+	generated, err := GenerateResource(NewResourceGenerateCommand(resourceType, Config{
+		Mode:              UniVariable,
+		VariablePrefix:    "",
+		VariablePrefixSet: true,
+	}, nil))
+	require.NoError(t, err)
+	assert.Contains(t, generated, "variable \"resource_group\"")
+	assert.Contains(t, generated, "location = var.resource_group.location")
+}
+
 func TestGenerateResource_ObjectInAttributeShouldGenerateNestedBlock(t *testing.T) {
 	code, err := GenerateResource(NewResourceGenerateCommand("azurerm_container_group", Config{
 		Mode: MultipleVariables,
@@ -201,6 +284,87 @@ func TestGenerateAzApiResource_MultipleVars(t *testing.T) {
 	require.Len(t, variables[0], 2)
 	assert.Equal(t, "var", variables[0][0].(hcl.TraverseRoot).Name)
 	assert.Equal(t, "resource_body", variables[0][1].(hcl.TraverseAttr).Name)
+}
+
+func TestGenerateAzApiResource_CustomVariablePrefix_MultipleVars(t *testing.T) {
+	version := "Microsoft.ContainerRegistry/registries@2020-11-01-preview"
+	cfg, err := GenerateResource(NewResourceGenerateCommand("azapi_resource", Config{
+		VariablePrefix: "azr",
+	}, map[string]string{
+		AzApiResourceType: version,
+	}))
+	require.NoError(t, err)
+	syntaxFile, diag := hclsyntax.ParseConfig([]byte(cfg), "", hcl.InitialPos)
+	require.False(t, diag.HasErrors())
+	var rb *hclsyntax.Block
+	for _, b := range syntaxFile.Body.(*hclsyntax.Body).Blocks {
+		if b.Type == "resource" {
+			rb = b
+			break
+		}
+	}
+	require.NotNil(t, rb)
+	variables := rb.Body.Attributes["body"].Expr.Variables()
+	require.NotNil(t, variables)
+	require.Len(t, variables, 1)
+	require.Len(t, variables[0], 2)
+	assert.Equal(t, "var", variables[0][0].(hcl.TraverseRoot).Name)
+	assert.Equal(t, "azr_body", variables[0][1].(hcl.TraverseAttr).Name)
+}
+
+func TestGenerateAzApiResource_CustomVariablePrefix_UniVar(t *testing.T) {
+	version := "Microsoft.ContainerRegistry/registries@2020-11-01-preview"
+	cfg, err := GenerateResource(NewResourceGenerateCommand("azapi_resource", Config{
+		Mode:           UniVariable,
+		VariablePrefix: "azr",
+	}, map[string]string{
+		AzApiResourceType: version,
+	}))
+	require.NoError(t, err)
+	syntaxFile, diag := hclsyntax.ParseConfig([]byte(cfg), "", hcl.InitialPos)
+	require.False(t, diag.HasErrors())
+	var rb *hclsyntax.Block
+	for _, b := range syntaxFile.Body.(*hclsyntax.Body).Blocks {
+		if b.Type == "resource" {
+			rb = b
+			break
+		}
+	}
+	require.NotNil(t, rb)
+	variables := rb.Body.Attributes["body"].Expr.Variables()
+	require.NotNil(t, variables)
+	require.Len(t, variables, 1)
+	require.Len(t, variables[0], 3)
+	assert.Equal(t, "var", variables[0][0].(hcl.TraverseRoot).Name)
+	assert.Equal(t, "azr", variables[0][1].(hcl.TraverseAttr).Name)
+	assert.Equal(t, "body", variables[0][2].(hcl.TraverseAttr).Name)
+}
+
+func TestGenerateAzApiResource_EmptyVariablePrefix_MultipleVars(t *testing.T) {
+	version := "Microsoft.ContainerRegistry/registries@2020-11-01-preview"
+	cfg, err := GenerateResource(NewResourceGenerateCommand("azapi_resource", Config{
+		VariablePrefix:    "",
+		VariablePrefixSet: true,
+	}, map[string]string{
+		AzApiResourceType: version,
+	}))
+	require.NoError(t, err)
+	syntaxFile, diag := hclsyntax.ParseConfig([]byte(cfg), "", hcl.InitialPos)
+	require.False(t, diag.HasErrors())
+	var rb *hclsyntax.Block
+	for _, b := range syntaxFile.Body.(*hclsyntax.Body).Blocks {
+		if b.Type == "resource" {
+			rb = b
+			break
+		}
+	}
+	require.NotNil(t, rb)
+	variables := rb.Body.Attributes["body"].Expr.Variables()
+	require.NotNil(t, variables)
+	require.Len(t, variables, 1)
+	require.Len(t, variables[0], 2)
+	assert.Equal(t, "var", variables[0][0].(hcl.TraverseRoot).Name)
+	assert.Equal(t, "body", variables[0][1].(hcl.TraverseAttr).Name)
 }
 
 func TestGenerateAzApiResource_UniVar(t *testing.T) {
