@@ -25,6 +25,7 @@ func main() {
 	delimiter := flag.String("delimiter", "EOT", "Heredoc delimiter (optional)")
 	azapiResourceType := flag.String(pkg.AzApiResourceType, "", "AZAPI resource type (optional)")
 	variablePrefix := flag.String("variable-prefix", "", "Variable name prefix override (optional; empty string means no prefix in MultiVariables mode)")
+	providerNamespace := flag.String("provider-namespace", "hashicorp", "Provider namespace (e.g., hashicorp, Azure, aliyun)")
 	flag.StringVar(resourceType, "resource-type", "", "")
 	flag.Usage = func() {
 		_, _ = fmt.Fprintln(os.Stderr, "Usage: newres -dir [DIRECTORY] [-u] [-r RESOURCE_TYPE] [-delimiter DELIMITER] [--variable-prefix PREFIX]")
@@ -78,6 +79,7 @@ func main() {
 		Mode:              generateMode,
 		VariablePrefix:    *variablePrefix,
 		VariablePrefixSet: variablePrefixProvided,
+		ProviderNamespace: *providerNamespace,
 	}, parameters))
 	if err != nil {
 		fmt.Printf("Error generating resource: %s\n", err)
