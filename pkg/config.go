@@ -17,6 +17,9 @@ type Config struct {
 	// ProviderNamespace is the provider namespace used for dynamic schema retrieval
 	// (e.g., "hashicorp", "Azure", "aliyun"). Defaults to "hashicorp" if empty.
 	ProviderNamespace string
+	// ProviderVersion is the provider version constraint (e.g., "4.39.0", "~> 4.0").
+	// If empty, the latest version is fetched from the Terraform Registry.
+	ProviderVersion string
 }
 
 func (c Config) GetDelimiter() string {

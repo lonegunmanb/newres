@@ -31,7 +31,7 @@ func (g generalResource) Config() Config {
 }
 
 func (g generalResource) Schema() (*tfjson.Schema, error) {
-	schema, err := getResourceSchema(g.resourceType, g.cfg.ProviderNamespace)
+	schema, err := getResourceSchema(g.resourceType, g.cfg.ProviderNamespace, g.cfg.ProviderVersion)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get schema for %s: %w", g.resourceType, err)
 	}
