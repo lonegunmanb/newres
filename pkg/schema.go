@@ -35,7 +35,8 @@ func CleanupSchemaServer() {
 // for the given resource type by downloading the provider binary via the
 // OpenTofu registry and querying it over gRPC.
 // If namespace is empty, it falls back to a default based on the provider type.
-func getResourceSchema(resourceType string, namespace string) (*tfjson.Schema, error) {
+// If version is empty, the latest version is fetched from the Terraform Registry.
+func getResourceSchema(resourceType string, namespace string, version string) (*tfjson.Schema, error) {
 	if !resourceTypeValid(resourceType) {
 		return nil, fmt.Errorf("invalid resource type: %s", resourceType)
 	}
@@ -43,9 +44,14 @@ func getResourceSchema(resourceType string, namespace string) (*tfjson.Schema, e
 	if namespace == "" {
 		namespace = defaultNamespace(providerType)
 	}
-	version, err := getLatestProviderVersion(namespace, providerType)
-	if err != nil {
-		return nil, fmt.Errorf("failed to get latest version for provider %s/%s: %w", namespace, providerType, err)
+	if version == "" {
+		var err error
+		version, err = getLatestProviderVersion(namespace, providerType)
+		if err != nil {
+			return nil, fmt.Errorf("failed to get latest version for provider %s/%s: %w", namespace, providerType, err)
+		}
+	} else {
+		version = strings.TrimPrefix(version, "v")
 	}
 
 	req := tfpluginschema.Request{

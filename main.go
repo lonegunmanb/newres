@@ -26,6 +26,7 @@ func main() {
 	azapiResourceType := flag.String(pkg.AzApiResourceType, "", "AZAPI resource type (optional)")
 	variablePrefix := flag.String("variable-prefix", "", "Variable name prefix override (optional; empty string means no prefix in MultiVariables mode)")
 	providerNamespace := flag.String("provider-namespace", "hashicorp", "Provider namespace (e.g., hashicorp, Azure, aliyun)")
+	providerVersion := flag.String("provider-version", "", "Provider version constraint (e.g., 4.39.0, ~> 4.0); mutually exclusive with --azapi-resource-type")
 	flag.StringVar(resourceType, "resource-type", "", "")
 	flag.Usage = func() {
 		_, _ = fmt.Fprintln(os.Stderr, "Usage: newres -dir [DIRECTORY] [-u] [-r RESOURCE_TYPE] [-delimiter DELIMITER] [--variable-prefix PREFIX]")
@@ -57,6 +58,10 @@ func main() {
 			fmt.Println("Error: Invalid azapi-resource-type format")
 			os.Exit(1)
 		}
+		if *providerVersion != "" {
+			fmt.Println("Error: --provider-version cannot be used together with --azapi-resource-type")
+			os.Exit(1)
+		}
 		parameters[pkg.AzApiResourceType] = *azapiResourceType
 	}
 
@@ -80,6 +85,7 @@ func main() {
 		VariablePrefix:    *variablePrefix,
 		VariablePrefixSet: variablePrefixProvided,
 		ProviderNamespace: *providerNamespace,
+		ProviderVersion:   *providerVersion,
 	}, parameters))
 	if err != nil {
 		fmt.Printf("Error generating resource: %s\n", err)
