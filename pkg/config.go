@@ -14,6 +14,9 @@ type Config struct {
 	// If VariablePrefixSet is false, the default will be used. If true, the provided value is used even if empty.
 	VariablePrefix    string
 	VariablePrefixSet bool
+	// ProviderNamespace is the provider namespace used for dynamic schema retrieval
+	// (e.g., "hashicorp", "Azure", "aliyun"). Defaults to "hashicorp" if empty.
+	ProviderNamespace string
 }
 
 func (c Config) GetDelimiter() string {

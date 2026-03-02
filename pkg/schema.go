@@ -34,12 +34,15 @@ func CleanupSchemaServer() {
 // getResourceSchema dynamically retrieves the Terraform resource schema
 // for the given resource type by downloading the provider binary via the
 // OpenTofu registry and querying it over gRPC.
-func getResourceSchema(resourceType string) (*tfjson.Schema, error) {
+// If namespace is empty, it falls back to a default based on the provider type.
+func getResourceSchema(resourceType string, namespace string) (*tfjson.Schema, error) {
 	if !resourceTypeValid(resourceType) {
 		return nil, fmt.Errorf("invalid resource type: %s", resourceType)
 	}
 	providerType := resourceVendor(resourceType)
-	namespace := defaultNamespace(providerType)
+	if namespace == "" {
+		namespace = defaultNamespace(providerType)
+	}
 	version, err := getLatestProviderVersion(namespace, providerType)
 	if err != nil {
 		return nil, fmt.Errorf("failed to get latest version for provider %s/%s: %w", namespace, providerType, err)
