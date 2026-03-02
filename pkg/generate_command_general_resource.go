@@ -3,7 +3,7 @@ package pkg
 import (
 	"fmt"
 
-	"github.com/hashicorp/terraform-json"
+	tfjson "github.com/hashicorp/terraform-json"
 )
 
 var _ ResourceGenerateCommand = generalResource{}
@@ -31,9 +31,9 @@ func (g generalResource) Config() Config {
 }
 
 func (g generalResource) Schema() (*tfjson.Schema, error) {
-	s, ok := resourceSchemas[g.resourceType]
-	if !ok {
-		return nil, fmt.Errorf("unsupported type %s", g.resourceType)
+	schema, err := getResourceSchema(g.resourceType)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get schema for %s: %w", g.resourceType, err)
 	}
-	return s, nil
+	return schema, nil
 }

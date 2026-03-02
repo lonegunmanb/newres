@@ -16,6 +16,8 @@ import (
 var azapiVersionRegex = regexp.MustCompile(`^[a-zA-Z0-9.-]+(/[a-zA-Z0-9.-]+)+@[0-9]{4}-[0-9]{2}-[0-9]{2}(-preview)?$`)
 
 func main() {
+	defer pkg.CleanupSchemaServer()
+
 	// Parse command line flags
 	dir := flag.String("dir", "", "Directory path to store generated files (required)")
 	univar := flag.Bool("u", false, "Generate mode: UniVariable if set, MultipleVariables if not set")
