@@ -18,7 +18,7 @@ import (
 func TestGenerateResourceBlock_InvalidResourcTypeShouldReturnError(t *testing.T) {
 	_, err := GenerateResource(NewResourceGenerateCommand("invalidType", Config{}, nil))
 	require.NotNil(t, err)
-	assert.Contains(t, err.Error(), "unsupported type")
+	assert.Contains(t, err.Error(), "invalid resource type")
 }
 
 func TestGenerateResource_SimpleUniVarResource(t *testing.T) {

@@ -34,6 +34,8 @@ import (
 	tls "github.com/lonegunmanb/terraform-tls-schema/v4/generated"
 )
 
+// resourceSchemas is a static schema registry used only by tests.
+// Production code uses dynamic schema retrieval via getResourceSchema().
 var resourceSchemas = make(map[string]*tfjson.Schema, 0)
 
 func init() {
